@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="plugins/bootstrap-4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+    <!-- 引入bootstrap的 inputfile插件-->
+    <link type="text/css" rel="stylesheet" href="plugins/bootstrap_fileinput/css/fileinput.min.css" />
     <style>
          /*
          会议项目前文字的style
           */
-        h.inputTile{
-
+        label.inputLabel{
+            text-align: center;
         }
     </style>
     <title>主页</title>
@@ -36,118 +40,78 @@
 
     <div class="container main-content">
         <div class="row header">
-            <div class="col-3">
-                <button type="button" class="btn w-100" style="background-color: #f55d54; color: #fff;">
-                    <i class="fas fa-plus"></i>
-                    新建会议
-                </button>
-            </div>
-            <div class="col-9 title">
-                <h5>新建会议</h5>
+            <div class="col-12 title">
+                <h5 >新建会议</h5>
             </div>
         </div>
         <div class="row">
-            <div class="col-3 function-list">
-                <span>功能列表</span>
-                <ul class="w-100  list-group">
-                    <li class="list-group-item active"><a href="#">我的会议</a></li>
-                    <li class="list-group-item"><a href="">发现会议</a></li>
-                </ul>
-            </div>
 
-            <div class="col-9 content-show">
+            <div class="col-12 content-show">
                 <!-- 新建会议的表单——by 杨彬-->
-                <form>
-                    <div class = "row" id="logoInputRow">
-                        <div class="col-2">
-                            <h6 class="inputTile">
-                                活动logo:
-                            </h6>
-                        </div>
-                        <div class="col-10">
-                            <img src="https://y4ngyy.xyz/assets/avatar.jpg" width="=50" height="50" class="userLogo" border="1">
-                            <button name="uplodeLogoButtom">点击上传</button>
-                        </div>
-                    </div>
-                    <div class="row" id="nameInputRow">
-                        <div class="col-2">
-                            <h6 class="inputTile">
-                                活动名称:
-                            </h6>
-                        </div>
-                        <div class="col-10">
-                            <input type="text" id="nameInput">
-                        </div>
-                    </div>
-                    <div class="row" id="timeInputRow">
-                        <div class="col-2">
-                            <h6 class="inputTile">
-                                活动时间:
-                            </h6>
-                        </div>
-                        <div class="col-10">
-                            <div>开始时间：<input type="datetime-local" id="startTime"></div>
-                            <div>结束时间：<input type="datetime-local" id="endTime"></div>
-                        </div>
-                    </div>
-                    <div class="row" id="locationRow">
-                        <div class="col-2">
-                            <h6 class="inputTile">
-                                活动地点
-                            </h6>
-                        </div>
-                        <div class="col-10">
-                            <input type="text" id="location">
-                        </div>
-                    </div>
-                    <div class="row" id="organizerRow">
-                        <div class="col-2">
-                            <h6 class="inputTile">
-                                主办方：
-                            </h6>
-                        </div>
-                        <div class="col-10">
-                            <input type="text" id="organizer">
-                        </div>
-                    </div>
-                    <div class="row" id="introductionRow">
-                        <div class="col-2">
-                            <h6 class="inputTile">
-                                活动简介：
-                            </h6>
-                        </div>
-                        <div class="col-10">
-                            <textarea type="text" id=introduction style="height:100px;width:50%">
-                                输入活动简介（200字以内）
-                            </textarea>
-                        </div>
-                    </div>
-                    <div class="row" id="uplodeFileRow">
-                        <div class="col-2">
-                            <h6 class="inputTile">
-                                活动资料：
-                            </h6>
-                        </div>
-                        <div class="col-10">
-                            <input type="file" id="uploadFile">
-                        </div>
-                    </div>
-                    <div class="row" id="guestListRow">
-                        <div class="col-2">
-                            <h6 class="inputTile">
-                                嘉宾：
-                            </h6>
-                        </div>
-                        <div class="col-10 "  >
-                            <div class="box" i="guestBox" style="width:50%;height:100px;border:1px solid">
-                                <a herf="#" style="display: block">嘉宾:</a>
-                                <a class="thumbnail userLogoLink"><img src="https://y4ngyy.xyz/assets/avatar.jpg"  width="=50" height="50" class="userLogo"></a>
+                <div style="width: 80%; margin: 0 auto;">
+                    <form class="form-horizontal" role="form">
+                        <div class = "form-group row" id="logoInputGroup">
+                            <label class="col-2 control-label inputLabel" for="uploadLogoButtom">活动logo:</label>
+                            <div class="col-10">
+                                <img src="https://y4ngyy.xyz/assets/avatar.jpg" style="border:1px dashed grey; border-radius: 10px; width:15%"  >
+                                <input type="file" class="form-control uploadProjectFile col-lg-6" id="uploadLogoButtom" name="logo" >
                             </div>
                         </div>
-                    </div>
-                </form>
+                        <div class="form-group row" role="form" id="nameInputGroup">
+                            <label class="col-2  control-label inputLabel" for="nameInput">活动名称:</label>
+                            <div class="col-10">
+                                <input type="text" id="nameInput" class="form-control col-lg-6" placeholder="请输入活动名称">
+                            </div>
+                        </div>
+                        <div class="form-group row" role="form" id="timeInputRow">
+                            <label class="col-2 control-label inputLabel" for="timeDiv" >活动时间:</label>
+                            <div class="col-10" id="timeDiv">
+                                <div>开始时间：<input type="datetime-local" id="startTime" class="form-control col-lg-6"></div>
+                                <div>结束时间：<input type="datetime-local" id="endTime" class="form-control col-lg-6"></div>
+                            </div>
+                        </div>
+                        <div class="form-group row" role="form" id="locationGroup">
+                            <label class="col-2 control-label inputLabel"  for="locationInput">活动地点:</label>
+                            <div class="col-10">
+                                <input type="text" id="locationInput" class="form-control col-lg-6" placeholder="请输入活动地点">
+                            </div>
+                        </div>
+                        <div class="form-group row" role="form" id="organizerGroup">
+                            <label class="col-2 control-label inputLabel" for="organizerInput">主办方:</label>
+                            <div class="col-10">
+                                <input type="text" id="organizerInput" class="form-control col-lg-6" placeholder="主办方">
+                            </div>
+                        </div>
+                        <div class="form-group row" role="form" id="introductionGroup">
+                            <label class="col-2 control-label inputLabel" for="introductionInput">活动简介:</label>
+                            <div class="col-10">
+                                <textarea type="text" id=introductionInput class="form-control col-lg-6" rows="4" >
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row" id="uplodeFileGroup">
+                            <label class="col-2 control-label inputLabel" for="uploadFile">活动资料:</label>
+                            <div class="col-10">
+                                <input id="uploadFile" name="userfile" multiple type="file" data-show-caption="true">
+                            </div>
+                        </div>
+                        <div class="row" id="guestListRow">
+                            <div class="col-2">
+                                <h6 class="inputTile">
+                                    嘉宾：
+                                </h6>
+                            </div>
+                            <div class="col-10 "  >
+                                <div class="box" i="guestBox" style="width:50%;border:1px solid">
+                                    <a herf="#" style="display: block">嘉宾:</a>
+                                    <a class="thumbnail userLogoLink"><img src="https://y4ngyy.xyz/assets/avatar.jpg"  width="=50" height="50" class="userLogo"></a>
+                                    <button id="inviteGuest">邀请</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-
         </div>
 
     </div>
@@ -155,7 +119,14 @@
     <script src="plugins/fontawesome/font-awesome.js"></script>
     <script src="plugins/jquery/jquery-3.4.1.min.js"></script>
     <script src="plugins/popper/popper.min.js"></script>
+
+    <script type="text/javascript" src="js/console_newMeeting.js"></script>
+    <script type="text/javascript" src="plugins/bootstrap_fileinput/js/fileinput.js"></script>
+    <script type="text/javascript" src="plugins/bootstrap_fileinput/js/locales/zh.js"></script>
     <script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+    <script>
+
+    </script>
 </body>
 </html>
 
