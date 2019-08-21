@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="plugins/bootstrap-4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+         /*
+         会议项目前文字的style
+          */
+        h.inputTile{
+
+        }
+    </style>
+    <title>主页</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="https://y4ngyy.xyz/assets/avatar.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+            Bootstrap
+        </a>
+        <div class="nav-list">
+            <a href="#">公开会议列表</a>
+            <a href="#">控制台</a>
+            <a href="">消息</a>
+            <a href="#">个人中心</a>
+
+            <span style="color: #ff5722;">
+                <i class="fas fa-power-off"></i>
+                <a href="#">退出</a>
+            </span>
+
+        </div>
+    </nav>
+
+    <div class="container main-content">
+        <div class="row header">
+            <div class="col-3">
+                <button type="button" class="btn w-100" style="background-color: #f55d54; color: #fff;">
+                    <i class="fas fa-plus"></i>
+                    新建会议
+                </button>
+            </div>
+            <div class="col-9 title">
+                <h5>新建会议</h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3 function-list">
+                <span>功能列表</span>
+                <ul class="w-100  list-group">
+                    <li class="list-group-item active"><a href="#">我的会议</a></li>
+                    <li class="list-group-item"><a href="">发现会议</a></li>
+                </ul>
+            </div>
+
+            <div class="col-9 content-show">
+                <!-- 新建会议的表单——by 杨彬-->
+                <form>
+                    <div class = "row" id="logoInputRow">
+                        <div class="col-2">
+                            <h6 class="inputTile">
+                                活动logo:
+                            </h6>
+                        </div>
+                        <div class="col-10">
+                            <img src="https://y4ngyy.xyz/assets/avatar.jpg" width="=50" height="50" class="userLogo" border="1">
+                            <button name="uplodeLogoButtom">点击上传</button>
+                        </div>
+                    </div>
+                    <div class="row" id="nameInputRow">
+                        <div class="col-2">
+                            <h6 class="inputTile">
+                                活动名称:
+                            </h6>
+                        </div>
+                        <div class="col-10">
+                            <input type="text" id="nameInput">
+                        </div>
+                    </div>
+                    <div class="row" id="timeInputRow">
+                        <div class="col-2">
+                            <h6 class="inputTile">
+                                活动时间:
+                            </h6>
+                        </div>
+                        <div class="col-10">
+                            <div>开始时间：<input type="datetime-local" id="startTime"></div>
+                            <div>结束时间：<input type="datetime-local" id="endTime"></div>
+                        </div>
+                    </div>
+                    <div class="row" id="locationRow">
+                        <div class="col-2">
+                            <h6 class="inputTile">
+                                活动地点
+                            </h6>
+                        </div>
+                        <div class="col-10">
+                            <input type="text" id="location">
+                        </div>
+                    </div>
+                    <div class="row" id="organizerRow">
+                        <div class="col-2">
+                            <h6 class="inputTile">
+                                主办方：
+                            </h6>
+                        </div>
+                        <div class="col-10">
+                            <input type="text" id="organizer">
+                        </div>
+                    </div>
+                    <div class="row" id="introductionRow">
+                        <div class="col-2">
+                            <h6 class="inputTile">
+                                活动简介：
+                            </h6>
+                        </div>
+                        <div class="col-10">
+                            <textarea type="text" id=introduction style="height:100px;width:50%">
+                                输入活动简介（200字以内）
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="row" id="uplodeFileRow">
+                        <div class="col-2">
+                            <h6 class="inputTile">
+                                活动资料：
+                            </h6>
+                        </div>
+                        <div class="col-10">
+                            <input type="file" id="uploadFile">
+                        </div>
+                    </div>
+                    <div class="row" id="guestListRow">
+                        <div class="col-2">
+                            <h6 class="inputTile">
+                                嘉宾：
+                            </h6>
+                        </div>
+                        <div class="col-10 "  >
+                            <div class="box" i="guestBox" style="width:50%;height:100px;border:1px solid">
+                                <a herf="#" style="display: block">嘉宾:</a>
+                                <a class="thumbnail userLogoLink"><img src="https://y4ngyy.xyz/assets/avatar.jpg"  width="=50" height="50" class="userLogo"></a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+    <footer>页脚</footer>
+    <script src="plugins/fontawesome/font-awesome.js"></script>
+    <script src="plugins/jquery/jquery-3.4.1.min.js"></script>
+    <script src="plugins/popper/popper.min.js"></script>
+    <script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
