@@ -1,0 +1,37 @@
+body {
+    background: #ededed;
+    height: 1000px;
+}
+.navbar {
+    background: #ffffff!important;
+}
+.main-content {
+    margin-top: 20px;
+}
+.main-content .header {
+    background: #ededed;
+    margin-bottom: 10px;
+}
+.main-content .header .title{
+    background: #ffffff;
+}
+.function-list a{
+    text-decoration: none;
+    color: black;
+}
+.nav-list {
+    float: right;
+}
+
+.nav-list a {
+    text-decoration: none;
+    color: #f55d54;
+}
+.content-show {
+    background-color: #ffffff;
+}
+@media  (min-width: 1200px) {
+    .container {
+        max-width: 1170px;
+    }
+}
