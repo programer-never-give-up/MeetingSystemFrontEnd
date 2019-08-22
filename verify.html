@@ -60,7 +60,7 @@
                 <form class="col-centered">
                     <table style="border-collapse: separate;border-spacing: 10px 10px;">
                         邮箱：<input type="" name="" id="" value="" />
-                        <button id="sendVer" onclick="run()" >点击发送验证码</button >
+                        <button ID="sendVer" onclick="run()" >点击发送验证码</button >
                         <tr>
                             <td>
                                 <label for="pwd">验证码:</label>
@@ -90,10 +90,11 @@
 <script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
-    var btn = document.getElementById('sendVer');
-    var ipt = document.getElementsByTagName('input')[0];
+
+    // var ipt = document.getElementsByTagName('input')[0];
     function run(){
-        var time = 10;//定义时间变量。用于倒计时用
+        var btn = document.getElementById('sendVer');
+        var time = 60;//定义时间变量。用于倒计时用
         var timer = null;//定义一个定时器；
         timer = setInterval(function(){///开启定时器。函数内执行
             btn.disabled = true;
