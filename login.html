@@ -99,14 +99,21 @@
 <script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
 <script>
     // 这是调试登录的ajax
+
     $(function () {
+        // response格式{"status":True, "type":"企业用户 or 普通用户"}
+        $.get('api/login/check/', function (data) {
+           if (data.status) {
+               window.location.href = 'index.html';
+           }
+        });
+        // response格式{"status":True, "message":"失败信息"}
         $('#login').click(function (e) {
             var username = $('#username').val();
             var password = $('#password').val();
-            $.post('/api/login', {username:username, password: password}, function (data) {
+            $.post('api/login/', {username:username, password: password}, function (data) {
                 console.log(data);
-                response = JSON.parse(data);
-                if (response.status) {
+                if (data.status) {
                     console.log('Login Success!');
                     window.location.href='index.html';
                 } else {
