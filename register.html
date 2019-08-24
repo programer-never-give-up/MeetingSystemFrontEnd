@@ -99,33 +99,33 @@
             </div>
             <div class="card-body ">
                 <form class="col-centered">
+                    <div class="con4">
+                        <canvas id="cvs" width="200" height="200"></canvas>
+                        <span class="btn upload">上传头像<input type="file" class="upload_pic" id="UploadAvatar" /></span>
+                    </div>
                     <table style="border-collapse: separate;border-spacing: 10px 10px;">
-                        <div class="con4">
-                            <canvas id="cvs" width="200" height="200"></canvas>
-                            <span class="btn upload">上传头像<input type="file" class="upload_pic" id="UploadAvatar" /></span>
-                        </div>
                         <tr>
                             <td class="margin-top:10">
-                                <label>用户名：</label>
+                                <label for="username">用户名：</label>
                             </td>
                             <td>
-                                <input type="text" required name="" class="">
+                                <input type="text" required name="username" id="username">
                             </td>
                         </tr>
                         <tr>
                         <td>
-                            <label for="pwd">密码:</label>
+                            <label for="password">密码:</label>
                         </td>
                         <td>
-                            <input type="password" required name="" >
+                            <input type="password" required name="password" id="password" >
                         </td>
                     </tr>
                         <tr>
                             <td>
-                                <label for="pwd">确认密码:</label>
+                                <label for="confirm_password">确认密码:</label>
                             </td>
                             <td>
-                                <input type="password" required name="" >
+                                <input type="password" required name="confirm_password" id="confirm_password">
                             </td>
                         </tr>
                         <tr>
@@ -133,12 +133,12 @@
                                 <label for="phoneNumber">联系电话:</label>
                             </td>
                             <td>
-                                <input required name="" >
+                                <input type="text" name="phoneNumber" id="phoneNumber" >
                             </td>
                         </tr>
                     </table>
+                    <h5>扩展信息：</h5>
                     <table style="border-collapse: separate;border-spacing: 10px 10px;">
-                        <h5>扩展信息：</h5>
                         <tr>
                             <td class="margin-top:10">
                                 <label>个人单位：</label>
@@ -152,7 +152,7 @@
                                 <label >学历:</label>
                             </td>
                             <td>
-                                <input type="password"  name="" >
+                                <input type="text"  name="" >
                             </td>
                         </tr>
                         <tr>
@@ -160,7 +160,7 @@
                                 <label >个人住址:</label>
                             </td>
                             <td>
-                                <input type="password"  name="" >
+                                <input type="text"  name="" >
                             </td>
                         </tr>
                         <tr>
@@ -173,7 +173,7 @@
                         </tr>
                     </table>
                     <div class="bg-white" style="text-align: center;">
-                        <button type="" class="btn bgcolor_red" οnclick="Toregister()">注册</button>
+                        <button type="button" class="btn bgcolor_red" onclick="Toregister()">注册</button>
                     </div>
                 </form>
             </div>
