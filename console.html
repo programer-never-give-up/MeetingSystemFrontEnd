@@ -49,7 +49,7 @@
             <span class="home-name">云会议系统</span>
         </a>
         <div class="nav-list" >
-            <a href="#" class="nav-list-item">公开会议列表</a>
+            <a href="#" class="nav-list-item activity-list-buttom">公开会议列表</a>
             <a href="#" class="nav-list-item">控制台</a>
             <a href="" class="nav-list-item">消息</a>
             <a href="#" class="nav-list-item">个人中心</a>
@@ -65,9 +65,9 @@
     <div class="container main-content">
         <div class="row header">
             <div class="col-3">
-                <button type="button" class="btn w-100" style="background-color: #f55d54; color: #fff;">
+                <button type="button" class="btn w-100" id="new-activity-bottom" style="background-color: #f55d54; color: #fff;">
                     <i class="fas fa-plus"></i>
-                    新建会议
+                    新建活动
                 </button>
             </div>
             <div class="col-9 title">
@@ -113,7 +113,7 @@
                             <th>开始时间</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="activity-card">
                         <tr class="item-card">
                             <td><img src="https://y4ngyy.xyz/assets/avatar.jpg" alt="会议图片"></td>
                             <td>会议名字</td>
@@ -181,6 +181,7 @@
     <script src="plugins/jquery/jquery-3.4.1.min.js"></script>
     <script src="plugins/popper/popper.min.js"></script>
     <script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+    <script src="js/console.js"></script>
 </body>
 </html>
 
