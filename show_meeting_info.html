@@ -19,6 +19,14 @@
             font-size: 14px;
             width: 6rem;
         }
+        .activity-label{
+            display: inline-block;
+            float:right;
+            border-radius: 20%;
+            padding:4px;
+            width: 6%;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -29,8 +37,8 @@
         <span class="home-name">云会议系统</span>
     </a>
     <div class="nav-list">
-        <a href="#" class="nav-list-item">公开会议列表</a>
-        <a href="#" class="nav-list-item">控制台</a>
+        <a href="index.html" class="nav-list-item">公开会议列表</a>
+        <a href="console.html" class="nav-list-item">控制台</a>
         <a href="" class="nav-list-item">消息</a>
         <a href="#" class="nav-list-item">个人中心</a>
 
@@ -43,16 +51,22 @@
 </nav>
 <div class="container main-content">
     <div class="meeting-article mb-5">
-        <h1 style="text-align: center">会议标题</h1>
+<!--        标签行-->
+        <div id="activity-label-row">
+        </div>
+        <div class='row' style="horiz-align:center;width: 15%;margin: 0  auto;margin-bottom: 3%">  <img id="logo-info" src="https://y4ngyy.xyz/assets/avatar.jpg" class="rounded-circle" style="width:100%"></div>
+        <h1 style="text-align: center" id="title-info">会议标题</h1>
         <hr>
         <h3 class="m-3">时间</h3>
-        <div class="info-box shadow-sm rounded-sm">这放时间信息</div>
-        <h3 class="m-3">地点</h3>
-        <div class="info-box shadow-sm rounded-sm">这放地点信息</div>
+        <div class="info-box shadow-sm rounded-sm" id="time-info">
+            2019.7.18-12013
+        </div>
+        <h3 class="m-3" >地点</h3>
+        <div class="info-box shadow-sm rounded-sm" id="location-info">这放地点信息</div>
         <h3 class="m-3">主办方</h3>
-        <div class="info-box shadow-sm rounded-sm">这放主办方信息</div>
+        <div class="info-box shadow-sm rounded-sm" id="organizer-info">这放主办方信息</div>
         <h3 class="m-3">活动简介</h3>
-        <div class="info-box shadow-sm rounded-sm">这放活动简介</div>
+        <div class="info-box shadow-sm rounded-sm" id="introduction-info">这放活动简介</div>
         <h3 class="m-3">活动资料</h3>
         <div class="info-box shadow-sm rounded-sm">这放活动资料</div>
         <div style="text-align: center;" class="mt-4">
@@ -68,5 +82,6 @@
 <script src="plugins/jquery/jquery-3.4.1.min.js"></script>
 <script src="plugins/popper/popper.min.js"></script>
 <script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<script src="js/show_meeting_info.js"></script>
 </body>
 </html>
