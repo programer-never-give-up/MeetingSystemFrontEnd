@@ -8,7 +8,12 @@
     <style>
         .item-list {
             background: #ffffff;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
+            padding: 20px;
+        }
+        .item-card {
+            padding: 20px;
+            border-bottom: solid 1px #b6b6b6;
         }
         .item-card img{
             height: 100%;
@@ -35,6 +40,9 @@
             color: #888;
 
         }
+        .item-card a, #recent_activity a{
+            color: #000;
+        }
         .item-card button {
             line-height: 32px;
             font-size: 13px;
@@ -46,27 +54,39 @@
         .item-card .item-info {
             margin-left: 30%;
         }
-        .item-list li {
+        .item-list li{
             list-style-type: none;
-            margin-bottom: 50px;
             text-align: left;
         }
-        #user-info {
+        .recent_activity_item {
+            list-style-type: none;
+            margin-bottom: 20px;
+        }
+        #recent_activity {
             border-left: solid 10px #eeeeee;
             background-color: #ffffff;
+            padding: 20px;
         }
-        #user-info .user-info-show {
-            padding-top: 20px;
-            text-align: center;
-        }
-        #user-info .user-info-show #user-name {
-            margin-top: 20px;
-        }
-        .avatar {
-            width: 100px;
-            height: 100px;
+        .recent_activity_item img {
+            width: 50px;
+            height: 50px;
             border-radius: 100px;
         }
+        .recent_activity_item h3 {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .recent_activity_header {
+            font-size: 18px;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+        .recent_activity_info {
+            font-size: 12px;
+            margin-top: 5px;
+            color: #808080;
+        }
+
     </style>
 </head>
 <body>
@@ -91,29 +111,127 @@
 </nav>
 <div class="container main-content">
     <div class="row">
-     <div class="col-9 item-list">
-         可参加的会议
-         <hr/>
+     <div class="col-8 item-list">
+         <h2 class="recent_activity_header">推荐活动</h2>
          <ul class="p-0">
              <li class="item-card">
                 <h1><img class=" " src="https://y4ngyy.xyz/assets/avatar.jpg" alt="会议logo"></h1>
                  <div class="item-info">
-                     <a href="#"><h2>超级超级超级超级超级超级超级超级超级超级超级长的会议名称</h2></a>
+                     <a href="#"><h2>第十二届东南大学九龙湖校区超级长的不知道是什么东西的会议名称</h2></a>
                 <h3>时间 地点</h3>
                      <h3>主办方</h3>
                 <h3>简介十大大苏打撒旦</h3>
                      <a href="#"><button type="button" class="btn btn-primary">查看详情</button></a>
                  </div>
              </li>
+             <li class="item-card">
+                 <h1><img class=" " src="https://y4ngyy.xyz/assets/avatar.jpg" alt="会议logo"></h1>
+                 <div class="item-info">
+                     <a href="#"><h2>超级超级超级超级超级超级超级超级超级超级超级长的会议名称</h2></a>
+                     <h3>时间 地点</h3>
+                     <h3>主办方</h3>
+                     <h3>简介十大大苏打撒旦</h3>
+                     <a href="#"><button type="button" class="btn btn-primary">查看详情</button></a>
+                 </div>
+             </li>
+             <li class="item-card">
+                 <h1><img class=" " src="https://y4ngyy.xyz/assets/avatar.jpg" alt="会议logo"></h1>
+                 <div class="item-info">
+                     <a href="#"><h2>超级超级超级超级超级超级超级超级超级超级超级长的会议名称</h2></a>
+                     <h3>时间 地点</h3>
+                     <h3>主办方</h3>
+                     <h3>简介十大大苏打撒旦</h3>
+                     <a href="#"><button type="button" class="btn btn-primary">查看详情</button></a>
+                 </div>
+             </li>
+             <li class="item-card">
+                 <h1><img class=" " src="https://y4ngyy.xyz/assets/avatar.jpg" alt="会议logo"></h1>
+                 <div class="item-info">
+                     <a href="#"><h2>超级超级超级超级超级超级超级超级超级超级超级长的会议名称</h2></a>
+                     <h3>时间 地点</h3>
+                     <h3>主办方</h3>
+                     <h3>简介十大大苏打撒旦</h3>
+                     <a href="#"><button type="button" class="btn btn-primary">查看详情</button></a>
+                 </div>
+             </li>
+             <li class="item-card">
+                 <h1><img class=" " src="https://y4ngyy.xyz/assets/avatar.jpg" alt="会议logo"></h1>
+                 <div class="item-info">
+                     <a href="#"><h2>超级超级超级超级超级超级超级超级超级超级超级长的会议名称</h2></a>
+                     <h3>时间 地点</h3>
+                     <h3>主办方</h3>
+                     <h3>简介十大大苏打撒旦</h3>
+                     <a href="#"><button type="button" class="btn btn-primary">查看详情</button></a>
+                 </div>
+             </li>
+             <li class="item-card">
+                 <h1><img class=" " src="https://y4ngyy.xyz/assets/avatar.jpg" alt="会议logo"></h1>
+                 <div class="item-info">
+                     <a href="#"><h2>超级超级超级超级超级超级超级超级超级超级超级长的会议名称</h2></a>
+                     <h3>时间 地点</h3>
+                     <h3>主办方</h3>
+                     <h3>简介十大大苏打撒旦</h3>
+                     <a href="#"><button type="button" class="btn btn-primary">查看详情</button></a>
+                 </div>
+             </li>
+             <li class="item-card">
+                 <h1><img class=" " src="https://y4ngyy.xyz/assets/avatar.jpg" alt="会议logo"></h1>
+                 <div class="item-info">
+                     <a href="#"><h2>超级超级超级超级超级超级超级超级超级超级超级长的会议名称</h2></a>
+                     <h3>时间 地点</h3>
+                     <h3>主办方</h3>
+                     <h3>简介十大大苏打撒旦</h3>
+                     <a href="#"><button type="button" class="btn btn-primary">查看详情</button></a>
+                 </div>
+             </li>
          </ul>
-         <div><a href="#">Load More>></a></div>
+         <div class="text-center"><a href="#">Load More>></a></div>
      </div>
-    <div class="col-3">
-        <div id="user-info">
-            <div class="user-info-show">
-                <img src="https://y4ngyy.xyz/assets/avatar.jpg" alt=""class="avatar">
-                <div id="user-name">用户名</div>
-            </div>
+    <div class="col-4">
+        <div id="recent_activity">
+            <h2 class="recent_activity_header">近期活动</h2>
+            <ul class="p-0">
+                <li class="recent_activity_item">
+                    <img src="https://y4ngyy.xyz/assets/avatar.jpg" alt="会议logo" class="align-middle">
+                    <div class="d-inline-block align-middle ml-2">
+                    <a href="#"><h3>会议名称</h3></a>
+                        <div class="recent_activity_info">
+                        <span >会议时间</span>
+                        <span>会议地点</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="recent_activity_item">
+                    <img src="https://y4ngyy.xyz/assets/avatar.jpg" alt="会议logo" class="align-middle">
+                    <div class="d-inline-block align-middle ml-2">
+                        <a href="#"><h3>会议名称</h3></a>
+                        <div class="recent_activity_info">
+                            <span >会议时间</span>
+                            <span>会议地点</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="recent_activity_item">
+                    <img src="https://y4ngyy.xyz/assets/avatar.jpg" alt="会议logo" class="align-middle">
+                    <div class="d-inline-block align-middle ml-2">
+                        <a href="#"><h3>会议名称</h3></a>
+                        <div class="recent_activity_info">
+                            <span >会议时间</span>
+                            <span>会议地点</span>
+                        </div>
+                    </div>
+                </li>
+                <li class="recent_activity_item">
+                    <img src="https://y4ngyy.xyz/assets/avatar.jpg" alt="会议logo" class="align-middle">
+                    <div class="d-inline-block align-middle ml-2">
+                        <a href="#"><h3>会议名称</h3></a>
+                        <div class="recent_activity_info">
+                            <span >会议时间</span>
+                            <span>会议地点</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
 
     </div>

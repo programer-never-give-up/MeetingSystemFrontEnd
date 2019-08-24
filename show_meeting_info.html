@@ -12,7 +12,12 @@
         }
         .info-box {
             border: solid 1px #dddddd;
-            padding: 15px;
+            padding: 20px;
+        }
+        #participate {
+            line-height: 22px;
+            font-size: 14px;
+            width: 6rem;
         }
     </style>
 </head>
@@ -37,20 +42,22 @@
     </div>
 </nav>
 <div class="container main-content">
-    <div class="meeting-article">
+    <div class="meeting-article mb-5">
         <h1 style="text-align: center">会议标题</h1>
         <hr>
-        <h3>时间</h3>
+        <h3 class="m-3">时间</h3>
         <div class="info-box shadow-sm rounded-sm">这放时间信息</div>
-        <h3>地点</h3>
+        <h3 class="m-3">地点</h3>
         <div class="info-box shadow-sm rounded-sm">这放地点信息</div>
-        <h3>主办方</h3>
+        <h3 class="m-3">主办方</h3>
         <div class="info-box shadow-sm rounded-sm">这放主办方信息</div>
-        <h3>活动简介</h3>
+        <h3 class="m-3">活动简介</h3>
         <div class="info-box shadow-sm rounded-sm">这放活动简介</div>
-        <h3>活动资料</h3>
+        <h3 class="m-3">活动资料</h3>
         <div class="info-box shadow-sm rounded-sm">这放活动资料</div>
-        <button type="button" class="btn btn-primary">参加</button>
+        <div style="text-align: center;" class="mt-4">
+            <button type="button" class="btn btn-primary" id="participate">参加</button>
+        </div>
     </div>
 </div>
 <footer class="footer" id="footer">
