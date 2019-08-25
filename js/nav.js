@@ -8,6 +8,7 @@
  * @param loginStatusToRedirect true:若在登录状态则跳转 false:若在非登录状态则跳转
  */
 function checkLogin(isRedirect, loginStatusToRedirect=false) {
+	      // response格式{"status":True, "type":"企业用户 or 普通用户"}
     $.get('api/check/', function (data) {
         // status === True 已登录
        if (data.status) {

@@ -96,12 +96,6 @@
 
     $(function () {
         // 弹出提示框
-        // response格式{"status":True, "type":"企业用户 or 普通用户"}
-        $.get('api/login/check/', function (data) {
-           if (data.status) {
-               window.location.href = 'index.html';
-           }
-        });
         // response格式{"status":True, "message":"失败信息"}
         $('#login').click(function (e) {
             var username = $('#username').val();
