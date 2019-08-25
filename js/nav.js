@@ -23,7 +23,7 @@ function checkLogin(isRedirect, loginStatusToRedirect=false) {
            navList.append('<a href="#" class="nav-list-item">个人中心</a>');
            navList.append('<span style="color: #ff5722;" class="nav-list-item">' +
                '<i class="fas fa-power-off"></i>' +
-               '<a href="#">退出</a>' +
+               '<a href="#" onclick="logout()">退出</a>' +
                '</span>');
        } else {
            if (isRedirect) {
@@ -37,4 +37,16 @@ function checkLogin(isRedirect, loginStatusToRedirect=false) {
            navList.append('<a href="register.html" class="nav-list-item">注册</a>');
        }
     });
+}
+
+function logout() {
+	// reponse {status: True}
+	$.get('api/logout/', function(data){
+		if(data.status) {
+			console.log('登出成功');
+			window.location.href='index.html';
+		} else {
+			console.log('登出失败')
+		}
+	});
 }
