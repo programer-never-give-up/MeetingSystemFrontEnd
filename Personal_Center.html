@@ -12,6 +12,7 @@
         }
         .bggreencolor
         {
+
          background-color: #8fd19e;
         }
         .whitecolor2
@@ -48,7 +49,7 @@
 
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#">
-        <img src="https://y4ngyy.xyz/assets/avatar.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+        <img src="https://y4ngyy.xyz/assets/avatar.jpg"  class="d-inline-block align-top" alt="">
         <span class="home-name">云会议系统</span>
     </a>
     <div class="nav-list">
@@ -70,16 +71,15 @@
         <p class="font-weight-bold greycolor">个人中心</p>
     </div>
     <div class="row">
-        <div class="col-1"></div>
         <div class="col-3">
-            <img src="" class="img-rounded picturesize">
+            <img src="" class="img-rounded picturesize " id="avatar">
         </div>
-        <div class="col-7 ">
+        <div class="col-8 ">
             <div class="row">
                 <p class="">简介：</p>
             </div>
             <div class="row">
-                <text class="textsize" id="introduction">这个人很懒，什么都没有留下</text>
+                <textarea disabled class="textsize" id="introduction" >这个人很懒，什么都没有留下</textarea>
             </div>
             <div class="row">
                 <div class="col-6">
@@ -110,7 +110,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <text class=" redcolor">个人地址:</text>
+                                <text class=" redcolor">联系地址:</text>
                             </td>
                             <td>
                                 <text class="label-primary" id="address">无</text>
@@ -174,5 +174,46 @@
 <script src="plugins/jquery/jquery-3.4.1.min.js"></script>
 <script src="plugins/popper/popper.min.js"></script>
 <script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<!--渲染页面-->
+<script>
+    var userImformation=
+    {
+
+        "avatar":"https://y4ngyy.xyz/assets/avatar.jpg",
+        "type":"个人",
+        "address":"翻斗大街翻斗花园二号楼1001室",
+        "perfession":"幼儿园小豆班学员",
+        "company":"翻斗幼儿园",
+        "eamil":"bigeras.@tutu.com",
+        "gender":"男",
+        "username":"大耳朵图图",
+        "phonenumber":"123123",
+        "introduction":"我叫胡图图，今年三岁，我的爸爸叫胡英俊，我的妈妈叫张小丽，我家住在翻斗花园二号楼一零零一室，妈妈做的炸小肉丸最好吃。我的猫咪叫小怪。他是一只会说话的猫咪呦，小怪和图图一样是个男孩子，图图最喜欢的好朋友是小美，图图的耳朵很大很神奇，你们看动耳神功。"
+    };
+    $(document).ready(function(){
+        $("#type").text(userImformation.type);
+        $("#gender").text(userImformation.gender);
+        $("#eamil").text(userImformation.eamil);
+        $("#address").text(userImformation.address);
+        $("#company").text(userImformation.company);
+        $("#phonenumber").text(userImformation.phonenumber);
+        $("#username").text(userImformation.username);
+        $("#perfession").text(userImformation.perfession);
+        $("#introduction").text(userImformation.introduction);
+        $("#avatar").src(userImformation.avatar);
+    });
+
+
+    document.getElementById("eamil").innerText=userImformation.eamil;
+    document.getElementById("address").innerText=userImformation.address;
+    document.getElementById("company").innerText=userImformation.company;
+    document.getElementById("phonenumber").innerText=userImformation.phonenumber;
+    document.getElementById("perfession").innerText=userImformation.perfession;
+    document.getElementById("username").innerText=userImformation.username;
+    document.getElementById("introduction").innerText=userImformation.introduction;
+    document.getElementById("avatar").src=userImformation.avatar;
+
+
+</script>
 </body>
 </html>
