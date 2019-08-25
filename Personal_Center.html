@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="plugins/bootstrap-4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>个人中心</title>
+    <style>
+        .whitecolor
+        {
+            background-color: #f8f9fa;
+        }
+        .bggreencolor
+        {
+         background-color: #8fd19e;
+        }
+        .whitecolor2
+        {
+            color:#f8f9fa;
+        }
+        .redcolor
+        {
+            color:#ff5722;
+        }
+        .textsize
+        {
+            background-color: #fbfcfc;
+            width: 500px;
+            height: 100px;
+        }
+        .bluecolor
+        {
+            color:#00b3ee;
+        }
+        .greycolor
+        {
+            color:#6c757d;
+            font-size: x-large;
+        }
+        .picturesize
+        {
+            width: 250px;
+            height: 280px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="https://y4ngyy.xyz/assets/avatar.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+        <span class="home-name">云会议系统</span>
+    </a>
+    <div class="nav-list">
+        <a href="#" class="nav-list-item">公开会议列表</a>
+        <a href="#" class="nav-list-item">控制台</a>
+        <a href="" class="nav-list-item">消息</a>
+        <a href="#" class="nav-list-item">个人中心</a>
+
+        <span style="color: #ff5722;" class="nav-list-item">
+                <i class="fas fa-power-off"></i>
+                <a href="#">退出</a>
+            </span>
+
+    </div>
+</nav>
+<div class="container main-content whitecolor">
+    <div class="row">
+        <h3 class="bluecolor">——</h3>
+        <p class="font-weight-bold greycolor">个人中心</p>
+    </div>
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-3">
+            <img src="" class="img-rounded picturesize">
+        </div>
+        <div class="col-7 ">
+            <div class="row">
+                <p class="">简介：</p>
+            </div>
+            <div class="row">
+                <text class="textsize" id="introduction">这个人很懒，什么都没有留下</text>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <table style="border-collapse: separate;border-spacing: 10px 10px;">
+                        <tr>
+                            <td>
+                                <text class=" redcolor">用户名:</text>
+                            </td>
+                            <td>
+                                <text id="username">无</text>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <text class=" redcolor">联系方式:</text>
+                            </td>
+                            <td>
+                                <text class="label-primary" id="phonenumber">无</text>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <text class=" redcolor">用户类型:</text>
+                            </td>
+                            <td>
+                                <text class="label-primary" id="type">无</text>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <text class=" redcolor">个人地址:</text>
+                            </td>
+                            <td>
+                                <text class="label-primary" id="address">无</text>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-6">
+                    <div>
+                        <table style="border-collapse: separate;border-spacing: 10px 10px;">
+                            <tr>
+                                <td>
+                                    <text class=" redcolor">性别:</text>
+                                </td>
+                                <td>
+                                    <text id="gender">无</text>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <text class=" redcolor">联系邮箱:</text>
+                                </td>
+                                <td>
+                                    <text id="eamil">无</text>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <text class=" redcolor">个人单位:</text>
+                                </td>
+                                <td>
+                                    <text class="label-primary" id="company">无</text>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <text class=" redcolor">个人职业:</text>
+                                </td>
+                                <td>
+                                    <text class="label-primary" id="perfession">无</text>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+        </div>
+        </div>
+        <div class="col-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-5"></div>
+        <div class="col-2">
+            <button>编辑</button>
+        </div>
+        <div class="col-5"></div>
+    </div>
+</div>
+
+
+<script src="plugins/fontawesome/font-awesome.js"></script>
+<script src="plugins/jquery/jquery-3.4.1.min.js"></script>
+<script src="plugins/popper/popper.min.js"></script>
+<script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
