@@ -14,13 +14,15 @@
         .row-centered {
             text-align:center;
         }
-        .col-centered {
-            text-align:center;
-            margin-right:-4px;
+        .toast {
+            position: absolute;
+            margin-top: 1rem;
+            right: 1rem;
+            z-index: 999;
         }
-        .login-table {
-            margin-right: auto;
-            margin-left: auto;
+        .btn {
+            line-height: 18px;
+            margin: 0 10px;
         }
     </style>
 </head>
@@ -44,44 +46,44 @@
 
     </div>
 </nav>
+<div class="toast w-25" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000" id="message-box">
+    <div class="toast-header bg-danger text-white">
+        <strong>提示</strong>
+    </div>
+    <div class="toast-body p-3" id="message">
+    </div>
+</div>
 <div class="container main-content">
+    <!--  toast提示框  -->
+
     <div class="row-centered " >
         <!-- 登陆窗口 -->
         <div class="card text-center">
             <div class="card-header">
                 用户登陆
             </div>
-            <div class="alert alert-warning">abcd</div>
-            <div class="card-body">
-                <div class="col-centered">
-                    <table style="border-collapse: separate;border-spacing: 10px 10px;" class="text-center login-table">
-                        <tr>
-                            <td class="marg">
-                                <label for="username">用户名：</label>
-                            </td>
-                            <td>
-                                <input type="text" name="username" id="username" placeholder="用户名" autofocus>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label for="password">密码:</label>
-                            </td>
-                            <td>
-                                <input type="password" name="password" id="password" placeholder="密码" required>
 
-                            </td>
-                            <td><button type="button" class="btn btn-link"><small>忘记密码？</small></button></td>
-                        </tr>
-                    </table>
+            <div class="card-body">
+                <div class="text-center">
+                    <div>
+                    <label for="username" class="mb-2">用户名</label>
+                    <input type="text" class="form-control w-25 m-auto" name="username" id="username" placeholder="用户名" autofocus>
+                    </div>
+                    <div>
+                    <label for="password" class="mb-2 mt-2">密码</label>
+                    <input type="password" class="form-control w-25 m-auto" name="password" id="password" placeholder="密码" required>
+                    </div>
 <!--                    <div class="form-check">-->
 <!--                        <label class="form-check-label">-->
 <!--                            <input type="checkbox" name="" class="form-check-input">记住密码-->
 <!--                        </label>-->
 <!--                    </div>-->
-                    <div class="bg-white" style="text-align: center;">
-                        <button type="submit" class="btn btn-danger" id="login">登陆</button>
-                        <button type="button" class="btn btn-secondary " onclick="window.location.href='verify.html'">注册</button>
+                    <div class="w-25 m-auto text-right">
+                        <a href="#"><small>忘记密码？</small></a>
+                    </div>
+                    <div class="mt-2 button-group">
+                        <button type="button" class="btn btn-danger" id="login">登陆</button>
+                        <button type="button" class="btn btn-secondary" onclick="window.location.href='register.html'">注册</button>
                     </div>
                 </div>
             </div>
@@ -101,6 +103,7 @@
     // 这是调试登录的ajax
 
     $(function () {
+        // 弹出提示框
         // response格式{"status":True, "type":"企业用户 or 普通用户"}
         $.get('api/login/check/', function (data) {
            if (data.status) {
@@ -114,10 +117,12 @@
             $.post('api/login/', {username:username, password: password}, function (data) {
                 console.log(data);
                 if (data.status) {
-                    console.log('Login Success!');
+                    $('#message').text('登录成功,正在跳转...');
+                    $('#message-box').toast('show');
                     window.location.href='index.html';
                 } else {
-                    console.log('Login Failed!');
+                    $('#message').text(data.message);
+                    $('#message-box').toast('show');
                 }
             });
         })
