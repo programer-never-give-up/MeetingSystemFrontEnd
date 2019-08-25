@@ -54,3 +54,9 @@ html, body {
     margin-left: 10px;
     margin-right: 10px;
 }
+.toast {
+	position: fixed;
+	z-index: 999;
+	right: 1rem;
+	top: 1rem;
+}
