@@ -1,5 +1,7 @@
-
-//一些跳转功能
+/**
+ * @author chonepieceyb
+ * 会议的跳转模块
+ */
 //新建会议的跳转
 $(function(){
     $("#new-activity-bottom").on('click',function (e) {
@@ -25,3 +27,5 @@ $(function () {
         window.location.href="index.html"
     })
 })
+
+
