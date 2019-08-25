@@ -14,31 +14,27 @@
             margin: 20px auto;
             color: #FFFFFF;
         }
-        .con4 .btn {
+        .con4 .btn{
             width: 100%;
             height: 40px;
             line-height: 40px;
             text-align: center;
-            background: #d8b49c;
+            background: #f55d54;
+            border-color: #f55d54;
             display: block;
             font-size: 16px;
             border-radius: 5px;
         }
-
-        .upload {
-            float: left;
-            position: relative;
-        }
-        .upload_pic {
-            display: block;
-            width: 100%;
-            height: 40px;
-            position: absolute;
-            left: 0;
-            top: 0;
-            opacity: 0;
-            border-radius: 5px;
-        }
+        /*.upload_pic {*/
+        /*    display: block;*/
+        /*    width: 100%;*/
+        /*    height: 40px;*/
+        /*    position: absolute;*/
+        /*    left: 0;*/
+        /*    top: 0;*/
+        /*    opacity: 0;*/
+        /*    border-radius: 5px;*/
+        /*}*/
 
         #cvs {
             border: 1px solid #000;
@@ -98,7 +94,7 @@
                 <form class="col-centered" id="form">
                     <div class="con4">
                         <canvas id="cvs" width="200" height="200"></canvas>
-                        <span class="btn upload">上传头像<input type="file" class="upload_pic" id="UploadAvatar" name="file"/></span>
+                        <input type="file" class="upload_pic btn" id="UploadAvatar" name="file"/>
                     </div>
                     <table style="border-collapse: separate;border-spacing: 10px 10px;">
                         <tr>

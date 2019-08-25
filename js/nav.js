@@ -8,7 +8,7 @@
  * @param loginStatusToRedirect true:若在登录状态则跳转 false:若在非登录状态则跳转
  */
 function checkLogin(isRedirect, loginStatusToRedirect=false) {
-    $.get('api/login/check/', function (data) {
+    $.get('api/check/', function (data) {
         // status === True 已登录
        if (data.status) {
            if (isRedirect) {
