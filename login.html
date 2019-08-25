@@ -34,16 +34,7 @@
         <span class="home-name">云会议系统</span>
     </a>
     <div class="nav-list">
-        <a href="#" class="nav-list-item">公开会议列表</a>
-        <a href="#" class="nav-list-item">控制台</a>
-        <a href="" class="nav-list-item">消息</a>
-        <a href="#" class="nav-list-item">个人中心</a>
-
-        <span style="color: #ff5722;" class="nav-list-item">
-                <i class="fas fa-power-off"></i>
-                <a href="#">退出</a>
-            </span>
-
+        <a href="index.html" class="nav-list-item">首页</a>
     </div>
 </nav>
 <div class="toast w-25" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000" id="message-box">
@@ -99,6 +90,12 @@
 <script src="plugins/jquery/jquery-3.4.1.min.js"></script>
 <script src="plugins/popper/popper.min.js"></script>
 <script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<script src="js/nav.js"></script>
+<script>
+    $(function () {
+        checkLogin(true, true);
+    })
+</script>
 <script>
     // 这是调试登录的ajax
 
