@@ -132,8 +132,10 @@
                                 <text>邮箱：</text>
                             </td>
                             <td>
-                                <input required id="email">
-                                <input type="button" value="发送验证码" id="sendVer" onclick="run()">
+                                <form name="mForm" onclick="validateForm()" >
+                                <input type="text" required id="email" name="fname">
+                                <input type="button" value="发送验证码" id="sendVer" >
+                                </form>
                             </td>
                             </div>
                         </tr>
@@ -161,7 +163,7 @@
                                 <label>用户类型:</label>
                             </td>
                             <td>
-                                <select class="selectpicker show-tick form-control" data-live-search="true" id="gender" class="selectsize" >
+                                <select class="selectpicker show-tick form-control" data-live-search="true" id="type" class="selectsize" >
                                     <option>个人</option>
                                     <option>企业</option>
                                 </select>
@@ -327,6 +329,15 @@
           });
        });
     });
+</script>
+<script>
+    function validateForm(){
+        var x=document.forms["myForm"]["fname"].value;
+        if (x==null || x==""){
+            alert("姓必须填写");
+            return false;
+        }
+    }
 </script>
 </body>
 </html>
