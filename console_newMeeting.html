@@ -21,96 +21,92 @@
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="#">
             <img src="https://y4ngyy.xyz/assets/avatar.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
-            Bootstrap
+            <span class="home-name">云活动系统</span>
         </a>
         <div class="nav-list">
-            <a href="#">公开会议列表</a>
-            <a href="#">控制台</a>
-            <a href="">消息</a>
-            <a href="#">个人中心</a>
-
-            <span style="color: #ff5722;">
-                <i class="fas fa-power-off"></i>
-                <a href="#">退出</a>
-            </span>
-
+            <a href="index.html" class="nav-list-item">首页</a>
         </div>
     </nav>
-
-    <div class="container main-content">
-        <div class="row header">
-            <div class="col-12 title">
-                <h5 >新建会议</h5>
-            </div>
-        </div>
-        <div class="row">
-
-            <div class="col-12 content-show">
-                <!-- 新建会议的表单——by 杨彬-->
-                <div style="width: 80%; margin: 0 auto;">
-                    <form class="form-horizontal" role="form">
-                        <div class = "form-group row" id="logoInputGroup">
-                            <label class="col-2 control-label inputLabel" for="uploadLogoButtom">活动logo:</label>
-                            <div class="col-10">
-                                <img src="https://y4ngyy.xyz/assets/avatar.jpg" style="border:1px dashed grey; border-radius: 10px; width:15%"  >
-                                <input type="file" class="form-control uploadProjectFile col-lg-6" id="uploadLogoButtom" name="logo" >
-                            </div>
-                        </div>
-                        <div class="form-group row" role="form" id="nameInputGroup">
-                            <label class="col-2  control-label inputLabel" for="nameInput">活动名称:</label>
-                            <div class="col-10">
-                                <input type="text" id="nameInput" class="form-control col-lg-6" placeholder="请输入活动名称">
-                            </div>
-                        </div>
-                        <div class="form-group row" role="form" id="timeInputRow">
-                            <label class="col-2 control-label inputLabel" for="timeDiv" >活动时间:</label>
-                            <div class="col-10" id="timeDiv">
-                                <div>开始时间：<input type="datetime-local" id="startTime" class="form-control col-lg-6"></div>
-                                <div>结束时间：<input type="datetime-local" id="endTime" class="form-control col-lg-6"></div>
-                            </div>
-                        </div>
-                        <div class="form-group row" role="form" id="locationGroup">
-                            <label class="col-2 control-label inputLabel"  for="locationInput">活动地点:</label>
-                            <div class="col-10">
-                                <input type="text" id="locationInput" class="form-control col-lg-6" placeholder="请输入活动地点">
-                            </div>
-                        </div>
-                        <div class="form-group row" role="form" id="organizerGroup">
-                            <label class="col-2 control-label inputLabel" for="organizerInput">主办方:</label>
-                            <div class="col-10">
-                                <input type="text" id="organizerInput" class="form-control col-lg-6" placeholder="主办方">
-                            </div>
-                        </div>
-                        <div class="form-group row" role="form" id="introductionGroup">
-                            <label class="col-2 control-label inputLabel" for="introductionInput">活动简介:</label>
-                            <div class="col-10">
-                                <textarea type="text" id=introductionInput class="form-control col-lg-6" rows="4" >
-                                </textarea>
-                            </div>
-                        </div>
-                        <div class="form-group row" id="uplodeFileGroup">
-                            <label class="col-2 control-label inputLabel" for="uploadFile">活动资料:</label>
-                            <div class="col-10">
-                                <input id="uploadFile" name="userfile" multiple type="file" data-show-caption="true">
-                            </div>
-                        </div>
-                        <div class="form-group row" id="activityTypeGroup">
-                            <label class="col-2 control-label inputLabel" >活动类型：</label>
-                            <div class="col-10">
-                                <label class="radio-inline"><input type="radio" name="activity-type">会议</label>
-                                <label class="radio-inline"><input type="radio" name="activity-type">讲座</label>
-                                <label class="radio-inline"><input type="radio" name="activity-type">活动</label>
-                            </div>
-                        </div>
-<!--                        保存和提交按钮-->
-
-                    </form>
+    <div class="container main-content mb-4">
+        <div class="card">
+            <div class="card-header">
+                <div class="col-12 title" style="text-align: center">
+                    <h5 >新建会议</h5>
                 </div>
             </div>
+            <div class="card-body">
+                <div class="col-12 content-show">
+                    <!-- 新建会议的表单——by 杨彬-->
+                    <div style="width: 80%; margin: 0 auto;">
+                        <form class="form-horizontal" role="form">
+                            <div class = "form-group row" id="logoInputGroup">
+                                <label class="col-2 control-label inputLabel" for="uploadLogoButtom">活动logo:</label>
+                                <div class="col-10">
+                                    <img src="https://y4ngyy.xyz/assets/avatar.jpg" style="border:1px dashed grey; border-radius: 10px; width:15%"  >
+                                    <input type="file" class="form-control uploadProjectFile col-lg-6" id="uploadLogoButtom" name="logo" >
+                                </div>
+                            </div>
+                            <div class="form-group row" role="form" id="nameInputGroup">
+                                <label class="col-2  control-label inputLabel" for="nameInput">活动名称:</label>
+                                <div class="col-10">
+                                    <input type="text" id="nameInput" class="form-control col-lg-6" placeholder="请输入活动名称">
+                                </div>
+                            </div>
+                            <div class="form-group row" role="form" id="timeInputRow">
+                                <label class="col-2 control-label inputLabel" for="timeDiv" >活动时间:</label>
+                                <div class="col-10" id="timeDiv">
+                                    <div>开始时间：<input type="datetime-local" id="startTime" class="form-control col-lg-6"></div>
+                                    <div>结束时间：<input type="datetime-local" id="endTime" class="form-control col-lg-6"></div>
+                                </div>
+                            </div>
+                            <div class="form-group row" role="form" id="locationGroup">
+                                <label class="col-2 control-label inputLabel"  for="locationInput">活动地点:</label>
+                                <div class="col-10">
+                                    <input type="text" id="locationInput" class="form-control col-lg-6" placeholder="请输入活动地点">
+                                </div>
+                            </div>
+                            <div class="form-group row" role="form" id="organizerGroup">
+                                <label class="col-2 control-label inputLabel" for="organizerInput">主办方:</label>
+                                <div class="col-10">
+                                    <input type="text" id="organizerInput" class="form-control col-lg-6" placeholder="主办方">
+                                </div>
+                            </div>
+                            <div class="form-group row" role="form" id="introductionGroup">
+                                <label class="col-2 control-label inputLabel" for="introductionInput">活动简介:</label>
+                                <div class="col-10">
+                                    <textarea type="text" id=introductionInput class="form-control col-lg-6" rows="4" >
+                                    </textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row" id="uplodeFileGroup">
+                                <label class="col-2 control-label inputLabel" for="uploadFile">活动资料:</label>
+                                <div class="col-10">
+                                    <input id="uploadFile" name="userfile" multiple type="file" data-show-caption="true">
+                                </div>
+                            </div>
+                            <div class="form-group row" id="activityTypeGroup">
+                                <label class="col-2 control-label inputLabel" >活动类型：</label>
+                                <div class="col-10">
+                                    <label class="radio-inline"><input type="radio" name="activity-type">会议</label>
+                                    <label class="radio-inline"><input type="radio" name="activity-type">讲座</label>
+                                    <label class="radio-inline"><input type="radio" name="activity-type">活动</label>
+                                </div>
+                            </div>
+    <!--                        保存和提交按钮-->
+                            <div class="form-group row" >
+                                <div class="col-2 offset-5"> <button type="button" class="btn btn-primary">保存</button></div>
+                                <div class="col-2"><button type="button" class="btn btn-secondary">取消</button></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
         </div>
-
     </div>
-    <footer>页脚</footer>
+    <footer class="footer" id="footer">
+        这是页脚
+    </footer>
     <script src="plugins/fontawesome/font-awesome.js"></script>
     <script src="plugins/jquery/jquery-3.4.1.min.js"></script>
     <script src="plugins/popper/popper.min.js"></script>
@@ -119,8 +115,11 @@
     <script type="text/javascript" src="plugins/bootstrap_fileinput/js/fileinput.min.js"></script>
     <script type="text/javascript" src="plugins/bootstrap_fileinput/js/locales/zh.js"></script>
     <script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+    <script src="js/nav.js"></script>
     <script>
-
+        $(function () {
+            checkLogin(true, false);
+        })
     </script>
 </body>
 </html>

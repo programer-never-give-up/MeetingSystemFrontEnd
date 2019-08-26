@@ -43,14 +43,44 @@
             width: 250px;
             height: 280px;
         }
+        .logo-img
+        {
+            width:150px;
+            heihgt:150px;
+        }
+        .info-card{
+            height: 100%;
+        }
+        .info-col{
+            padding:5px;
+        }
+        .label-info{
+            text-align: right;
+        }
+        .content-info{
+            text-align: left;
+        }
+        .label-input{
+            text-align: right;
+        }
+        .content-input{
+            text-align: left;
+        }
+        .input-card{
+            height: 100%;
+        }
+        .input-col{
+            padding:5px;
+        }
+
     </style>
 </head>
 <body>
 
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#">
-        <img src="https://y4ngyy.xyz/assets/avatar.jpg"  class="d-inline-block align-top" alt="">
-        <span class="home-name">云会议系统</span>
+        <img src="https://y4ngyy.xyz/assets/avatar.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+        <span class="home-name">云活动系统</span>
     </a>
     <div class="nav-list">
         <a href="#" class="nav-list-item">公开会议列表</a>
@@ -65,108 +95,289 @@
 
     </div>
 </nav>
-<div class="container main-content whitecolor">
-    <div class="row">
-        <h3 class="bluecolor">——</h3>
-        <p class="font-weight-bold greycolor">个人中心</p>
-    </div>
-    <div class="row">
-        <div class="col-3">
-            <img src="" class="img-rounded picturesize " id="avatar">
+<div class="container main-content ">
+    <div class="card">
+        <div class="card-header " style="text-align: center">
+            <h3 class="card-title">个人中心</h3>
         </div>
-        <div class="col-8 ">
-            <div class="row">
-                <p class="">简介：</p>
-            </div>
-            <div class="row">
-                <textarea disabled class="textsize" id="introduction" >这个人很懒，什么都没有留下</textarea>
-            </div>
-            <div class="row">
-                <div class="col-6">
-                    <table style="border-collapse: separate;border-spacing: 10px 10px;">
-                        <tr>
-                            <td>
-                                <text class=" redcolor">用户名:</text>
-                            </td>
-                            <td>
-                                <text id="username">无</text>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <text class=" redcolor">联系方式:</text>
-                            </td>
-                            <td>
-                                <text class="label-primary" id="phonenumber">无</text>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <text class=" redcolor">用户类型:</text>
-                            </td>
-                            <td>
-                                <text class="label-primary" id="type">无</text>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <text class=" redcolor">联系地址:</text>
-                            </td>
-                            <td>
-                                <text class="label-primary" id="address">无</text>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="col-6">
-                    <div>
-                        <table style="border-collapse: separate;border-spacing: 10px 10px;">
-                            <tr>
-                                <td>
-                                    <text class=" redcolor">性别:</text>
-                                </td>
-                                <td>
-                                    <text id="gender">无</text>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <text class=" redcolor">联系邮箱:</text>
-                                </td>
-                                <td>
-                                    <text id="eamil">无</text>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <text class=" redcolor">个人单位:</text>
-                                </td>
-                                <td>
-                                    <text class="label-primary" id="company">无</text>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <text class=" redcolor">个人职业:</text>
-                                </td>
-                                <td>
-                                    <text class="label-primary" id="perfession">无</text>
-                                </td>
-                            </tr>
-                        </table>
+        <div class="card-body container">
+            <div style="margin:10px">
+                <div class="row">
+                    <div class="col-2 info-col">
+                        <div class="card info-card">
+                            <img src="https://y4ngyy.xyz/assets/avatar.jpg" class="card-img-top" id="usr-logo">
+                            <div class="card-body">
+                                <div class="list-group-">
+                                    <a herf="#" class="list-group-item list-group-item-action">个人信息</a>
+                                    <a herf="#" class="list-group-item list-group-item-action">隐私设置</a>
+                                    <a herf="#" class="list-group-item list-group-item-action">参与历史</a>
+                                    <a herf="#" class="list-group-item list-group-item-action">举办历史</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-5 info-col" >
+                        <div class="card info-card">
+                            <div>
+                                <h5 class="card-title" style="text-align: center; margin: 10px 20px;display: inline-block">基本信息</h5>
+                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)">编辑</a></label>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-hover border-bottom">
+                                    <tr>
+                                        <td class="label-info">用户名：</td>
+                                        <td id="username-info" class="content-info">saf</td>
+                                    </tr>
+                                    <tr>
+                                        <td  class="label-info">性别：</td>
+                                        <td id="user-gender-info" class="content-info">asfsfd</td>
+                                    </tr>
+                                    <tr>
+                                        <td  class="label-info">电子邮箱：</td>
+                                        <td id="user-mail-info" class="content-info">asdfasdf</td>
+                                    </tr>
+                                    <tr>
+                                        <td  class="label-info">手机：</td>
+                                        <td id="user-telphone-info" class="content-info">asdfsdf</td>
+                                    </tr>
+                                    <tr>
+                                        <td  class="label-info">用户类别：</td>
+                                        <td id="user-type-info" class="content-info"><asdfasdfsdf/td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-5 input-col" style="display: none">
+                        <div class="card input-card">
+                            <div>
+                                <h5 class="card-title" style="text-align: center; margin: 10px 20px;display: inline-block">基本信息</h5>
+                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)">保存</a></label>
+                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)">取消编辑</a></label>
+                            </div>
+                            <div class="card-body">
+                                <form class="input-form">
+                                    <table class="table table-hover border-bottom">
+                                        <tr>
+                                            <td class="label-info">用户名：</td>
+                                            <td id="username-input" class="content-input">saf</td>
+                                        </tr>
+                                        <tr>
+                                            <td  class="label-info">性别：</td>
+                                            <td  class="content-input">
+                                                <input type="text" id="user-gender-input" class="form-control " placeholder="修改用户名">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td  class="label-info">电子邮箱：</td>
+                                            <td  class="content-info">
+                                                <input type="text" id="user-mail-input" class="form-control " placeholder="修改邮箱">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td  class="label-info">手机：</td>
+                                            <td  class="content-info">
+                                                <input type="text" id="user-telephone-input" class="form-control " placeholder="修改手机号">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td  class="label-info">用户类别：</td>
+                                            <td id="user-type-input" class="content-info">asdfasdfsdf</td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-5 info-col" style="display: none">
+                        <div class="card info-card">
+                            <div>
+                                <h5 class="card-title" style="text-align: center; margin: 10px 20px;display: inline-block">扩展信息</h5>
+                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)">编辑</a></label>
+                            </div>
+                            <div class="card-body">
+                                <table class="table  table-hover border-bottom">
+                                    <tr>
+                                        <td  class="label-info">地址：</td>
+                                        <td id="user-address-info" class="content-info">adsfasdfa</td>
+                                    </tr>
+                                    <tr>
+                                        <td  class="label-info">工作(学习)单位：</td>
+                                        <td id="user-company-info" class="content-info">sdafsdafsdf</td>
+                                    </tr>
+                                    <tr>
+                                        <td  class="label-info">职业：</td>
+                                        <td id="user-job-info" class="content-info">asdfsadfsafd</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-5 input-col" >
+                        <div class="card input-card">
+                            <div>
+                                <h5 class="card-title" style="text-align: center; margin: 10px 20px;display: inline-block">扩展信息</h5>
+                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)">保存</a></label>
+                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)">取消编辑</a></label>
+                            </div>
+                            <div class="card-body">
+                                <form class="input-form">
+                                    <table class="table table-hover border-bottom">
+                                        <tr>
+                                            <td  class="label-info">地址：</td>
+                                            <td  class="content-input">
+                                                <input type="text" id="user-address-input" class="form-control " placeholder="修改用户名">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td  class="label-info">工作(学习)单位：</td>
+                                            <td  class="content-info">
+                                                <input type="text" id="user-company-input" class="form-control " placeholder="修改邮箱">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td  class="label-info">职业：</td>
+                                            <td  class="content-info">
+                                                <input type="text" id="user-job-input" class="form-control " placeholder="修改手机号">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="row" >
+                    <div class="col-12 info-col" style="display: none;">
+                        <div class="card info-card">
+                            <div>
+                                <h5 class="card-title" style="text-align: center; margin: 10px 20px;display: inline-block" >个人简介：</h5>
+                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)">编辑</a></label>
+                            </div>
+                            <div class="card-body" id="user-introduction-info">
+                                <p>"我叫胡图图，今年三岁，我的爸爸叫胡英俊，我的妈妈叫张小丽，我家住在翻斗花园二号楼一零零一室，妈妈做的炸小肉丸最好吃。我的猫咪叫小怪。他是一只会说话的猫咪呦</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 input-col">
+                        <div class="card input-card">
+                            <div>
+                                <h5 class="card-title" style="text-align: center; margin: 10px 20px;display: inline-block" >个人简介：</h5>
+                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)">保存</a></label>
+                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)">取消编辑</a></label>
+                            </div>
+                            <div class="card-body">
+                                <textarea type="text"  class="form-control " rows="4" >
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        </div>
-        <div class="col-3"></div>
     </div>
-    <div class="row">
-        <div class="col-5"></div>
-        <div class="col-2">
-            <button>编辑</button>
-        </div>
-        <div class="col-5"></div>
-    </div>
+<!--    <h1 class="font-weight-bold greycolor">个人中心</h1>-->
+<!--        <div class="col-3">-->
+<!--            <img src="https://y4ngyy.xyz/assets/avatar.jpg" class="img-rounded picturesize " id="avatar">-->
+<!--        </div>-->
+<!--        <div class="col-8 ">-->
+<!--            <div class="row">-->
+<!--                <div class="col-6">-->
+<!--                    <table style="border-collapse: separate;border-spacing: 10px 10px;">-->
+<!--                        <tr>-->
+<!--                            <td>-->
+<!--                                <text class=" redcolor">用户名:</text>-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <text id="username">无</text>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td>-->
+<!--                                <text class=" redcolor">联系方式:</text>-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <text class="label-primary" id="phonenumber">无</text>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td>-->
+<!--                                <text class=" redcolor">用户类型:</text>-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <text class="label-primary" id="type">无</text>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                        <tr>-->
+<!--                            <td>-->
+<!--                                <text class=" redcolor">联系地址:</text>-->
+<!--                            </td>-->
+<!--                            <td>-->
+<!--                                <text class="label-primary" id="address">无</text>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--                <div class="col-6">-->
+<!--                    <div>-->
+<!--                        <table style="border-collapse: separate;border-spacing: 10px 10px;">-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <text class=" redcolor">性别:</text>-->
+<!--                                </td>-->
+<!--                                <td>-->
+<!--                                    <text id="gender">无</text>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <text class=" redcolor">联系邮箱:</text>-->
+<!--                                </td>-->
+<!--                                <td>-->
+<!--                                    <text id="eamil">无</text>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <text class=" redcolor">个人单位:</text>-->
+<!--                                </td>-->
+<!--                                <td>-->
+<!--                                    <text class="label-primary" id="company">无</text>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <text class=" redcolor">个人职业:</text>-->
+<!--                                </td>-->
+<!--                                <td>-->
+<!--                                    <text class="label-primary" id="perfession">无</text>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+<!--                        </table>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--        </div>-->
+<!--             <div class="row">-->
+<!--                <p class="col-8 pl-2">简介：</p>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--                <p class="textsize" id="introduction" >这个人很懒，什么都没有留下</p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="col-3"></div>-->
+<!--    </div>-->
+<!--    <div class="row">-->
+<!--        <div class="col-5"></div>-->
+<!--        <div class="col-2">-->
+<!--            <button>编辑</button>-->
+<!--        </div>-->
+<!--        <div class="col-5"></div>-->
+<!--    </div>-->
 </div>
 
 
