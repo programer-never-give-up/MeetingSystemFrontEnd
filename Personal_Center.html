@@ -121,25 +121,25 @@
                         <div class="card info-card">
                             <div>
                                 <h5 class="card-title" style="text-align: center; margin: 10px 20px;display: inline-block">基本信息</h5>
-                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)">编辑</a></label>
+                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)" id="base-edit-link">编辑</a></label>
                             </div>
                             <div class="card-body">
                                 <table class="table table-hover border-bottom">
                                     <tr>
                                         <td class="label-info">用户名：</td>
-                                        <td id="username-info" class="content-info">saf</td>
+                                        <td id="username-info" class="content-info"></td>
                                     </tr>
                                     <tr>
                                         <td  class="label-info">性别：</td>
-                                        <td id="user-gender-info" class="content-info">asfsfd</td>
+                                        <td id="user-gender-info" class="content-info"></td>
                                     </tr>
                                     <tr>
                                         <td  class="label-info">电子邮箱：</td>
-                                        <td id="user-mail-info" class="content-info">asdfasdf</td>
+                                        <td id="user-mail-info" class="content-info"></td>
                                     </tr>
                                     <tr>
                                         <td  class="label-info">手机：</td>
-                                        <td id="user-telphone-info" class="content-info">asdfsdf</td>
+                                        <td id="user-telphone-info" class="content-info"></td>
                                     </tr>
                                     <tr>
                                         <td  class="label-info">用户类别：</td>
@@ -154,37 +154,37 @@
                         <div class="card input-card">
                             <div>
                                 <h5 class="card-title" style="text-align: center; margin: 10px 20px;display: inline-block">基本信息</h5>
-                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)">保存</a></label>
-                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)">取消编辑</a></label>
+                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)" id="base-save-link">保存</a></label>
+                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)" id="base-cancel-link">取消编辑</a></label>
                             </div>
                             <div class="card-body">
                                 <form class="input-form">
                                     <table class="table table-hover border-bottom">
                                         <tr>
                                             <td class="label-info">用户名：</td>
-                                            <td id="username-input" class="content-input">saf</td>
+                                            <td id="username-input" class="content-input"></td>
                                         </tr>
                                         <tr>
                                             <td  class="label-info">性别：</td>
                                             <td  class="content-input">
-                                                <input type="text" id="user-gender-input" class="form-control " placeholder="修改用户名">
+                                                <input type="text" name="username" id="user-gender-input" class="form-control " placeholder="修改用户名">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td  class="label-info">电子邮箱：</td>
                                             <td  class="content-info">
-                                                <input type="text" id="user-mail-input" class="form-control " placeholder="修改邮箱">
+                                                <input type="text" name="email" id="user-mail-input" class="form-control " placeholder="修改邮箱">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td  class="label-info">手机：</td>
                                             <td  class="content-info">
-                                                <input type="text" id="user-telephone-input" class="form-control " placeholder="修改手机号">
+                                                <input type="text" id="user-telephone-input" name="phone_number" class="form-control " placeholder="修改手机号">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td  class="label-info">用户类别：</td>
-                                            <td id="user-type-input" class="content-info">asdfasdfsdf</td>
+                                            <td id="user-type-input" class="content-info"></td>
                                         </tr>
                                     </table>
                                 </form>
@@ -196,21 +196,21 @@
                         <div class="card info-card">
                             <div>
                                 <h5 class="card-title" style="text-align: center; margin: 10px 20px;display: inline-block">扩展信息</h5>
-                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)">编辑</a></label>
+                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)" id="ext-edit-link">编辑</a></label>
                             </div>
                             <div class="card-body">
                                 <table class="table  table-hover border-bottom">
                                     <tr>
                                         <td  class="label-info">地址：</td>
-                                        <td id="user-address-info" class="content-info">adsfasdfa</td>
+                                        <td id="user-address-info" class="content-info"></td>
                                     </tr>
                                     <tr>
                                         <td  class="label-info">工作(学习)单位：</td>
-                                        <td id="user-company-info" class="content-info">sdafsdafsdf</td>
+                                        <td id="user-company-info" class="content-info"></td>
                                     </tr>
                                     <tr>
                                         <td  class="label-info">职业：</td>
-                                        <td id="user-job-info" class="content-info">asdfsadfsafd</td>
+                                        <td id="user-job-info" class="content-info"></td>
                                     </tr>
                                 </table>
                             </div>
@@ -221,8 +221,8 @@
                         <div class="card input-card">
                             <div>
                                 <h5 class="card-title" style="text-align: center; margin: 10px 20px;display: inline-block">扩展信息</h5>
-                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)">保存</a></label>
-                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)">取消编辑</a></label>
+                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)" id="exp-save-link">保存</a></label>
+                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)" id="exp-cancel-link">取消编辑</a></label>
                             </div>
                             <div class="card-body">
                                 <form class="input-form">
@@ -230,19 +230,19 @@
                                         <tr>
                                             <td  class="label-info">地址：</td>
                                             <td  class="content-input">
-                                                <input type="text" id="user-address-input" class="form-control " placeholder="修改用户名">
+                                                <input type="text" id="user-address-input" name="address" class="form-control " placeholder="修改用户名">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td  class="label-info">工作(学习)单位：</td>
                                             <td  class="content-info">
-                                                <input type="text" id="user-company-input" class="form-control " placeholder="修改邮箱">
+                                                <input type="text" id="user-company-input" name="company"class="form-control " placeholder="修改单位   ">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td  class="label-info">职业：</td>
                                             <td  class="content-info">
-                                                <input type="text" id="user-job-input" class="form-control " placeholder="修改手机号">
+                                                <input type="text" id="user-job-input" name="profession" class="form-control " placeholder="修改职业">
                                             </td>
                                         </tr>
                                     </table>
@@ -256,10 +256,9 @@
                         <div class="card info-card">
                             <div>
                                 <h5 class="card-title" style="text-align: center; margin: 10px 20px;display: inline-block" >个人简介：</h5>
-                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)">编辑</a></label>
+                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)" id="intro-edit-link">编辑</a></label>
                             </div>
                             <div class="card-body" id="user-introduction-info">
-                                <p>"我叫胡图图，今年三岁，我的爸爸叫胡英俊，我的妈妈叫张小丽，我家住在翻斗花园二号楼一零零一室，妈妈做的炸小肉丸最好吃。我的猫咪叫小怪。他是一只会说话的猫咪呦</p>
                             </div>
                         </div>
                     </div>
@@ -268,12 +267,14 @@
                         <div class="card input-card">
                             <div>
                                 <h5 class="card-title" style="text-align: center; margin: 10px 20px;display: inline-block" >个人简介：</h5>
-                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)">保存</a></label>
-                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)">取消编辑</a></label>
+                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)" id="intro-edit-save">保存</a></label>
+                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)" id="intro-cancel-save">取消编辑</a></label>
                             </div>
                             <div class="card-body">
-                                <textarea type="text"  class="form-control " rows="4" >
-                                </textarea>
+                                <form>
+                                    <textarea type="text"  name="introduction" id='user-introduction-input' class="form-control " rows="4" >
+                                    </textarea>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -385,46 +386,47 @@
 <script src="plugins/jquery/jquery-3.4.1.min.js"></script>
 <script src="plugins/popper/popper.min.js"></script>
 <script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<script src="js/Personal_Center.js"></script>
 <!--渲染页面-->
-<script>
-    var userImformation=
-    {
+<!--<script>-->
+<!--    var userImformation=-->
+<!--    {-->
 
-        "avatar":"https://y4ngyy.xyz/assets/avatar.jpg",
-        "type":"个人",
-        "address":"翻斗大街翻斗花园二号楼1001室",
-        "perfession":"幼儿园小豆班学员",
-        "company":"翻斗幼儿园",
-        "eamil":"bigeras.@tutu.com",
-        "gender":"男",
-        "username":"大耳朵图图",
-        "phonenumber":"123123",
-        "introduction":"我叫胡图图，今年三岁，我的爸爸叫胡英俊，我的妈妈叫张小丽，我家住在翻斗花园二号楼一零零一室，妈妈做的炸小肉丸最好吃。我的猫咪叫小怪。他是一只会说话的猫咪呦，小怪和图图一样是个男孩子，图图最喜欢的好朋友是小美，图图的耳朵很大很神奇，你们看动耳神功。"
-    };
-    $(document).ready(function(){
-        $("#type").text(userImformation.type);
-        $("#gender").text(userImformation.gender);
-        $("#eamil").text(userImformation.eamil);
-        $("#address").text(userImformation.address);
-        $("#company").text(userImformation.company);
-        $("#phonenumber").text(userImformation.phonenumber);
-        $("#username").text(userImformation.username);
-        $("#perfession").text(userImformation.perfession);
-        $("#introduction").text(userImformation.introduction);
-        $("#avatar").src(userImformation.avatar);
-    });
-
-
-    document.getElementById("eamil").innerText=userImformation.eamil;
-    document.getElementById("address").innerText=userImformation.address;
-    document.getElementById("company").innerText=userImformation.company;
-    document.getElementById("phonenumber").innerText=userImformation.phonenumber;
-    document.getElementById("perfession").innerText=userImformation.perfession;
-    document.getElementById("username").innerText=userImformation.username;
-    document.getElementById("introduction").innerText=userImformation.introduction;
-    document.getElementById("avatar").src=userImformation.avatar;
+<!--        "avatar":"https://y4ngyy.xyz/assets/avatar.jpg",-->
+<!--        "type":"个人",-->
+<!--        "address":"翻斗大街翻斗花园二号楼1001室",-->
+<!--        "perfession":"幼儿园小豆班学员",-->
+<!--        "company":"翻斗幼儿园",-->
+<!--        "eamil":"bigeras.@tutu.com",-->
+<!--        "gender":"男",-->
+<!--        "username":"大耳朵图图",-->
+<!--        "phonenumber":"123123",-->
+<!--        "introduction":"我叫胡图图，今年三岁，我的爸爸叫胡英俊，我的妈妈叫张小丽，我家住在翻斗花园二号楼一零零一室，妈妈做的炸小肉丸最好吃。我的猫咪叫小怪。他是一只会说话的猫咪呦，小怪和图图一样是个男孩子，图图最喜欢的好朋友是小美，图图的耳朵很大很神奇，你们看动耳神功。"-->
+<!--    };-->
+<!--    $(document).ready(function(){-->
+<!--        $("#type").text(userImformation.type);-->
+<!--        $("#gender").text(userImformation.gender);-->
+<!--        $("#eamil").text(userImformation.eamil);-->
+<!--        $("#address").text(userImformation.address);-->
+<!--        $("#company").text(userImformation.company);-->
+<!--        $("#phonenumber").text(userImformation.phonenumber);-->
+<!--        $("#username").text(userImformation.username);-->
+<!--        $("#perfession").text(userImformation.perfession);-->
+<!--        $("#introduction").text(userImformation.introduction);-->
+<!--        $("#avatar").src(userImformation.avatar);-->
+<!--    });-->
 
 
-</script>
+<!--    document.getElementById("eamil").innerText=userImformation.eamil;-->
+<!--    document.getElementById("address").innerText=userImformation.address;-->
+<!--    document.getElementById("company").innerText=userImformation.company;-->
+<!--    document.getElementById("phonenumber").innerText=userImformation.phonenumber;-->
+<!--    document.getElementById("perfession").innerText=userImformation.perfession;-->
+<!--    document.getElementById("username").innerText=userImformation.username;-->
+<!--    document.getElementById("introduction").innerText=userImformation.introduction;-->
+<!--    document.getElementById("avatar").src=userImformation.avatar;-->
+
+
+<!--</script>-->
 </body>
 </html>
