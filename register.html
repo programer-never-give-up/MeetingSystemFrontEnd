@@ -260,7 +260,7 @@
         $('#check_code').on('change', function (e) {
             $.post('api/mail/checkMail/', {"code": $('#check_code').val()}, function (data) {
                 if (data.status_check) {
-                    $('#register').enable();
+                    $('#register').removeAttr('disabled');
                 } else {
                     toastMessage('验证码错误');
                 }
