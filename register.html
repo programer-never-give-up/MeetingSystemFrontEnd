@@ -333,5 +333,14 @@
        });
     });
 </script>
+<script>
+    function validateForm(){
+        var x=document.forms["myForm"]["fname"].value;
+        if (x==null || x==""){
+            alert("姓必须填写");
+            return false;
+        }
+    }
+</script>
 </body>
 </html>
