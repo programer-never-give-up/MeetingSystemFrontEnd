@@ -223,6 +223,7 @@
 <script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
 <script src="js/nav.js"></script>
 <script>
+    // 消息框
     function toastMessage(message) {
         $('#message').text(message);
         $('.toast').toast('show');
@@ -297,12 +298,18 @@
           let password = $('#password').val();
           let confirmPassword = $('#confirm_password').val();
           if (password !== confirmPassword) {
-              $('#message').text('两次密码输入不一致');
-              $('.toast').toast('show');
+              toastMessage('两次密码');
+              return;
+          }
+          let avatar = $('#UploadAvatar')[0].files[0];
+          // 限制上传文件大小
+          console.log(avatar.size);
+          if (avatar.size >= 102400) {
+              toastMessage('上传的头像不能超过100k!');
               return;
           }
           let form = new FormData();
-          form.append('avatar',$('#UploadAvatar')[0].files[0]); // 头像
+          form.append('avatar', avatar); // 头像
           form.append('username', $('#username').val());
           form.append('password', password);
           form.append('phone_number', $('#phoneNumber').val());
