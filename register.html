@@ -87,9 +87,6 @@
 <div class="container main-content  ">
     <div class="col-12 " >
         <div class="card  text-center" >
-            <div class="card-header">
-                用户注册
-            </div>
             <div class="card-body ">
                 <form class="col-centered" id="form">
                     <div class="con4">
@@ -129,6 +126,47 @@
                                 <input type="text" name="phoneNumber" id="phoneNumber" >
                             </td>
                         </tr>
+                        <tr>
+                            <div class="row">
+                            <td>
+                                <text>邮箱：</text>
+                            </td>
+                            <td>
+                                <input required id="email">
+                                <input type="button" value="发送验证码" id="sendVer" onclick="run()">
+                            </td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>验证码:</label>
+                            </td>
+                            <td>
+                                <input required name="" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>性别:</label>
+                            </td>
+                            <td>
+                                <select class="selectpicker show-tick form-control" data-live-search="true" id="gender" class="selectsize" >
+                                    <option>男</option>
+                                    <option>女</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>用户类型:</label>
+                            </td>
+                            <td>
+                                <select class="selectpicker show-tick form-control" data-live-search="true" id="gender" class="selectsize" >
+                                    <option>个人</option>
+                                    <option>企业</option>
+                                </select>
+                            </td>
+                        </tr>
                     </table>
                     <h5>扩展信息：</h5>
                     <table style="border-collapse: separate;border-spacing: 10px 10px;">
@@ -142,7 +180,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="profession">职业:</label>
+                                <label for="profession">个人职业:</label>
                             </td>
                             <td>
                                 <input type="text"  name="profession" id="profession">
