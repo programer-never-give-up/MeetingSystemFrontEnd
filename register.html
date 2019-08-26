@@ -68,6 +68,10 @@
         .bgcolor_red{
             background-color:#f55d54;
         }
+        .selectsize
+        {
+            width:500px;
+        }
         .button-ce
     </style>
 </head>
@@ -94,10 +98,8 @@
 <div class="container main-content  ">
     <div class="col-12 " >
         <div class="card  text-center" >
-            <div class="card-header">
-                用户注册
-            </div>
             <div class="card-body ">
+                <h2>————————————用户注册————————————</h2>
                 <form class="col-centered">
                     <table style="border-collapse: separate;border-spacing: 10px 10px;">
                         <div class="con4">
@@ -136,6 +138,47 @@
                                 <input required name="" >
                             </td>
                         </tr>
+                        <tr>
+                            <div class="row">
+                            <td>
+                                <text>邮箱：</text>
+                            </td>
+                            <td>
+                                <input required id="email">
+                                <input type="button" value="发送验证码" id="sendVer" onclick="run()">
+                            </td>
+                            </div>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>验证码:</label>
+                            </td>
+                            <td>
+                                <input required name="" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>性别:</label>
+                            </td>
+                            <td>
+                                <select class="selectpicker show-tick form-control" data-live-search="true" id="gender" class="selectsize" >
+                                    <option>男</option>
+                                    <option>女</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>用户类型:</label>
+                            </td>
+                            <td>
+                                <select class="selectpicker show-tick form-control" data-live-search="true" id="gender" class="selectsize" >
+                                    <option>个人</option>
+                                    <option>企业</option>
+                                </select>
+                            </td>
+                        </tr>
                     </table>
                     <table style="border-collapse: separate;border-spacing: 10px 10px;">
                         <h5>扩展信息：</h5>
@@ -149,7 +192,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <label >学历:</label>
+                                <label >个人职业:</label>
                             </td>
                             <td>
                                 <input type="password"  name="" >
@@ -161,14 +204,6 @@
                             </td>
                             <td>
                                 <input type="password"  name="" >
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label >简介:</label>
-                            </td>
-                            <td>
-                                <input  name="" >
                             </td>
                         </tr>
                     </table>
@@ -255,6 +290,21 @@
             };
         }
     };
+    function run(){
+        var time = 120;//定义时间变量。用于倒计时用
+        var timer = null;//定义一个定时器；
+        timer = setInterval(function(){///开启定时器。函数内执行
+            var btn = document.getElementById('sendVer');
+            btn.disabled = true;
+            btn.value = time+"秒后重新发送";    //点击发生后，按钮的文本内容变成之前定义好的时间值。
+            time--;//时间值自减
+            if(time === 0){     //判断,当时间值小于等于0的时候
+                btn.value='重新发送验证码'; //其文本内容变成……点击重新发送……
+                btn.disabled = false;
+                clearInterval(timer); //清除定时器
+            }
+        },1000)
+    }
 </script>
 </body>
 </html>
