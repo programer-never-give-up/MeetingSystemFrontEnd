@@ -105,13 +105,28 @@
                 <div class="row">
                     <div class="col-2 info-col">
                         <div class="card info-card">
-                            <img src="https://y4ngyy.xyz/assets/avatar.jpg" class="card-img-top" id="usr-logo">
-                            <div class="card-body">
-                                <div class="list-group-">
-                                    <a herf="#" class="list-group-item list-group-item-action">个人信息</a>
-                                    <a herf="#" class="list-group-item list-group-item-action">隐私设置</a>
-                                    <a herf="#" class="list-group-item list-group-item-action">参与历史</a>
-                                    <a herf="#" class="list-group-item list-group-item-action">举办历史</a>
+                            <div class="form-group">
+                                <div id="user-logo-info-div">
+                                    <img src="https://y4ngyy.xyz/assets/avatar.jpg" class="card-img-top" id="user-logo-info">
+                                    <div style="width: 100%;padding: auto;">
+                                        <label for="upload-logo" class="btn btn-primary" style="display:block;width:55%;margin:auto;margin-top:10px">更换头像</label>
+                                        <input id="upload-logo" type="file" style="display: none">
+                                    </div>
+                                </div>
+                                <div id="user-logo-input-div" style="display: none">
+                                    <img src="https://y4ngyy.xyz/assets/avatar.jpg" class="card-img-top" id="user-logo-input">
+                                    <div class="btn-group btn-group-sm" style="width:60%;margin:10px 20% 0px">
+                                        <button  type="button" class="btn btn-primary" id="logo-save-button">保存</button>
+                                        <button  type="button" class="btn btn-danger" id="logo-cancel-button">取消</button>
+                                    </div>
+                                </div>
+                                <div class="card-body" style="padding-top: 10px">
+                                    <div class="list-group" style="text-align: center">
+                                        <a herf="#" class="list-group-item list-group-item-action">个人信息</a>
+                                        <a herf="#" class="list-group-item list-group-item-action">隐私设置</a>
+                                        <a herf="#" class="list-group-item list-group-item-action">参与历史</a>
+                                        <a herf="#" class="list-group-item list-group-item-action">举办历史</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
