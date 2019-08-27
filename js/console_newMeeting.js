@@ -1,5 +1,6 @@
 //bootstrap fileinput
 
+
 $(function () {
     //0.初始化fileinput
     var oFileInput = new FileInput();
@@ -53,4 +54,44 @@ var FileInput = function () {
     return oFile;
 };
 
+function getObjectURL(file) {
+    var url = null ;
+    if (window.createObjectURL!=undefined) { // basic
+        url = window.createObjectURL(file) ;
+    } else if (window.URL!=undefined) { // mozilla(firefox)
+        url = window.URL.createObjectURL(file) ;
+    } else if (window.webkitURL!=undefined) { // webkit or chrome
+        url = window.webkitURL.createObjectURL(file) ;
+    }
+    return url ;
+}
 
+/**
+ * @author chonepieceyb
+ * @returns {boolean}
+ * @usuage:上传上传并预览活动logo
+ */
+function uploadActivityLogo(){
+    let file = $(this).get(0).files[0];
+    //判断文件类型
+    if (!/image\/\w+/.test(file.type)) {
+        //图片文件的type值为image/png或image/jpg
+        alert("文件必须为图片！");
+        return false;
+    }
+    //判单图片的大小  100KB
+    if(file.size>300*1024){
+        alert("请选择小于300KB的图片");
+        return false;
+    }
+
+    var logoSrc=getObjectURL(file);
+    console.log(logoSrc);
+    $("#activity-logo").attr("src",logoSrc);
+}
+
+
+//浏览器加载时运行
+$(function () {
+    $("#upload-activity-logo").on('change',uploadActivityLogo);
+});
