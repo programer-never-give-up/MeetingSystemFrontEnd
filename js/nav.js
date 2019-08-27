@@ -20,7 +20,7 @@ function checkLogin(isRedirect, loginStatusToRedirect=false) {
            }
            var navList = $('.nav-list');
            navList.append('<a href="console.html" class="nav-list-item">控制台</a>');
-           navList.append('<a href="#" class="nav-list-item">个人中心</a>');
+           navList.append('<a href="Personal_Center.html" class="nav-list-item">个人中心</a>');
            navList.append('<span style="color: #ff5722;" class="nav-list-item">' +
                '<i class="fas fa-power-off"></i>' +
                '<a href="#" onclick="logout()">退出</a>' +

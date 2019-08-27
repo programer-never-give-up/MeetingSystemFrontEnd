@@ -94,8 +94,9 @@ function toastMessage(message) {
 
 //浏览器加载时运行 by-chonepieceyb
 $(function () {
+
         $.ajax({
-            url:"api/personal_center/showInfo",
+            url:"api/personal_center/showInfo/",
             type:"GET",
             dataType:'json',
             success:function(data){
@@ -162,7 +163,7 @@ $(function () {
         form.append("avatar",avatar);
         //提交
         $.ajax({
-            url:"api/personal_center/editInfo",
+            url:"api/personal_center/editInfo/",
             data:form,
             type:"POST",
             contentType: false,
@@ -189,7 +190,7 @@ $(function () {
         form.append('gender',gender);
         form.append('phone_number',phoneNumber);
         $.ajax({
-            url:"api/personal_center/editInfo",
+            url:"api/personal_center/editInfo/",
             data:form,
             type:"POST",
             contentType: false,
@@ -220,7 +221,7 @@ $(function () {
         form.append('company',company);
         form.append("profession",profession);
         $.ajax({
-            url:"api/personal_center/editInfo",
+            url:"api/personal_center/editInfo/",
             data:form,
             type:"POST",
             contentType: false,
@@ -248,7 +249,7 @@ $(function () {
         form.append('username',userName);
         form.append('introduction',introduction);
         $.ajax({
-            url:"api/personal_center/editInfo",
+            url:"api/personal_center/editInfo/",
             data:form,
             type:"POST",
             contentType: false,
