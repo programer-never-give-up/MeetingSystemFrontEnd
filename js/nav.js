@@ -50,3 +50,8 @@ function logout() {
 		}
 	});
 }
+
+function toastMessage(message) {
+    $('#message').text(message);
+    $('.toast').toast('show');
+}

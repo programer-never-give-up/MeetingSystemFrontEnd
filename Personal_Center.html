@@ -95,6 +95,15 @@
 
     </div>
 </nav>
+
+<div class="toast w-25" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000" id="message-box">
+    <div class="toast-header bg-danger text-white">
+        <strong>提示</strong>
+    </div>
+    <div class="toast-body p-3" id="message">
+    </div>
+</div>
+
 <div class="container main-content ">
     <div class="card">
         <div class="card-header " style="text-align: center">
@@ -187,9 +196,7 @@
                                         </tr>
                                         <tr>
                                             <td  class="label-info">电子邮箱：</td>
-                                            <td  class="content-info">
-                                                <input type="text" name="email" id="user-mail-input" class="form-control " placeholder="修改邮箱">
-                                            </td>
+                                            <td id="user-mail-input" class="content-input"></td>
                                         </tr>
                                         <tr>
                                             <td  class="label-info">手机：</td>
@@ -282,7 +289,7 @@
                         <div class="card input-card">
                             <div>
                                 <h5 class="card-title" style="text-align: center; margin: 10px 20px;display: inline-block" >个人简介：</h5>
-                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)" id="intro-edit-save">保存</a></label>
+                                <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)" id="intro-save-link">保存</a></label>
                                 <label style="margin-left:8px;font-size:12px"><a href="javascript:void (0)" id="intro-cancel-save">取消编辑</a></label>
                             </div>
                             <div class="card-body">
