@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="plugins/bootstrap-4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>模板</title>
+</head>
+<body onload="Render()">
+
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="https://y4ngyy.xyz/assets/avatar.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+        <span class="home-name">云活动系统</span>
+    </a>
+    <div class="nav-list">
+        <a href="index.html" class="nav-list-item">首页</a>
+    </div>
+</nav>
+<div class="container main-content">
+    <h2 align="center">参会历史</h2>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8 item-list">
+            <div class="p-0" id="history">
+            </div>
+            <div class="text-center"><a href="#">Load More>></a></div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+<footer class="footer" id="footer">
+    这是页脚
+</footer>
+
+<script src="plugins/fontawesome/font-awesome.js"></script>
+<script src="plugins/jquery/jquery-3.4.1.min.js"></script>
+<script src="plugins/popper/popper.min.js"></script>
+<script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<script src="js/nav.js"></script>
+    <script>
+    $(function () {
+        checkLogin(false);
+    })
+    </script>
+    <script src="js/history_attend.js"></script>
+</body>
+</html>
