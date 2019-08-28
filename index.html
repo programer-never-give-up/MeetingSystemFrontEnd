@@ -89,8 +89,7 @@
 
     </style>
 </head>
-<body>
-
+<body onload="Render()">
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#">
         <img src="https://y4ngyy.xyz/assets/avatar.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -105,53 +104,13 @@
      <div class="col-8 item-list">
          <h2 class="recent_activity_header">推荐活动</h2>
          <ul class="p-0" id="recommend">
-             <li class="item-card">
-                 <h1><img class=" " src="https://y4ngyy.xyz/assets/avatar.jpg" alt="会议logo"></h1>
-                 <div class="item-info">
-                     <a href="show_meeting_info.html"><h2>第十二届东南大学九龙湖校区超级长的不知道是什么东西的会议名称</h2></a>
-                     <h3>时间 地点</h3>
-                     <h3>主办方</h3>
-                     <h3>简介十大大苏打撒旦</h3>
-                     <a href="show_meeting_info.html"><button type="button" class="btn btn-primary">查看详情</button></a>
-                 </div>
-             </li>
          </ul>
          <div class="text-center"><a href="#">Load More>></a></div>
      </div>
     <div class="col-4">
         <div id="recent_activity">
             <h2 class="recent_activity_header">近期活动</h2>
-            <ul class="p-0">
-                <li class="recent_activity_item">
-                    <img src="https://y4ngyy.xyz/assets/avatar.jpg" alt="会议logo" class="align-middle">
-                    <div class="d-inline-block align-middle ml-2">
-                    <a href="#"><h3>会议名称</h3></a>
-                        <div class="recent_activity_info">
-                        <span >会议时间</span>
-                        <span>会议地点</span>
-                        </div>
-                    </div>
-                </li>
-                <li class="recent_activity_item">
-                    <img src="https://y4ngyy.xyz/assets/avatar.jpg" alt="会议logo" class="align-middle">
-                    <div class="d-inline-block align-middle ml-2">
-                        <a href="#"><h3>会议名称</h3></a>
-                        <div class="recent_activity_info">
-                            <span >会议时间</span>
-                            <span>会议地点</span>
-                        </div>
-                    </div>
-                </li>
-                <li class="recent_activity_item">
-                    <img src="https://y4ngyy.xyz/assets/avatar.jpg" alt="会议logo" class="align-middle">
-                    <div class="d-inline-block align-middle ml-2">
-                        <a href="#"><h3>会议名称</h3></a>
-                        <div class="recent_activity_info">
-                            <span >会议时间</span>
-                            <span>会议地点</span>
-                        </div>
-                    </div>
-                </li>
+            <ul class="p-0" id="latestAct">
                 <li class="recent_activity_item">
                     <img src="https://y4ngyy.xyz/assets/avatar.jpg" alt="会议logo" class="align-middle">
                     <div class="d-inline-block align-middle ml-2">
@@ -166,11 +125,6 @@
         </div>
 
     </div>
-    </div>
-    <div class="row">
-        <button id="addEevement">
-            添加
-        </button>
     </div>
 </div>
 <footer class="footer" id="footer">
