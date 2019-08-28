@@ -80,53 +80,52 @@ var latestData=
             }
         ]
 };
-$(document).ready(function()
+
+function Render ()
 {
-    $("#addEevement").click(function setJson()
+    function setRecommend()
+    {
+        for(var i=0;i<data.act.length;i++)
         {
-            for(var i=0;i<data.act.length;i++)
-            {
-                var gF = document.createElement("li");
-                gF.className = "item-card";
-                var F1 = document.createElement("h1");
-                var S1 = document.createElement("img");
-                S1.src = data.act[i].logoSrc;
-                F1.appendChild(S1);
-                var F2 = document.createElement("div");
-                F2.className = "item-info";
-                var S2 = document.createElement("a");
-                var S4 = document.createElement("a");
-                S2.setAttribute('href', data.act[i].detail);
-                S4.setAttribute('href', data.act[i].detail);
-                var gS1 = document.createElement("h2");
-                var gS2 = document.createElement("button");
-                gS2.innerText = "查看详情";
-                gS2.className = "btn btn-info";
-                gS2.onclick = "location='data.act[i].detail'";
-                var S3 = document.createElement("h3");
-                var S6 = document.createElement("h3");
-                var S5 = document.createElement("h3");
-                S3.innerText = "地点：" + data.act[i].location + " 时间：" + data.act[i].time.startTime + "——" + data.act[i].time.endTime;
-                S5.innerText = data.act[i].organizer;
-                S6.innerText = data.act[i].introduction;
-                gS1.innerText = data.act[i].activityName;
-                S2.appendChild(gS1);
-                S4.appendChild(gS2);
-                F2.appendChild(S2);
-                F2.appendChild(S3);
-                F2.appendChild(S5);
-                F2.appendChild(S6);
-                F2.appendChild(S4);
-                gF.appendChild(F1);
-                gF.appendChild(F2);
-                var x = document.getElementById("recommend");
-                x.appendChild(gF);
-            }
-        });
-});
-$(document).ready(function ()
-{
-    $("#addLatest").click(function setLatest()
+            var gF = document.createElement("li");
+            gF.className = "item-card";
+            var F1 = document.createElement("h1");
+            var S1 = document.createElement("img");
+            S1.src = data.act[i].logoSrc;
+            F1.appendChild(S1);
+            var F2 = document.createElement("div");
+            F2.className = "item-info";
+            var S2 = document.createElement("a");
+            var S4 = document.createElement("a");
+            S2.setAttribute('href', data.act[i].detail);
+            S4.setAttribute('href', data.act[i].detail);
+            var gS1 = document.createElement("h2");
+            var gS2 = document.createElement("button");
+            gS2.innerText = "查看详情";
+            gS2.className = "btn btn-info";
+            gS2.onclick = "location='data.act[i].detail'";
+            var S3 = document.createElement("h3");
+            var S6 = document.createElement("h3");
+            var S5 = document.createElement("h3");
+            S3.innerText = "地点：" + data.act[i].location + " 时间：" + data.act[i].time.startTime + "——" + data.act[i].time.endTime;
+            S5.innerText = data.act[i].organizer;
+            S6.innerText = data.act[i].introduction;
+            gS1.innerText = data.act[i].activityName;
+            S2.appendChild(gS1);
+            S4.appendChild(gS2);
+            F2.appendChild(S2);
+            F2.appendChild(S3);
+            F2.appendChild(S5);
+            F2.appendChild(S6);
+            F2.appendChild(S4);
+            gF.appendChild(F1);
+            gF.appendChild(F2);
+            var x = document.getElementById("recommend");
+            x.appendChild(gF);
+        }
+    }
+}
+    function setLatest()
     {
         for(var i=0;i<latestData.act.length;i++)
         {
@@ -154,11 +153,10 @@ $(document).ready(function ()
             S2.appendChild(gS3);
             gF.appendChild(F1);
             gF.appendChild(F2);
-
             var x = document.getElementById("latestAct");
             x.appendChild(gF);
         }
-    });
+    };
 
-});
+
 
