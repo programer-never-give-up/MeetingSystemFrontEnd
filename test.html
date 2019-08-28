@@ -57,6 +57,7 @@
             </div>
         </div>
     </div>
+    <button id="test">abcd</button>
 </div>
 <footer class="footer" id="footer">
     这是页脚
@@ -66,6 +67,20 @@
 <script src="plugins/jquery/jquery-3.4.1.min.js"></script>
 <script src="plugins/popper/popper.min.js"></script>
 <script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<script src="js/nav.js"></script>
+<script>
+
+    $(function(){
+        function test() {
+            console.log("test");
+            toastMessage("test");
+
+        }
+        toastMessage("abcd");
+        $("#test").click(test);
+    });
+
+</script>
 </body>
 </html>
 

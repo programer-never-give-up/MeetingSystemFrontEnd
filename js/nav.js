@@ -52,6 +52,16 @@ function logout() {
 }
 
 function toastMessage(message) {
+    if ($(".toast").length <= 0) {
+        let toast = "<div class=\"toast w-25\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\" data-delay=\"2000\" id=\"message-box\">\n" +
+            "    <div class=\"toast-header bg-danger text-white\">\n" +
+            "        <strong>提示</strong>\n" +
+            "    </div>\n" +
+            "    <div class=\"toast-body p-3\" id=\"message\">\n" +
+            "    </div>\n" +
+            "</div>";
+        $(".navbar").after(toast);
+    }
     $('#message').text(message);
     $('.toast').toast('show');
 }
