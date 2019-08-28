@@ -67,7 +67,7 @@ function getObjectURL(file) {
  */
 function uploadLogo(){
     $("#user-logo-input").attr("src",$("#user-logo-info").attr("src"));
-    var file=$(this).get(0).files[0];
+    var file=$(this)[0].files[0];
     //判断文件类型
     if (!/image\/\w+/.test(file.type)) {
         //图片文件的type值为image/png或image/jpg
@@ -157,8 +157,8 @@ $(function () {
     //保存图片
     $('#logo-save-button').on('click',function () {
         let form = new FormData();
-        var avatar = $('#user-logo-input').get(0).files[0];
-        var userName=$('#username-info').text();
+        let avatar = $('#upload-logo')[0].files[0];
+        let userName=$('#username-info').text();
         form.append('username',userName);
         form.append("avatar",avatar);
         //提交
