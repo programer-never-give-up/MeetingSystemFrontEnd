@@ -256,7 +256,7 @@ $(function () {
             processData: false,
             success:function (data) {
                 //更改 info
-                $('#user-introduction-info').innerHTML("<p>"+introduction+"</p>");
+                $('#user-introduction-info').html("<p>"+introduction+"</p>");
                 toastMessage("保存个人简介成功");
                 $("#intro-info-col").show();
                 $("#intro-input-col").hide();

@@ -18,9 +18,9 @@ var FileInput = function () {
         //初始化上传控件的样式
         control.fileinput({
             language: 'zh', //设置语言
-            uploadUrl: uploadUrl, //上传的地址
+            //uploadUrl: uploadUrl, //上传的地址
             //allowedFileExtensions: ['jpg', 'gif', 'png','txt','word'],//接收的文件后缀
-            showUpload: true, //是否显示上传按钮
+            showUpload: false, //是否显示上传按钮
             showCaption: false,//是否显示标题
             browseClass: "btn btn-primary", //按钮样式
             //dropZoneEnabled: false,//是否显示拖拽区域
@@ -90,8 +90,64 @@ function uploadActivityLogo(){
     $("#activity-logo").attr("src",logoSrc);
 }
 
+function toastMessage(message) {
+    $('#message').text(message);
+    $('.toast').toast('show');
+}
+
+/**
+ * @author:chonepieceyb
+ * return : 创建会议成功 true, 创建会议失败 false
+ * 功能上传基本信息
+ */
+function uploadActivityInfo(){
+    let form= new FormData();
+    let logo = $("#upload-activity-logo")[0].files[0];
+    let name= $('#name-input').val();
+    let location = $('#location-input').val();
+    let organizer =  $('#organizer-input').val();
+    let introduction =$('#introduction-input').val();
+    let type = $('input[name="activity-type"]:checked').parent('label').text();
+    let startTime=$('#start-time-input').val();
+    let endTime=$('#end-time-input').val();
+    form.append('logo',logo);
+    form.append('name',name);
+    form.append('start_time',startTime);
+    form.append('end_time',endTime);
+    form.append('location',location);
+    form.append('organizer',organizer);
+    form.append('introduction',introduction);
+    form.append('tyoe',type);
+    $.ajax({
+        url:"api/activity/createActivity/",
+        data:form,
+        type:"POST",
+        contentType: false,
+        processData: false,
+        success:function (data) {
+            //更改 info
+            toastMessage("创建会议成功，开始上传会议文件！");
+            return true;
+        },
+        error:function () {
+            toastMessage("创建会议失败！");
+            return false;
+        }
+    })
+
+}
+
 
 //浏览器加载时运行
 $(function () {
-    $("#upload-activity-logo").on('change',uploadActivityLogo);
+
+    $("#upload-activity-logo").on('change',uploadActivityLogo);    //上传图片
+
+    //保存按钮(还没有上传文件）
+    $("#activity-save-btn").on('click',uploadActivityInfo)
+    //取消按钮
+    $("#activity-cancel-btn").on('click',function () {
+        window.location.href='console.html';
+    })
+
 });
