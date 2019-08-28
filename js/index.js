@@ -10,15 +10,44 @@
 //     </div>
 //     </li>
 // </ul>
+// $.ajax({
+//     // 请求后台数据
+//     url:"接口",
+//     contentType: 'application/json;charset=UTF-8',
+//     dataType: "json",
+//     data: JSON.stringify(data),
+//     type: "get",
+//     async: false,
+//     success: function (res) {
+//
+//
+//     },
+//     error: function () {
+//
+//
+//     }
+// });
+
+var data=
+    {
+        "logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg",
+        "activityName":"东南大学实训宣讲会",
+        "time":{"startTime":"2019-6-8","endTime":"2019-6-9"},
+        "location":"计算机楼",
+        "organizer":"东南大学计算机科学与工程学院",
+        "detial":"show_meeting_info",
+        "introduction":"简介简介简介"
+    };
+
 $(document).ready(function()
 {
-    $("#addEevement").click(function()
+    $("#addEevement").click(function setJson()
     {
         var gF=document.createElement("li");
         gF.className="item-card pull-left";
         var F1=document.createElement("h1");
         var S1=document.createElement("img");
-        S1.src="https://y4ngyy.xyz/assets/avatar.jpg";
+        S1.src=data.logoSrc;
         F1.appendChild(S1);
         var F2=document.createElement("div");
         F2.className="item-info";
@@ -29,14 +58,15 @@ $(document).ready(function()
         var gS1=document.createElement("h2");
         var gS2=document.createElement("button");
         gS2.innerText="查看详情";
-        gS2.className="btn btn-info"
+        gS2.className="btn btn-info";
+        gS2.onclick="location='data.detial'";
         var S3=document.createElement("h3");
         var S6=document.createElement("h3");
         var S5=document.createElement("h3");
-        S6.innerText="时间地点简介什么的";
-        S5.innerText="时间地点简介什么的";
-        S3.innerText="时间地点简介什么的";
-        gS1.innerText="xxxxx会议";
+        S3.innerText="地点："+data.location+" 时间："+data.time.startTime+"——"+data.time.endTime;
+        S5.innerText=data.organizer;
+        S6.innerText=data.introduction;
+        gS1.innerText=data.activityName;
         S2.appendChild(gS1);
         S4.appendChild(gS2);
         F2.appendChild(S2);
@@ -49,5 +79,5 @@ $(document).ready(function()
         var x=document.getElementById("recommend")
         x.appendChild(gF);
     });
-
 });
+
