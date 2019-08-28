@@ -30,7 +30,7 @@ $(function () {
 
 /**
  * @author chonepieceyb
- * @param data:活动数据 json对象。 格式为{activities:[{logoSrc:"#",activityName:"#",location:"#",time:{startTime:"#",endTime:"#"},id:"#"},{...}，{...}>]}
+     * @param data:活动数据 json对象。 格式为{activities:[{logoSrc:"#",activityName:"#",location:"#",startTime:"#",endTime:"#",id:"#"},{...}，{...}>]}
  * @param buttomID  buttomType参数说明  block-subBlock 例如 活动管理模块下面的未发布为 mangement-Unpublished  ,mengement-published ....
  */
 function setInfoList(data,buttomType){
@@ -46,7 +46,7 @@ function setInfoList(data,buttomType){
         $itemCard.append('<td>'+activity["location"]+'</td>');        //添加活动地点
 
         var $timeTd=$('<td></td>');                                              //添加活动的开始时间和结束时间
-        $timeTd.append(activity["time"]["startTime"]+"</br>"+activity["time"]["endTime"]);
+        $timeTd.append(activity["startTime"]+"</br>"+activity["endTime"]);
         $itemCard.append($timeTd);
 
         var $buttonTd=$("<td class='buttonTd'></td>");    //添加查看详情按钮
@@ -70,10 +70,12 @@ function setInfoList(data,buttomType){
             })
             $(".buttonTd").append($button);
 
+    }else if(buttomType=='management-published'){
+            
     }
 }
 
 //测试代码
-var data='{"activities":[{"logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","time":{"startTime":"2019-6-8","endTime":"2019-6-9"},"location":"计算机楼","id":"00000000111111"},{"logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","time":{"startTime":"2019-6-8","endTime":"2019-6-9"},"location":"计算机楼","id":"00000000111111"},{"logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","time":{"startTime":"2019-6-8","endTime":"2019-6-9"},"location":"计算机楼","id":"00000000111111"}]}';
+var data='{"activities":[{"logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","startTime":"2019-6-8","endTime":"2019-6-9","location":"计算机楼","id":"00000000111111"},{"logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","startTime":"2019-6-8","endTime":"2019-6-9","location":"计算机楼","id":"00000000111111"},{"logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","startTime":"2019-6-8","endTime":"2019-6-9","location":"计算机楼","id":"00000000111111"}]}';
 data=JSON.parse(data);
 setInfoList(data,"management-unpublished");
