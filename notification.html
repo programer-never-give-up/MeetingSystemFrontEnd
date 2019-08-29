@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="plugins/bootstrap-4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>模板</title>
+    <title>消息中心</title>
     <style>
         .biankuang
         {
@@ -115,11 +115,11 @@
                 <div class=" col-12">
                     <div class="tab" role="tabpanel">
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" ><a href="#Section1" aria-controls="home" role="tab" data-toggle="tab">系统消息</a></li>
+                            <li role="presentation" ><a href="#Section1" aria-controls="home" role="tab" data-toggle="tab" class="active" aria-selected="true">系统消息</a></li>
                             <li role="presentation"><a href="#Section2" aria-controls="profile" role="tab" data-toggle="tab">会议消息</a></li>
                         </ul>
                         <div class="tab-content tabs">
-                            <div role="tabpanel" class="tab-pane fade in active" id="Section1">
+                            <div role="tabpanel" class="tab-pane fade in active show" id="Section1">
                                 <h3>系统消息：</h3>
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="Section2">
@@ -152,11 +152,11 @@
     function run2()
     {
 
-        var x=document.getElementById("Section2")
+        var x=document.getElementById("Section2");
         var y1=document.createElement("div");
         var y2=document.createElement("div");
         var y3=document.createElement("div");
-        var y4=document.createElement("div")
+        var y4=document.createElement("div");
         var y5=document.createElement("button");
         y2.className="card-body";
         y3.className="h3";
