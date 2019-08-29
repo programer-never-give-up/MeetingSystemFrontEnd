@@ -142,10 +142,13 @@ function uploadActivityInfo(){
         contentType: false,
         processData: false,
         success:function (data) {
-            //更改 info
+
             toastMessage("创建会议成功，开始上传会议文件！");
-            $('#upload-file-input').on('filepreupload', function(event, dataNext, jqXHR) {
-                dataNext.extra={"act_uuid": data["uuid"]};
+            $('#upload-file-input').on('filepreupload', function(event,outData, previewId, i) {
+
+                outData.extra.act_uuid=data["uuid"];
+                console.log(outData);
+                // outData.files.append("act_uuid",data["uuid"]);
             });
             $('#upload-file-input').fileinput("upload");
             return true;

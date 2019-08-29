@@ -80,12 +80,12 @@ function setInfoList(data,buttomType){
             })
             $(".buttonTd").append($aDel);
 
-    }else if(buttomType=='management-processing' || buttomType=="management-done"){   //活动管理的：进行中和已结束
+    }else if(buttomType=='management-processing' || buttomType=="management-finished"){   //活动管理的：进行中和已结束
             //上传按钮，进入界面后只能上传活动资料
             var $a =$('<a class="btn btn-light">上传文件</a>');     //上传按钮
             $a.attr("href","console_newMeeting.html?id="+activity["id"]+"&type="+buttomType);
             $(".buttonTd").append($a);
-    }else if(buttomType=="my-not-started"){    //活动管理的 待审核 和我的活动的 进行中 已结束
+    }else if(buttomType=="my-not-started"){    //我的活动的 未开始
             //取消报名的按钮
             $aDel =$('<a class="btn btn-danger">取消报名</a>');
             $aDel.attr("id","delete-button-"+activity["id"]);
@@ -106,6 +106,11 @@ function setInfoList(data,buttomType){
     }
 }
 
+//浏览器加载时运行
+$(function () {
+    //未开始等按钮的跳转
+
+})
 //测试代码
 var data='{"activities":[{"logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","startTime":"2019-6-8","endTime":"2019-6-9","location":"计算机楼","id":"00000000111111"},{"logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","startTime":"2019-6-8","endTime":"2019-6-9","location":"计算机楼","id":"00000000111111"},{"logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","startTime":"2019-6-8","endTime":"2019-6-9","location":"计算机楼","id":"00000000111111"}]}';
 data=JSON.parse(data);
