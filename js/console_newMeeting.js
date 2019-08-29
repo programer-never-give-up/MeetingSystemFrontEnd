@@ -55,10 +55,10 @@ function initFileInput(colID,url){
     });
     $("#"+colID).on("fileuploaded",function () {
         toastMessage("上传文件成功");
-       // window.location.href="console.html";
+        window.location.href="console.html";
     }).on("fileuploaderror",function () {
         toastMessage("上传文件失败");
-        //window.location.href='console.html';
+        window.location.href='console.html';
     });
 }
 
@@ -146,9 +146,7 @@ function uploadActivityInfo(){
             toastMessage("创建会议成功，开始上传会议文件！");
             $('#upload-file-input').on('filepreupload', function(event,outData, previewId, i) {
 
-                outData.extra.act_uuid=data["uuid"];
-                console.log(outData);
-                // outData.files.append("act_uuid",data["uuid"]);
+                outData.formdata.append('act_uuid',data["uuid"]);
             });
             $('#upload-file-input').fileinput("upload");
             return true;
