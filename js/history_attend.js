@@ -25,7 +25,7 @@ function Render()
 {
     $.ajax({
 
-        url: "api/history_attend/",
+        url: "api/personal_center/history_attend/",
         dataType: "json",
         type: "post",
         success: function (data)
