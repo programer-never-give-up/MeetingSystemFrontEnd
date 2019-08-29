@@ -3,10 +3,8 @@ function Render()
     $.ajax({
 
         url: "api/history_organize/",
-        contentType: 'application/json;charset=UTF-8',
         dataType: "json",
         type: "post",
-        async: false,
         success: function (data)
         {
             for (var i = 0; i < data.act.length; i++)

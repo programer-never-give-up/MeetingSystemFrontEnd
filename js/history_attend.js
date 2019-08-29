@@ -26,11 +26,8 @@ function Render()
     $.ajax({
 
         url: "api/history_attend/",
-        contentType: 'application/json;charset=UTF-8',
         dataType: "json",
-        data: JSON.stringify(data),
         type: "post",
-        async: false,
         success: function (data)
         {
             for (var i = 0; i < data.act.length; i++)
