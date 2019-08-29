@@ -9,14 +9,14 @@ function Render()
         {
             for (var i = 0; i <data["list_activity"].length; i++)
             {
-
+				console.log(data["list_activity"][i]["uuid_act"]);
                 var x = document.getElementById("history")
                 var gF = document.createElement("tr");
                 var F1 = document.createElement("td");
                 var S1 = document.createElement("a");
                 var F2 = document.createElement("td");
                 var F3 = document.createElement("td");
-                var baseUrl = "show_meeting_info";
+                var baseUrl = "show_meeting_info.html";
                 var Url = baseUrl + "?id=" +data["list_activity"][i]["uuid_act"];
                 S1.setAttribute('href', Url);
                 S1.innerText = data["list_activity"][i]["name_act"];
