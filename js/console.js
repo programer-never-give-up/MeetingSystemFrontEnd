@@ -109,6 +109,13 @@ function setInfoList(data,buttomType){
 //浏览器加载时运行
 $(function () {
     //未开始等按钮的跳转
+    $("div.function-list *div.collapse *a").on('click',function () {
+        //实现按钮点击效果
+        $(this).parent().parent().find('a').removeClass('active');
+        $(this).addClass('active');
+        $(this).parent('div').prev('a').addClass('active');
+
+    });
 
 })
 //测试代码
