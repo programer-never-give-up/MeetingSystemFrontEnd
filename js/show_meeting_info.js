@@ -28,19 +28,19 @@
 
 /**
  * usuage:渲染页面信息的函数
- * @param data:json文件，格式为： 字典格式 {logoSrc:"#",activityName:"#",time:{startTime:"#",endTime:"#"},location:"#",organizer:"#",introduction:"#",files:[{fileName:"#",fileSrc:"#"},..],type:"#","status":int}
- status: 0未开始 1进行中 2已结束
+ * @param data:json文件，格式为： 字典格式 {logo:"#",name:"#",start_time:"#",end_time:"#",location:"#",organizer:"#",introduction:"#",files:[{fileName:"#",fileSrc:"#"},..],type:"#","status":int}
+  status: 0未开始 1进行中 2已结束
  */
-    function setInfoByJson(data){
+    function setActivityInfo(data){
         $(".meeting-article *img").attr(
             {
-                "src": data["logoSrc"]
+                "src": data["logo"]
             }
         );
         //获取并设置图片标题
-        $("#title-info").text(data["activityName"]);
+        $("#title-info").text(data["name"]);
         //获取并设置开始时间和结束时间
-        time = data["time"]["startTime"]+"至" +data["time"]["endTime"];
+        time = data["start_time"]+"至" +data["end_time"];
         $("#time-info").text(time);
         //获取地址
         $("#location-info").text(data["location"])
@@ -85,11 +85,36 @@
         }
 
     }
-    //测试代码
-var data='{"logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","time":{"startTime":"2019-6-8","endTime":"2019-6-9"},"location":"计算机楼","organizer":"东南大学计算机科学与工程学院",' +
-    '"introduction":"这是软件学院计算机科学与工程学院举办的宣讲会","type":"讲座","status":2' +
-    ',"files":[{"fileName":"1.pdf","fileSrc":"#"},{"fileName":"1.pdf","fileSrc":"#"}]}';
-data=JSON.parse(data);
+
+//浏览器刷新时执行
 $(function () {
-    setInfoByJson(data)
-});
+    //获取会议id
+    var act_uuid=getParameter()['id'];
+    //ajax请求
+    $.ajax({
+        url:"api/activity/showActivity/",
+        data:{uuid:act_uuid},
+        type:"GET",
+        dataType:'json',
+        success:function (data) {
+            setActivityInfo(data);
+            toastMessage("获取会议信息成功！");
+        },
+        error:function () {
+            toastMessage("获取会议信息失败！");
+        }
+    })
+})
+
+
+
+
+
+    //测试代码
+// var data='{"logo":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","start_time":"2019-6-8","end_time":"2019-6-9","location":"计算机楼","organizer":"东南大学计算机科学与工程学院",' +
+//     '"introduction":"这是软件学院计算机科学与工程学院举办的宣讲会","type":"讲座","status":2' +
+//     ',"files":[{"fileName":"1.pdf","fileSrc":"#"},{"fileName":"1.pdf","fileSrc":"#"}]}';
+// data=JSON.parse(data);
+// $(function () {
+//     setInfoByJson(data)
+// });
