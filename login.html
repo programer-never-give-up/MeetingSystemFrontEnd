@@ -95,12 +95,11 @@
             $.post('api/login/', {username:username, password: password}, function (data) {
                 console.log(data);
                 if (data.status) {
-                    $('#message').text('登录成功,正在跳转...');
-                    $('#message-box').toast('show');
+                    toastMessage('登录成功,正在跳转...');
                     window.location.href='index.html';
                 } else {
-                    $('#message').text(data.message);
-                    $('#message-box').toast('show');
+                   toastMessage(data.message);
+
                 }
             });
         })
