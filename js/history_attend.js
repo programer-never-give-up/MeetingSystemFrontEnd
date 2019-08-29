@@ -25,16 +25,15 @@ function Render()
 {
     $.ajax({
 
-        url: "api/history_attend",
-        contentType: 'application/json;charset=UTF-8',
+        url: "api/personal_center/history_attend/",
         dataType: "json",
-        data: JSON.stringify(data),
         type: "post",
-        async: false,
         success: function (data)
         {
-            for (var i = 0; i < data.act.length; i++)
+            
+            for (var i = 0; i <data["list_activity"].length; i++)
             {
+				
                 var x = document.getElementById("history")
                 var gF = document.createElement("tr");
                 var F1 = document.createElement("td");
@@ -42,11 +41,11 @@ function Render()
                 var F2 = document.createElement("td");
                 var F3 = document.createElement("td");
                 var baseUrl = "show_meeting_info";
-                var Url = baseUrl + "?id=" + data.act[i].uuid;
+                var Url = baseUrl + "?id=" +data["list_activity"][i]["uuid_act"];
                 S1.setAttribute('href', Url);
-                S1.innerText = data.act[i].activityName;
-                F2.innerText = data.act[i].time.startTime;
-                F3.innerText = data.act[i].time.endTime;
+                S1.innerText = data["list_activity"][i]["name_act"];
+                F2.innerText = data["list_activity"][i]["start_time"];
+                F3.innerText = data["list_activity"][i]["end_time"];
                 F1.appendChild(S1);
                 gF.appendChild(F1);
                 gF.appendChild(F2);
