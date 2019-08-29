@@ -54,15 +54,27 @@ function initFileInput(colID,url){
 
     });
     $("#"+colID).on("fileuploaded",function () {
-        toastMessage("上传文件成功");
-        window.location.href="console.html";
+        jump(3,"上传文件成功","console.html");
     }).on("fileuploaderror",function () {
-        toastMessage("上传文件失败");
-        window.location.href='console.html';
+        jump(3,"上传文件失败","console.html");
     });
 }
 
-
+/**
+ * @author chonepieceyb
+ * @param seconds  跳转描述
+ * @param message  提示信息
+ * @param url       跳转的url
+ */
+function jump(seconds,message,url){
+    if(seconds>0){
+        seconds-=1;
+        toastMessage(message+" "+seconds+"秒");
+        window.setInterval(jump(seconds,message,url),1000)
+    }else{
+        window.location.href=url;
+    }
+}
 
 function getObjectURL(file) {
     var url = null ;
