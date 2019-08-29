@@ -1,34 +1,10 @@
-
-
-// var data=
-//     {
-//         "act":
-//             [
-//             {
-//                 "uuid":123,
-//                 "activityName":"东南大学实训宣讲会1",
-//                 "time":{"startTime":"2019-6-8","endTime":"2019-6-9"},
-//             },
-//             {
-//                 "uuid":123,
-//                 "activityName":"东南大学实训宣讲会2",
-//                 "time":{"startTime":"2019-6-8","endTime":"2019-6-9"},
-//             },
-//             {
-//                 "uuid":123,
-//                 "activityName":"东南大学实训宣讲会3",
-//                 "time":{"startTime":"2019-6-8","endTime":"2019-6-9"},
-//             }
-//             ]
-//     };
 function Render()
 {
     $.ajax({
 
-        url: "api/history_attend",
+        url: "api/history_organize",
         contentType: 'application/json;charset=UTF-8',
         dataType: "json",
-        data: JSON.stringify(data),
         type: "post",
         async: false,
         success: function (data)
@@ -56,7 +32,7 @@ function Render()
         },
         error: function ()
         {
-            alert("出问题了喔");
+            alert("出问题了");
         }
     });
 }
