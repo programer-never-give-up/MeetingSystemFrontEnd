@@ -68,18 +68,19 @@
         //生成类别标签
         var typeLabel='<div class="activity-label" style="background-color:#9A5DFC; color:white">'+data["type"]+'</div>';
         $("#activity-label-row").append( typeLabel);
-
         //生成文件下载列表
         for(index in data["files"]){
-            item=data["files"][index];
+            console.log(index);
+            console.log(item);
+            var item=data["files"][index];
             var name = item["fileName"];
-            ext = name.split(".")[1];
+            var ext = name.split(".")[1];
             iconSrc=extIcons["unknown"];
             if(ext in extIcons) {
                     iconSrc=extIcons[ext];
             }
             iconSrc = "images/icons/" + iconSrc;
-            html='<img src="'+iconSrc+'" >'+'<a href="'+item["fileSrc"]+'">'+item["fileName"]+'</a>';
+            html='<img src="'+iconSrc+'" >'+'<a href="'+item["fileSrc"]+item['fileName']+'">'+item["fileName"]+'</a>';
             $("#activity-files-box").append(html);
             $("#activity-files-box").append("</br>")
         }
@@ -90,7 +91,6 @@
 $(function () {
     //获取会议id
     var act_uuid=getParameter()['id'];
-	console.log(act_uuid);
     //ajax请求
     $.ajax({
         url:"api/activity/showActivity/",
