@@ -30,6 +30,7 @@ function Render()
         type: "post",
         success: function (data)
         {
+            console.log(data);
             for (var i = 0; i < data.act.length; i++)
             {
                 var x = document.getElementById("history")
@@ -42,8 +43,8 @@ function Render()
                 var Url = baseUrl + "?id=" + data.act[i].uuid;
                 S1.setAttribute('href', Url);
                 S1.innerText = data.act[i].activityName;
-                F2.innerText = data.act[i].time.startTime;
-                F3.innerText = data.act[i].time.endTime;
+                F2.innerText = data.act[i].startTime;
+                F3.innerText = data.act[i].endTime;
                 F1.appendChild(S1);
                 gF.appendChild(F1);
                 gF.appendChild(F2);
