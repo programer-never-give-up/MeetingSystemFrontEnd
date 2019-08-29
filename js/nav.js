@@ -51,6 +51,10 @@ function logout() {
 	});
 }
 
+/**
+ * @author y4ngyy
+ * @param message
+ */
 function toastMessage(message) {
     if ($(".toast").length <= 0) {
         let toast = "<div class=\"toast w-25\" role=\"alert\" aria-live=\"assertive\" aria-atomic=\"true\" data-delay=\"2000\" id=\"message-box\">\n" +
@@ -64,4 +68,23 @@ function toastMessage(message) {
     }
     $('#message').text(message);
     $('.toast').toast('show');
+}
+
+/**
+ * @author chonepieceyb
+ * @param seconds  跳转描述
+ * @param message  提示信息
+ * @param url       跳转的url
+ */
+function jump(seconds,message,url) {
+    var timeOut = seconds;
+    window.setInterval(function () {
+        if(timeOut>0){
+            toastMessage(message+" "+timeOut+"秒");
+            timeOut--;
+        }else{
+            window.clearInterval();
+            window.location.href=url;
+        }
+    },1000)
 }
