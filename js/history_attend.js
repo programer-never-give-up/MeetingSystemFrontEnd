@@ -25,7 +25,7 @@ function Render()
 {
     $.ajax({
 
-        url: "api/history_attend",
+        url: "api/history_attend/",
         contentType: 'application/json;charset=UTF-8',
         dataType: "json",
         data: JSON.stringify(data),

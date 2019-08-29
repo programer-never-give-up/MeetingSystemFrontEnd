@@ -2,7 +2,7 @@ function Render()
 {
     $.ajax({
 
-        url: "api/history_organize",
+        url: "api/history_organize/",
         contentType: 'application/json;charset=UTF-8',
         dataType: "json",
         type: "post",
