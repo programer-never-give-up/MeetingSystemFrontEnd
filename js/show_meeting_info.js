@@ -90,11 +90,12 @@
 $(function () {
     //获取会议id
     var act_uuid=getParameter()['id'];
+	console.log(act_uuid);
     //ajax请求
     $.ajax({
         url:"api/activity/showActivity/",
         data:{uuid:act_uuid},
-        type:"GET",
+        type:"post",
         dataType:'json',
         success:function (data) {
             setActivityInfo(data);

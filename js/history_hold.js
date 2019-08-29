@@ -9,7 +9,7 @@ function Render()
         {
             for (var i = 0; i <data["list_activity"].length; i++)
             {
-
+				console.log(data["list_activity"][i]["uuid_act"]);
                 var x = document.getElementById("history")
                 var gF = document.createElement("tr");
                 var F1 = document.createElement("td");
