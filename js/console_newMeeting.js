@@ -153,8 +153,10 @@ function uploadActivityInfo(){
 
 }
 
+
 //浏览器加载时运行
 $(function () {
+
     initFileInput("upload-file-input","api/activity/uploadFile/");
 
     $("#upload-activity-logo").on('change',uploadActivityLogo);    //上传图片

@@ -96,7 +96,7 @@ function setInfoList(data,buttomType){
             $(".buttonTd").append($aDel);
     }else if(buttomType=="fav-not-started" || buttomType=="fav-processing" ||buttomType=="fav-finished"){   //我的收藏模块的按钮
             //添加删除按钮
-            $aDel =$('<a class="btn btn-danger">删除</a>');
+                $aDel =$('<a class="btn btn-danger">删除</a>');
             $aDel.attr("id","delete-button-"+activity["id"]);
             $aDel.on("click",function () {
                 $(this).parent().parent().remove();
@@ -113,8 +113,9 @@ function setInfoList(data,buttomType){
  * @param btnID  按钮类型
  * @param pageID 第几页
  * @param perPage 每一页的页数
+ * @param :是否生成新的导航栏，主要是区别在点击控制台的按钮，和下面的链接（第几页)的区别
  */
-function getActivityList(api,btnID,pageID,perPage){
+function getActivityList(api,btnID,pageID,perPage,isGeneratePage=false){
     $.ajax({
         url:api,
         data:{"btn-type":btnID, "page-id":pageID,'per-page':perPage},
@@ -123,6 +124,9 @@ function getActivityList(api,btnID,pageID,perPage){
         success:function (data) {
             setInfoList(data,btnID);
             toastMessage("刷新成功！");
+            if(isGeneratePage){
+                generatePageItems(btnID,data['pageNum']);
+            }
         },
         error:function () {
             toastMessage("获取信息失败！");
@@ -179,6 +183,7 @@ function generatePageItems(btnID,pageNum,pageShowNum=0){
 
 //浏览器加载时运行
 $(function () {
+    var perPage=5;
     //面包屑导航栏要用的字典
     var breadDict={
         "management-unpublished":['活动管理','未发布'],
@@ -187,19 +192,30 @@ $(function () {
         "management-finished":['活动管理','已结束'],
         "to-be-audited":['活动管理','待审核'],
         "my-not-start":['我的活动','未开始'],
-        "my-not-start":['我的活动',''],
-        "my-not-start":['我的活动','未开始'],
+        "my-processing":['我的活动','进行中'],
+        "my-finished":['我的活动','已结束'],
+        "fav-not-start":['我的收藏','未开始'],
+        "fav-processing":['我的收藏','进行中'],
+        "fav-finished":['我的收藏','已结束']
     }
+
+
     //未开始等按钮的跳转
     $("div.function-list *div.collapse *a").on('click',function () {
+        $('.breadcrumb *li').remove();
         //实现按钮点击效果
         $(this).parent().parent().find('a').removeClass('active');
         $(this).addClass('active');
         $(this).parent('div').prev('a').addClass('active');
-        //向前端请求数据 并更新首页列表
-        getActivityList("#",$(this).attr('id'),1,5);
+        //更改面包导航栏
+        items=breadDict[$(this).attr('id')];
+        $('.breadcrumb').append(' <li class="breadcrumb-item"><a herf="#">控制台</a></li>');
+        $('.breadcrumb').append(' <li class="breadcrumb-item"><a herf="#">'+items[0]+'</a></li>');
+        $('.breadcrumb').append(' <li class="breadcrumb-item active"><a herf="#">'+items[1]+'</a></li>');
+        //向前端请求数据 并更新首页列表,产生分页栏
+        getActivityList("#",$(this).attr('id'),1,perPage,true);
     });
-    generatePageItems(1,7);
+
 
     //分页按钮点击
     $('#page-bar *a').on('click',function () {
@@ -231,9 +247,12 @@ $(function () {
             $('#page-previous').parent().removeClass('disabled');
             $("#page-next").parent().removeClass('disabled');
         }
+        //像前端请求页面信息
+        console.log($('#page-bar').data('btnID'));
+        getActivityList("#",$('#page-bar').data('btnID'),currentPage,perPage,false);
     })
 })
 //测试代码
 var data='{"activities":[{"logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","startTime":"2019-6-8","endTime":"2019-6-9","location":"计算机楼","id":"00000000111111"},{"logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","startTime":"2019-6-8","endTime":"2019-6-9","location":"计算机楼","id":"00000000111111"},{"logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","startTime":"2019-6-8","endTime":"2019-6-9","location":"计算机楼","id":"00000000111111"}]}';
 data=JSON.parse(data);
-setInfoList(data,"fav-not-started");
+setInfoList(data,"fav-processing");
