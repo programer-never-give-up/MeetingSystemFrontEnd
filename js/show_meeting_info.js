@@ -49,19 +49,32 @@
         //获取个人简介
         $("#introduction-info").text(data["introduction"]);
         //获取会议的状态和类别 以标签的形式展示在右上角
-        var status=data["status"];
+        var status_process=data["status_process"];
+        var status_publish=data["status_publish"];
         var statuslabel;
-        switch(status){
-            case 0:  //未开始
+        if(status_publish=='published') {                       //已发布
+            //生成已发布标签
+            $("#activity-label-row").append('<div class="activity-label" style="background-color:#58b2fc;color:white">已发布</div>');
+            if(status_process=='not_start'){
                 statuslabel='<div class="activity-label" style="background-color:#f8fc20;color:white">未开始</div>';
-                break;
-            case 1:   //进行中
+            }else  if(status_process=='processing'){
                 statuslabel='<div class="activity-label" style="background-color:#5DFC2C;color:white">进行中</div>';
-                break;
-            case 2:  //已结束
+            }else if(status_process=='finished'){
                 statuslabel='<div class="activity-label" style="background-color:#FC0C2B;color:white">已结束</div>';
-                break;
-            default:
+            }
+        }else if(status_publish=='unpublished'){
+            //生成未发布标签
+            $("#activity-label-row").append('<div class="activity-label" style="background-color:#58b2fc;color:white">未发布</div>');
+        }else if(status_publish=='to_be_audited'){
+            //添加待审核标签
+            $("#activity-label-row").append('<div class="activity-label" style="background-color:#FC9C62;color:white">待审核</div>');
+            if(status_process=='not_start'){
+                statuslabel='<div class="activity-label" style="background-color:#f8fc20;color:white">未开始</div>';
+            }else  if(status_process=='processing'){
+                statuslabel='<div class="activity-label" style="background-color:#5DFC2C;color:white">进行中</div>';
+            }else if(status_process=='finished'){
+                statuslabel='<div class="activity-label" style="background-color:#FC0C2B;color:white">已结束</div>';
+            }
         }
         //生成标签
         $("#activity-label-row").append(statuslabel);
@@ -109,13 +122,20 @@ $(function () {
 
 
 
-
-
-    //测试代码
-// var data='{"logo":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","start_time":"2019-6-8","end_time":"2019-6-9","location":"计算机楼","organizer":"东南大学计算机科学与工程学院",' +
-//     '"introduction":"这是软件学院计算机科学与工程学院举办的宣讲会","type":"讲座","status":2' +
-//     ',"files":[{"fileName":"1.pdf","fileSrc":"#"},{"fileName":"1.pdf","fileSrc":"#"}]}';
-// data=JSON.parse(data);
-// $(function () {
-//     setInfoByJson(data)
+//  //测试代码
+// var data = {
+//     logo:"https://y4ngyy.xyz/assets/avatar.jpg",
+//     activityName:"东南大学实训宣讲会",
+//     start_time:"2019-6-8",
+//     end_time:'2019-6-9',
+//     location:"计算机楼",
+//     organizer:'东南大学计算机科学与工程学院',
+//     files:[{"fileName":"1.pdf","fileSrc":"#"},{"fileName":"1.pdf","fileSrc":"#"}],
+//     status_publish:"to_be_audited",
+//     status_process:'processing',
+//     type:'讲座'
+//
+// }
+//  $(function () {
+//      setActivityInfo(data);
 // });

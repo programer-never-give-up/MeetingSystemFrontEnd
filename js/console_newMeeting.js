@@ -110,7 +110,7 @@ function uploadActivityLogo(){
  * return : 创建会议成功 true, 创建会议失败 false
  * 功能上传基本信息
  */
-function uploadActivityInfo(){
+function uploadActivityInfo(isNew,act_uuid=null){
 
     let form= new FormData();
     let logo = $("#upload-activity-logo")[0].files[0];
@@ -149,18 +149,136 @@ function uploadActivityInfo(){
             toastMessage("创建会议失败！");
             return false;
         }
-    })
-
+    });
 }
 
+/**
+ * @author chonepieceyb
+ * @param status_published  活动发布状态
+ * @param status_process    活动进行状态
+ * @usage 根据活动的状态将有些输入框disable
+ */
+function setPageInput(status_published,status_process){
+    $('.card-header *h5').text('编辑');
+    if(status_published != "unpublished"){
+        $('.card').find('input').attr('disabled','disabled')   //禁止所有input框
+        $('textarea').attr('disabled','disabled');
+    }
+    if(status_published == "published"){     //如果是已发布 需要控制权限
+        if(status_process=='not_start'){    //只能编辑未开始活动
+            //移除可编辑选项的input
+            $('#start-time-input').removeAttr('disabled');
+            $('#end-time-input').removeAttr('disabled');
+            $('#location-input').removeAttr('disabled');
+            $('#introduction-input').removeAttr('disabled');
+            $('#upload-file-input').removeAttr('disabled');
+        }else{
+            $('#upload-file-input').removeAttr('disabled');   //只能上传文件
+        }
+    }
+}
+
+/**
+ * @author choenpeiceyb
+ * @param className  内容发生变化时,添加的类名
+ * @param data, 原始数据
+ * usage:监听输入框，当输入框内容生变化时和原始内容比较，如果和原始内容不同，添加className 否则移除className
+ */
+function monittorInput(className,data){
+    //监听文本框
+    var dict={      //字典，定义映射关系，方便查数据
+        'name-input':'name',
+        'upload-activity-logo':'logo',
+        'start-time-input':'start_time',
+        'end-time-input':'end_time',
+        'location-input' :'location',
+        'organizer-input':'organizer',
+        'introduction-input' :'introduction',
+        'radio':'type'
+    }
+    //监听文本框
+    $('input[type="text"]').on('blur',function () {
+        console.log('进入文本框监听模块');
+        console.log($(this).val());
+        console.log(data[dict[$(this).attr('id')]]);
+        if($(this).val()!=data[dict[$(this).attr('id')]]){
+            $(this).addClass(className);
+        }else{
+            $(this).removeClass(className);
+        }
+    })
+    //监听头像上传
+    $('#upload-activity-logo').on('change',function () {
+        $(this).addClass(className);
+    })
+    //监听 单选框
+    $('input[type="radio"]').on('change',function () {
+        if ($(this).parent('label').text()!=data['type']){
+            $(this).addClass(className);
+        }else{
+            $(this).removeClass(className);
+        }
+
+    })
+    //监听简介框
+    $('#introduction-input').on('blur',function () {
+        if($(this).val()!=data[dict[$(this).attr('id')]]){
+            $(this).addClass(className);
+        }else{
+            $(this).removeClass(className);
+        }
+    })
+    console.log("监听")
+}
+/**
+ * @author chonepieceyb
+ * @param data 从服务器获取的数据
+ * @usage : 遍及页面将原来的值作为预设值
+ */
+function setPageInfo(data){
+    $('#activity-logo').attr('src',data["logo"]);   //
+    $('#name-input').val(data['name']);
+    $('#start-time-input').val(data['start_time']);
+    $('#end-time-input').val(data['end_time']);
+    $('#location-input').val(data['location']);
+    $('#organizer-input').val(data['organizer']);
+    $('#introduction-input').val(data['introduction']);
+    $(".radio-inline").each(function (index,element) {
+        if($(this).text()==data['type']){
+            $(this).attr('checked','true');
+        }
+    });
+}
 
 //浏览器加载时运行
 $(function () {
 
+    var id = getParameter()["id"];
+    if(id){
+
+    }
+
     initFileInput("upload-file-input","api/activity/uploadFile/");
-
     $("#upload-activity-logo").on('change',uploadActivityLogo);    //上传图片
+    setPageInput('published','not_start');
+    //测试
+    var data = {
+    logo:"https://y4ngyy.xyz/assets/avatar.jpg",
+    name:"东南大学实训宣讲会",
+    start_time:"2019-6-8",
+    end_time:'2019-6-9',
+    location:"计算机楼",
+    organizer:'东南大学计算机科学与工程学院',
+    files:[{"fileName":"1.pdf","fileSrc":"#"},{"fileName":"1.pdf","fileSrc":"#"}],
+    status_publish:"to_be_audited",
+    status_process:'processing',
+    type:'讲座'
 
+}
+
+    //
+    setPageInfo(data);
+    monittorInput('input-change',data);
     //保存按钮(还没有上传文件）
     $("#activity-save-btn").on('click',uploadActivityInfo);
     //取消按钮

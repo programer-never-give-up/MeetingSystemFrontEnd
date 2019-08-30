@@ -85,7 +85,7 @@ function setInfoList(data,buttomType){
             var $a =$('<a class="btn btn-light">编辑</a>');     //上传按钮
             $a.attr("href","console_newMeeting.html?id="+activity["id"]+"&type="+buttomType);
             $(".buttonTd").append($a);
-    }else if(buttomType=="my-not-started"){    //我的活动的 未开始
+    }else if(buttomType=="my-not_start"){    //我的活动的 未开始
             //取消报名的按钮
             $aDel =$('<a class="btn btn-danger">取消报名</a>');
             $aDel.attr("id","delete-button-"+activity["id"]);
@@ -94,7 +94,7 @@ function setInfoList(data,buttomType){
                 deleteActivity(activity["id"]);
             });
             $(".buttonTd").append($aDel);
-    }else if(buttomType=="fav-not-started" || buttomType=="fav-processing" ||buttomType=="fav-finished"){   //我的收藏模块的按钮
+    }else if(buttomType=="fav-not_start" || buttomType=="fav-processing" ||buttomType=="fav-finished"){   //我的收藏模块的按钮
             //添加删除按钮
                 $aDel =$('<a class="btn btn-danger">删除</a>');
             $aDel.attr("id","delete-button-"+activity["id"]);
@@ -190,11 +190,11 @@ $(function () {
         "management-published":['活动管理','已发布'],
         "management-processing":['活动管理','进行中'],
         "management-finished":['活动管理','已结束'],
-        "to-be-audited":['活动管理','待审核'],
-        "my-not-start":['我的活动','未开始'],
+        "management_to_be_audited":['活动管理','待审核'],
+        "my-not_start":['我的活动','未开始'],
         "my-processing":['我的活动','进行中'],
         "my-finished":['我的活动','已结束'],
-        "fav-not-start":['我的收藏','未开始'],
+        "fav-not_start":['我的收藏','未开始'],
         "fav-processing":['我的收藏','进行中'],
         "fav-finished":['我的收藏','已结束']
     }
@@ -255,4 +255,4 @@ $(function () {
 //测试代码
 var data='{"activities":[{"logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","startTime":"2019-6-8","endTime":"2019-6-9","location":"计算机楼","id":"00000000111111"},{"logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","startTime":"2019-6-8","endTime":"2019-6-9","location":"计算机楼","id":"00000000111111"},{"logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","startTime":"2019-6-8","endTime":"2019-6-9","location":"计算机楼","id":"00000000111111"}]}';
 data=JSON.parse(data);
-setInfoList(data,"fav-processing");
+setInfoList(data,"management_to_be_audited");
