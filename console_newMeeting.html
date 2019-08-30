@@ -14,6 +14,9 @@
         label.inputLabel{
             text-align: center;
         }
+        .input-change{
+            color:blue;
+        }
     </style>
     <title>主页</title>
 </head>
@@ -50,20 +53,20 @@
                                 </div>
                             </div>
                             <div class="form-group row" role="form" id="nameInputGroup">
-                                <label class="col-2  control-label inputLabel" for="name-input">活动名称:</label>
+                                <label class="col-2  control-label inputLabel required" for="name-input">活动名称:</label>
                                 <div class="col-10">
                                     <input type="text" id="name-input" class="form-control col-lg-6" placeholder="请输入活动名称">
                                 </div>
                             </div>
                             <div class="form-group row" role="form" id="timeInputRow">
-                                <label class="col-2 control-label inputLabel" for="timeDiv" >活动时间:</label>
+                                <label class="col-2 control-label inputLabel required" for="timeDiv" >活动时间:</label>
                                 <div class="col-10" id="timeDiv">
                                     <div>开始时间：<input type="datetime-local" id="start-time-input" class="form-control col-lg-6"></div>
                                     <div>结束时间：<input type="datetime-local" id="end-time-input" class="form-control col-lg-6"></div>
                                 </div>
                             </div>
                             <div class="form-group row" role="form" id="locationGroup">
-                                <label class="col-2 control-label inputLabel"  for="location-input">活动地点:</label>
+                                <label class="col-2 control-label inputLabel required"  for="location-input">活动地点:</label>
                                 <div class="col-10">
                                     <input type="text" id="location-input" class="form-control col-lg-6" placeholder="请输入活动地点">
                                 </div>
@@ -88,7 +91,7 @@
                                 </div>
                             </div>
                             <div class="form-group row" id="activityTypeGroup">
-                                <label class="col-2 control-label inputLabel" >活动类型：</label>
+                                <label class="col-2 control-label inputLabel required" >活动类型：</label>
                                 <div class="col-10">
                                     <label class="radio-inline"><input type="radio" name="activity-type">会议</label>
                                     <label class="radio-inline"><input type="radio" name="activity-type">讲座</label>

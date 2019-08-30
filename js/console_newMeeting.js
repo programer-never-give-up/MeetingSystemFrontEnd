@@ -186,7 +186,7 @@ function setPageInput(status_published,status_process){
  */
 function monittorInput(className,data){
     //监听文本框
-    var dict={      //字典，定义映射关系，方便查数据
+    var myDict={      //字典，定义映射关系，方便查数据
         'name-input':'name',
         'upload-activity-logo':'logo',
         'start-time-input':'start_time',
@@ -195,40 +195,42 @@ function monittorInput(className,data){
         'organizer-input':'organizer',
         'introduction-input' :'introduction',
         'radio':'type'
-    }
+    };
     //监听文本框
     $('input[type="text"]').on('blur',function () {
-        console.log('进入文本框监听模块');
-        console.log($(this).val());
-        console.log(data[dict[$(this).attr('id')]]);
-        if($(this).val()!=data[dict[$(this).attr('id')]]){
+        if($(this).val()!=data[myDict[$(this).attr('id')]]){
             $(this).addClass(className);
         }else{
             $(this).removeClass(className);
         }
-    })
+    });
     //监听头像上传
     $('#upload-activity-logo').on('change',function () {
         $(this).addClass(className);
-    })
+    });
     //监听 单选框
     $('input[type="radio"]').on('change',function () {
+        console.log('监听单选框');
         if ($(this).parent('label').text()!=data['type']){
             $(this).addClass(className);
         }else{
             $(this).removeClass(className);
         }
 
-    })
+    });
     //监听简介框
     $('#introduction-input').on('blur',function () {
-        if($(this).val()!=data[dict[$(this).attr('id')]]){
+        console.log('进入个人简介模块');
+        console.log($(this).val());
+        console.log(myDict[$(this).attr('id')]);
+        console.log(data[myDict[$(this).attr('id')]]);
+        if($(this).val()!=data[myDict[$(this).attr('id')]]){
             $(this).addClass(className);
         }else{
             $(this).removeClass(className);
         }
-    })
-    console.log("监听")
+    });
+
 }
 /**
  * @author chonepieceyb
@@ -236,14 +238,27 @@ function monittorInput(className,data){
  * @usage : 遍及页面将原来的值作为预设值
  */
 function setPageInfo(data){
-    $('#activity-logo').attr('src',data["logo"]);   //
+    $('#activity-logo').attr('src',data["logo"]);
     $('#name-input').val(data['name']);
+    //$('#name-input').data("name",data['name']);
+
     $('#start-time-input').val(data['start_time']);
+   // $('#start-time-input').data('startTime',data['start_time']);
+
     $('#end-time-input').val(data['end_time']);
+   // $('#end-time-input').data('endTime',data['end_time']);
+
     $('#location-input').val(data['location']);
+   // $('#location-input').data('location',data['location']);
+
     $('#organizer-input').val(data['organizer']);
+   // $('#organizer-input').data('organizer',data['organizer']);
+
     $('#introduction-input').val(data['introduction']);
+   // $('#introduction-input').data('introduction',data['introduction']);
+
     $(".radio-inline").each(function (index,element) {
+       // $(this).data('type',data['tyoe']);
         if($(this).text()==data['type']){
             $(this).attr('checked','true');
         }
@@ -257,10 +272,11 @@ $(function () {
     if(id){
 
     }
-
+    //给必选的元素前添加星号
+    $('.required').prepend('<span style="color:red">*</span>');
     initFileInput("upload-file-input","api/activity/uploadFile/");
     $("#upload-activity-logo").on('change',uploadActivityLogo);    //上传图片
-    setPageInput('published','not_start');
+    setPageInput('unpublished','not_start');
     //测试
     var data = {
     logo:"https://y4ngyy.xyz/assets/avatar.jpg",
@@ -269,6 +285,7 @@ $(function () {
     end_time:'2019-6-9',
     location:"计算机楼",
     organizer:'东南大学计算机科学与工程学院',
+        introduction:'',
     files:[{"fileName":"1.pdf","fileSrc":"#"},{"fileName":"1.pdf","fileSrc":"#"}],
     status_publish:"to_be_audited",
     status_process:'processing',
