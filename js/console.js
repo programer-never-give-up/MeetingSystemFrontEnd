@@ -44,65 +44,65 @@ function deleteActivity(uuid){
  * @param buttomID  buttomType参数说明  block-subBlock 例如 活动管理模块下面的未发布为 mangement-Unpublished  ,mengement-published ....
  */
 function setInfoList(data,buttomType){
-    for(index in data["activities"]){
-        activity=data["activities"][index];
-        var $itemCard=$('<tr class="item-card"></tr>');
+    for(index in data["activities"]) {
+        activity = data["activities"][index];
+        var $itemCard = $('<tr class="item-card"></tr>');
 //<td><img src="https://y4ngyy.xyz/assets/avatar.jpg" alt="活动logo"></td>
 
-        $itemCard.append('<td><img src="'+activity["logoSrc"]+'" alt="活动logo"></td>');   //添加缩略图
+        $itemCard.append('<td><img src="' + activity["logoSrc"] + '" alt="活动logo"></td>');   //添加缩略图
 
-        $itemCard.append('<td>'+activity["activityName"]+'</td>');    //添加活动名称
+        $itemCard.append('<td>' + activity["activityName"] + '</td>');    //添加活动名称
 
-        $itemCard.append('<td>'+activity["location"]+'</td>');        //添加活动地点
+        $itemCard.append('<td>' + activity["location"] + '</td>');        //添加活动地点
 
-        var $timeTd=$('<td></td>');                                              //添加活动的开始时间和结束时间
-        $timeTd.append(activity["startTime"]+"</br>"+activity["endTime"]);
+        var $timeTd = $('<td></td>');                                              //添加活动的开始时间和结束时间
+        $timeTd.append(activity["startTime"] + "</br>" + activity["endTime"]);
         $itemCard.append($timeTd);
 
-        var $buttonTd=$("<td class='buttonTd'></td>");    //添加查看详情按钮
-        var $a =$('<a class="btn btn-primary">查看</a>');
-        $a.attr("href","show_meeting_info.html?id="+activity["id"]);
+        var $buttonTd = $("<td class='buttonTd'></td>");    //添加查看详情按钮
+        var $a = $('<a class="btn btn-primary">查看</a>');
+        $a.attr("href", "show_meeting_info.html?id=" + activity["id"]);
         $buttonTd.append($a);
         $itemCard.append($buttonTd);
         $("tbody.activity-card").append($itemCard);
-    }
-    //根据不同的模块生成不同的链接样式
-    if(buttomType=='management-unpublished' ||buttomType=='management-published'){      //活动管理的：未发布 和已发布
-            var $aEdit =$('<a class="btn btn-light">编辑</a>');     //编辑按钮
-            $aEdit.attr("href","console_newMeeting.html?id="+activity["id"]+"&type="+buttomType);
+        //根据不同的模块生成不同的链接样式
+        if (buttomType == 'management-unpublished' || buttomType == 'management-published') {      //活动管理的：未发布 和已发布
+            var $aEdit = $('<a class="btn btn-light">编辑</a>');     //编辑按钮
+            $aEdit.attr("href", "console_newMeeting.html?id=" + activity["id"] + "&type=" + buttomType);
             $(".buttonTd").append($aEdit);
 
-            $aDel =$('<a class="btn btn-danger">删除</a>');
-            $aDel.attr("id","delete-button-"+activity["id"]);
-            $aDel.on("click",function () {
+            $aDel = $('<a class="btn btn-danger">删除</a>');
+            $aDel.attr("id", "delete-button-" + activity["id"]);
+            $aDel.on("click", function () {
                 $(this).parent().parent().remove();
                 deleteActivity(activity["id"]);
             })
             $(".buttonTd").append($aDel);
 
-    }else if(buttomType=='management-processing' || buttomType=="management-finished"){   //活动管理的：进行中和已结束
+        } else if (buttomType == 'management-processing' || buttomType == "management-finished") {   //活动管理的：进行中和已结束
             //上传按钮，进入界面后只能上传活动资料
-            var $a =$('<a class="btn btn-light">编辑</a>');     //上传按钮
-            $a.attr("href","console_newMeeting.html?id="+activity["id"]+"&type="+buttomType);
+            var $a = $('<a class="btn btn-light">编辑</a>');     //上传按钮
+            $a.attr("href", "console_newMeeting.html?id=" + activity["id"] + "&type=" + buttomType);
             $(".buttonTd").append($a);
-    }else if(buttomType=="my-not_start"){    //我的活动的 未开始
+        } else if (buttomType == "my-not_start") {    //我的活动的 未开始
             //取消报名的按钮
-            $aDel =$('<a class="btn btn-danger">取消报名</a>');
-            $aDel.attr("id","delete-button-"+activity["id"]);
-            $aDel.on("click",function () {
+            $aDel = $('<a class="btn btn-danger">取消报名</a>');
+            $aDel.attr("id", "delete-button-" + activity["id"]);
+            $aDel.on("click", function () {
                 $(this).parent().parent().remove();
                 deleteActivity(activity["id"]);
             });
             $(".buttonTd").append($aDel);
-    }else if(buttomType=="fav-not_start" || buttomType=="fav-processing" ||buttomType=="fav-finished"){   //我的收藏模块的按钮
+        } else if (buttomType == "fav-not_start" || buttomType == "fav-processing" || buttomType == "fav-finished") {   //我的收藏模块的按钮
             //添加删除按钮
-                $aDel =$('<a class="btn btn-danger">删除</a>');
-            $aDel.attr("id","delete-button-"+activity["id"]);
-            $aDel.on("click",function () {
+            $aDel = $('<a class="btn btn-danger">删除</a>');
+            $aDel.attr("id", "delete-button-" + activity["id"]);
+            $aDel.on("click", function () {
                 $(this).parent().parent().remove();
                 deleteActivity(activity["id"]);
             });
             $(".buttonTd").append($aDel);
+        }
     }
 }
 
@@ -116,6 +116,8 @@ function setInfoList(data,buttomType){
  * @param :是否生成新的导航栏，主要是区别在点击控制台的按钮，和下面的链接（第几页)的区别
  */
 function getActivityList(api,btnID,pageID,perPage,isGeneratePage=false){
+    //删除原有的元素
+    $('.activity-card').find('*').remove();
     $.ajax({
         url:api,
         data:{"btn-type":btnID, "page-id":pageID,'per-page':perPage},
@@ -148,6 +150,8 @@ function generatePageItems(btnID,pageNum,pageShowNum=0){
     // if(pageShowNum>pageNum){
     //     pageShowNum=pageNum;  //防止页面过少的情况
     // }
+    //删除元素
+    $('#page-bar').find('*').remove();
     //缓存当前页数（1）
     $('#page-bar').data('currentPage',1);
     //缓存按钮类型
@@ -190,7 +194,7 @@ $(function () {
         "management-published":['活动管理','已发布'],
         "management-processing":['活动管理','进行中'],
         "management-finished":['活动管理','已结束'],
-        "management_to_be_audited":['活动管理','待审核'],
+        "management-to_be_audited":['活动管理','待审核'],
         "my-not_start":['我的活动','未开始'],
         "my-processing":['我的活动','进行中'],
         "my-finished":['我的活动','已结束'],
@@ -213,7 +217,7 @@ $(function () {
         $('.breadcrumb').append(' <li class="breadcrumb-item"><a herf="#">'+items[0]+'</a></li>');
         $('.breadcrumb').append(' <li class="breadcrumb-item active"><a herf="#">'+items[1]+'</a></li>');
         //向前端请求数据 并更新首页列表,产生分页栏
-        getActivityList("#",$(this).attr('id'),1,perPage,true);
+        getActivityList("api/activity/pageDisplay/",$(this).attr('id'),1,perPage,true);
     });
 
 
@@ -249,10 +253,7 @@ $(function () {
         }
         //像前端请求页面信息
         console.log($('#page-bar').data('btnID'));
-        getActivityList("#",$('#page-bar').data('btnID'),currentPage,perPage,false);
+        getActivityList("api/activity/pageDisplay/",$('#page-bar').data('btnID'),currentPage,perPage,false);
     })
 })
 //测试代码
-var data='{"activities":[{"logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","startTime":"2019-6-8","endTime":"2019-6-9","location":"计算机楼","id":"00000000111111"},{"logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","startTime":"2019-6-8","endTime":"2019-6-9","location":"计算机楼","id":"00000000111111"},{"logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg","activityName":"东南大学实训宣讲会","startTime":"2019-6-8","endTime":"2019-6-9","location":"计算机楼","id":"00000000111111"}]}';
-data=JSON.parse(data);
-setInfoList(data,"management_to_be_audited");
