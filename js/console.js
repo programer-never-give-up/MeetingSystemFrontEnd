@@ -174,19 +174,54 @@ function generatePageItems(btnID,pageNum,pageShowNum=0){
         $('#page-bar').append($li);
     }
     //添加next按钮
-    var $liN = $('<li class="page-item activate">\n' +
+    var $liN = $('<li class="page-item">\n' +
         '                            <a class="page-link" href="#" id="page-next">next</a>\n' +
         '                        </li>');
     $('#page-bar').append($liN);
 
     //添加激活效果
     $('#page-1').parent().addClass('active');
+    $('#page-bar *a').on('click',function () {
+        //取消激活状态
+        var pageNum = $('#page-bar').data('pageNum');
+        var currentPage=$('#page-bar').data('currentPage');
+        $('#page-'+currentPage).parent().removeClass('active');
+
+        if($(this).attr('id')=="page-previous"){                                 //获取当前的active
+            currentPage-=1;                                                         //当前页-1
+            $('#page-'+currentPage).parent().addClass('active');                     //激活效果
+            $('#page-bar').data('currentPage',currentPage);                           //储存
+        }
+        else if($(this).attr('id')=="page-next" ){
+            currentPage+=1;  //当前页+1
+            $('#page-'+currentPage).parent().addClass('active');
+            $('#page-bar').data('currentPage',currentPage);
+        }else{
+            $(this).parent().addClass('active');
+            currentPage =  $(this).attr('id').split('-')[1];
+            $('#page-bar').data('currentPage',currentPage);
+        }
+
+        if(currentPage==1){
+            $('#page-previous').parent().addClass('disabled');
+            $("#page-next").parent().removeClass('disabled');
+        }else if(currentPage==pageNum){
+            $('#page-previous').parent().removeClass('disabled');
+            $("#page-next").parent().addClass('disabled');
+        }else{
+            $('#page-previous').parent().removeClass('disabled');
+            $("#page-next").parent().removeClass('disabled');
+        }
+        //像前端请求页面信息
+        getActivityList("api/activity/pageDisplay/",$('#page-bar').data('btnID'),currentPage,5,false);
+    });
 }
 
 
 
 //浏览器加载时运行
 $(function () {
+    //分页按钮点击
     var perPage=5;
     //面包屑导航栏要用的字典
     var breadDict={
@@ -221,39 +256,6 @@ $(function () {
     });
 
 
-    //分页按钮点击
-    $('#page-bar *a').on('click',function () {
-        //取消激活状态
-        var pageNum = $('#page-bar').data('pageNum');
-        var currentPage=$('#page-bar').data('currentPage');
-        $('#page-'+currentPage).parent().removeClass('active');
 
-        if($(this).attr('id')=="page-previous"){                                 //获取当前的active
-            currentPage-=1;                                                         //当前页-1
-            $('#page-'+currentPage).parent().addClass('active');                     //激活效果
-            $('#page-bar').data('currentPage',currentPage);                           //储存
-        }
-        else if($(this).attr('id')=="page-next" ){
-            currentPage+=1;  //当前页+1
-            $('#page-'+currentPage).parent().addClass('active');
-            $('#page-bar').data('currentPage',currentPage);
-        }else{
-            $(this).parent().addClass('active');
-            currentPage =  $(this).attr('id').split('-')[1];
-            $('#page-bar').data('currentPage',currentPage);
-        }
-
-        if(currentPage==1){
-            $('#page-previous').parent().addClass('disabled');
-        }else if(currentPage==pageNum){
-            $("#page-next").parent().addClass('disabled');
-        }else{
-            $('#page-previous').parent().removeClass('disabled');
-            $("#page-next").parent().removeClass('disabled');
-        }
-        //像前端请求页面信息
-        console.log($('#page-bar').data('btnID'));
-        getActivityList("api/activity/pageDisplay/",$('#page-bar').data('btnID'),currentPage,perPage,false);
-    })
 })
 //测试代码
