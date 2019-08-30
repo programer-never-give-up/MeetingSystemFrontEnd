@@ -69,7 +69,7 @@ function setInfoList(data,buttomType){
         if (buttomType == 'management-unpublished' || buttomType == 'management-published') {      //活动管理的：未发布 和已发布
             var $aEdit = $('<a class="btn btn-light">编辑</a>');     //编辑按钮
             $aEdit.attr("href", "console_newMeeting.html?id=" + activity["id"] + "&type=" + buttomType);
-            $(".buttonTd").append($aEdit);
+            $buttonTd.append($aEdit);
 
             $aDel = $('<a class="btn btn-danger">删除</a>');
             $aDel.attr("id", "delete-button-" + activity["id"]);
@@ -77,7 +77,7 @@ function setInfoList(data,buttomType){
                 $(this).parent().parent().remove();
                 deleteActivity(activity["id"]);
             })
-            $(".buttonTd").append($aDel);
+            $buttonTd.append($aDel);
 
         } else if (buttomType == 'management-processing' || buttomType == "management-finished") {   //活动管理的：进行中和已结束
             //上传按钮，进入界面后只能上传活动资料
@@ -92,7 +92,7 @@ function setInfoList(data,buttomType){
                 $(this).parent().parent().remove();
                 deleteActivity(activity["id"]);
             });
-            $(".buttonTd").append($aDel);
+            $buttonTd.append($aDel);
         } else if (buttomType == "fav-not_start" || buttomType == "fav-processing" || buttomType == "fav-finished") {   //我的收藏模块的按钮
             //添加删除按钮
             $aDel = $('<a class="btn btn-danger">删除</a>');
@@ -101,7 +101,7 @@ function setInfoList(data,buttomType){
                 $(this).parent().parent().remove();
                 deleteActivity(activity["id"]);
             });
-            $(".buttonTd").append($aDel);
+            $buttonTd.append($aDel);
         }
     }
 }
