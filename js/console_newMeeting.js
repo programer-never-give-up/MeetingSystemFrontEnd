@@ -257,13 +257,10 @@ function monittorInput(className,data){
     });
     //监听 单选框
     $('input[type="radio"]').on('change',function () {
-        console.log('监听单选框');
-        if ($(this).parent('label').text()!=data['type']){
-            $(this).addClass(className);
-        }else{
-            $(this).removeClass(className);
+        $('.radio-inline').removeClass(className);
+        if ($(this).parent('label').text()!=data['type']) {
+            $(this).parent('label').addClass(className);
         }
-
     });
     //监听简介框
     $('#introduction-input').on('blur',function () {
@@ -321,9 +318,10 @@ function setPageInfo(data){
    // $('#introduction-input').data('introduction',data['introduction']);
 
     $(".radio-inline").each(function (index,element) {
-       // $(this).data('type',data['tyoe']);
+        //($(this).data('type',data['type']));
+        console.log(data['type']);
         if($(this).text()==data['type']){
-            $(this).attr('checked','true');
+                $(this).children('input').attr('checked',true);
         }
     });
 }
