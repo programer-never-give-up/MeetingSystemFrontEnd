@@ -110,7 +110,7 @@ function uploadActivityLogo(){
  * return : 创建会议成功 true, 创建会议失败 false
  * 功能上传基本信息
  */
-function uploadActivityInfo(isNew,act_uuid=null){
+function uploadActivityInfo(){
 
     let form= new FormData();
     let logo = $("#upload-activity-logo")[0].files[0];
@@ -137,7 +137,7 @@ function uploadActivityInfo(isNew,act_uuid=null){
         processData: false,
         success:function (data) {
 
-            toastMessage("创建会议成功，开始上传会议文件！");
+            toastMessage("创建会议成功，开始上传活动文件！");
             $('#upload-file-input').on('filepreupload', function(event,outData, previewId, i) {
 
                 outData.formdata.append('act_uuid',data["uuid"]);
@@ -152,6 +152,53 @@ function uploadActivityInfo(isNew,act_uuid=null){
     });
 }
 
+/**
+ * @author chonepieceyb
+ * @param act_uuid
+ * @param api 保存的api
+ * @usage : 编辑保存时候的函数（区别于新建会议）
+ */
+function uploadSaveChange(act_uuid,api='#'){
+    let form= new FormData();
+    let logo = $("#upload-activity-logo")[0].files[0];
+    let name= $('#name-input').val();
+    let location = $('#location-input').val();
+    let organizer =  $('#organizer-input').val();
+    let introduction =$('#introduction-input').val();
+    let type = $('input[name="activity-type"]:checked').parent('label').text();
+    let startTime=$('#start-time-input').val();
+    let endTime=$('#end-time-input').val();
+    form.append('logo',logo);
+    form.append('name',name);
+    form.append('start_time',startTime);
+    form.append('end_time',endTime);
+    form.append('location',location);
+    form.append('organizer',organizer);
+    form.append('introduction',introduction);
+    form.append('type',type);
+    form.append('act_uuid',act_uuid);
+    $.ajax({
+        url:api,
+        data:form,
+        type:"POST",
+        contentType: false,
+        processData: false,
+        success:function (data) {
+
+            toastMessage("编辑请求提交成功！开始上传活动文件！"+data['message']);
+            $('#upload-file-input').on('filepreupload', function(event,outData, previewId, i) {
+
+                outData.formdata.append('act_uuid',data["uuid"]);
+            });
+            $('#upload-file-input').fileinput("upload");
+            return true;
+        },
+        error:function () {
+            toastMessage("编辑请求提交失败！");
+            return false;
+        }
+    });
+}
 /**
  * @author chonepieceyb
  * @param status_published  活动发布状态
@@ -230,7 +277,21 @@ function monittorInput(className,data){
             $(this).removeClass(className);
         }
     });
-
+    //监听日期框框
+    $('#start-time-input').on('change',function () {
+        if($(this).val()!=data['start_time'].replace(' ','T')){
+            $(this).addClass(className);
+        }else{
+            $(this).removeClass(className);
+        }
+    })
+    $('#end-time-input').on('change',function () {
+        if($(this).val()!=data['end_time'].replace(' ','T')){
+            $(this).addClass(className);
+        }else{
+            $(this).removeClass(className);
+        }
+    })
 }
 /**
  * @author chonepieceyb
@@ -242,10 +303,12 @@ function setPageInfo(data){
     $('#name-input').val(data['name']);
     //$('#name-input').data("name",data['name']);
 
-    $('#start-time-input').val(data['start_time']);
+    startTime = data['start_time'].replace(' ','T');
+    $('#start-time-input').val(startTime);
    // $('#start-time-input').data('startTime',data['start_time']);
 
-    $('#end-time-input').val(data['end_time']);
+    endTime = data['end_time'].replace(' ','T');
+    $('#end-time-input').val(endTime);
    // $('#end-time-input').data('endTime',data['end_time']);
 
     $('#location-input').val(data['location']);
@@ -267,40 +330,62 @@ function setPageInfo(data){
 
 //浏览器加载时运行
 $(function () {
-
-    var id = getParameter()["id"];
-    if(id){
-
-    }
     //给必选的元素前添加星号
     $('.required').prepend('<span style="color:red">*</span>');
+
     initFileInput("upload-file-input","api/activity/uploadFile/");
+
     $("#upload-activity-logo").on('change',uploadActivityLogo);    //上传图片
-    setPageInput('unpublished','not_start');
-    //测试
-    var data = {
-    logo:"https://y4ngyy.xyz/assets/avatar.jpg",
-    name:"东南大学实训宣讲会",
-    start_time:"2019-6-8",
-    end_time:'2019-6-9',
-    location:"计算机楼",
-    organizer:'东南大学计算机科学与工程学院',
-        introduction:'',
-    files:[{"fileName":"1.pdf","fileSrc":"#"},{"fileName":"1.pdf","fileSrc":"#"}],
-    status_publish:"to_be_audited",
-    status_process:'processing',
-    type:'讲座'
 
-}
+    var id = getParameter()["id"];    //获取uuid
+    if(id){                          //如果是编辑按钮
+        //向服务器请求数据
+        $.ajax({
+            url:"api/activity/showActivity/",
+            data:{uuid:id},
+            type:"post",
+            dataType:'json',
+            success:function (data) {
+                toastMessage("获取会议信息成功！");
+                setPageInfo(data);
+                setPageInput(data['status_publish'],data['status_process']);
+                monittorInput('input-change',data);
+                $("#activity-save-btn").on('click',function () {
+                    uploadSaveChange(id,'#');
+                });
+            },
+            error:function () {
+                toastMessage("获取会议信息失败！");
+            }
+        })
+    }else{
+        //保存按钮(还没有上传文件）
+        $("#activity-save-btn").on('click',uploadActivityInfo);
+    }
 
-    //
-    setPageInfo(data);
-    monittorInput('input-change',data);
-    //保存按钮(还没有上传文件）
-    $("#activity-save-btn").on('click',uploadActivityInfo);
     //取消按钮
     $("#activity-cancel-btn").on('click',function () {
         window.location.href='console.html';
     })
 
 });
+
+
+
+
+
+//测试
+// var data = {
+//     logo:"https://y4ngyy.xyz/assets/avatar.jpg",
+//     name:"东南大学实训宣讲会",
+//     start_time:"2019-06-08 17:00",
+//     end_time:'2019-06-09 08:00',
+//     location:"计算机楼",
+//     organizer:'东南大学计算机科学与工程学院',
+//     introduction:'',
+//     files:[{"fileName":"1.pdf","fileSrc":"#"},{"fileName":"1.pdf","fileSrc":"#"}],
+//     status_publish:"to_be_audited",
+//     status_process:'processing',
+//     type:'讲座'
+//
+// }
