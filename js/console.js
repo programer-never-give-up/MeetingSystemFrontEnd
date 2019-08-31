@@ -1,32 +1,5 @@
-/**
- * @author chonepieceyb
- * 会议的跳转模块
- */
-//新建会议的跳转
-$(function(){
-    $("#new-activity-bottom").on('click',function (e) {
-        window.location.href="console_newMeeting.html"
-    })
-});
-//查看详情按钮的跳转
-$(function(){
-    $(".activity-card *button.btn-primary").on('click',function (e) {
-        window.location.href="show_meeting_info.html"
-    })
-});
-//编辑按钮的跳转
-$(function(){
-    $(".activity-card *button.btn-light").on('click',function (e) {
-        window.location.href="console_newMeeting.html"
-    })
-});
 
-//主页的跳蛛
-$(function () {
-    $(".activity-list-buttom").on('click',function (e) {
-        window.location.href="index.html"
-    })
-})
+
 
 /**
  * @author chonepieceyb
@@ -67,8 +40,8 @@ function setInfoList(data,buttomType){
         $("tbody.activity-card").append($itemCard);
         //根据不同的模块生成不同的链接样式
         if (buttomType == 'management-unpublished' || buttomType == 'management-published') {      //活动管理的：未发布 和已发布
-            var $aEdit = $('<a class="btn btn-light">编辑</a>');     //编辑按钮
-            $aEdit.attr("href", "console_newMeeting.html?id=" + activity["id"] + "&type=" + buttomType);
+            var $aEdit = $('<a class="btn btn-my-edit">编辑</a>');     //编辑按钮
+            $aEdit.attr("href", "console_newMeeting.html?id=" + activity["id"]);
             $buttonTd.append($aEdit);
 
             $aDel = $('<a class="btn btn-danger">删除</a>');
@@ -81,8 +54,8 @@ function setInfoList(data,buttomType){
 
         } else if (buttomType == 'management-processing' || buttomType == "management-finished") {   //活动管理的：进行中和已结束
             //上传按钮，进入界面后只能上传活动资料
-            var $a = $('<a class="btn btn-light">编辑</a>');     //上传按钮
-            $a.attr("href", "console_newMeeting.html?id=" + activity["id"] + "&type=" + buttomType);
+            var $a = $('<a class="btn btn-my-edit">编辑</a>');     //上传按钮
+            $a.attr("href", "console_newMeeting.html?id=" + activity["id"]);
             $(".buttonTd").append($a);
         } else if (buttomType == "my-not_start") {    //我的活动的 未开始
             //取消报名的按钮
@@ -237,6 +210,18 @@ $(function () {
         "fav-finished":['我的收藏','已结束']
     }
 
+    //新建会议的跳转
+    $(function(){
+        $("#new-activity-bottom").on('click',function (e) {
+            window.location.href="console_newMeeting.html"
+        })
+    });
+    //主页的跳蛛
+    $(function () {
+        $(".activity-list-buttom").on('click',function (e) {
+            window.location.href="index.html"
+        })
+    })
 
     //未开始等按钮的跳转
     $("div.function-list *div.collapse *a").on('click',function () {

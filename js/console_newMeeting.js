@@ -341,7 +341,7 @@ $(function () {
         $.ajax({
             url:"api/activity/showActivity/",
             data:{uuid:id},
-            type:"post",
+            type:"GET",
             dataType:'json',
             success:function (data) {
                 toastMessage("获取会议信息成功！");
