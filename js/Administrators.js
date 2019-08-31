@@ -70,7 +70,7 @@ function Render ()
         S4.setAttribute('href', data.act[i].detail);
         var gS1 = document.createElement("h2");
         var gS2 = document.createElement("button");
-        gS2.innerText = "查看详情";
+        gS2.innerText = "详情";
         gS2.className = "btn btn-info";
         gS2.onclick = "location='data.act[i].detail'";
         var S3 = document.createElement("h3");
@@ -94,34 +94,34 @@ function Render ()
     }
 
 
-    for (var i = 0; i < latestData.act.length; i++)
-    {
-        var gF = document.createElement("li");
-        gF.className = "recent_activity_item";
-        var F1 = document.createElement("img");
-        var F2 = document.createElement("div");
-        F2.className = "d-inline-block align-middle ml-2";
-        F1.className = "align-middle";
-        var S1 = document.createElement("a");
-        var S2 = document.createElement("div");
-        S2.className = "recent_activity_info";
-        var gS2 = document.createElement("span");
-        var gS3 = document.createElement("span");
-        S1.setAttribute('href', latestData.act[i].detail);
-        var gS1 = document.createElement("h3");
-        gS3.innerText = latestData.act[i].location;
-        gS2.innerText = latestData.act[i].time.startTime + "-" + latestData.act[i].time.endTime + " ";
-        gS1.innerText = latestData.act[i].activityName;
-        F1.src = latestData.act[i].logoSrc;
-        F2.appendChild(S1);
-        F2.appendChild(S2);
-        S1.appendChild(gS1);
-        S2.appendChild(gS2);
-        S2.appendChild(gS3);
-        gF.appendChild(F1);
-        gF.appendChild(F2);
-        var x = document.getElementById("modifyRequest");
-        x.appendChild(gF);
-    }
+    // for (var i = 0; i < latestData.act.length; i++)
+    // {
+    //     var gF = document.createElement("li");
+    //     gF.className = "recent_activity_item";
+    //     var F1 = document.createElement("img");
+    //     var F2 = document.createElement("div");
+    //     F2.className = "d-inline-block align-middle ml-2";
+    //     F1.className = "align-middle";
+    //     var S1 = document.createElement("a");
+    //     var S2 = document.createElement("div");
+    //     S2.className = "recent_activity_info";
+    //     var gS2 = document.createElement("span");
+    //     var gS3 = document.createElement("span");
+    //     S1.setAttribute('href', latestData.act[i].detail);
+    //     var gS1 = document.createElement("h3");
+    //     gS3.innerText = latestData.act[i].location;
+    //     gS2.innerText = latestData.act[i].time.startTime + "-" + latestData.act[i].time.endTime + " ";
+    //     gS1.innerText = latestData.act[i].activityName;
+    //     F1.src = latestData.act[i].logoSrc;
+    //     F2.appendChild(S1);
+    //     F2.appendChild(S2);
+    //     S1.appendChild(gS1);
+    //     S2.appendChild(gS2);
+    //     S2.appendChild(gS3);
+    //     gF.appendChild(F1);
+    //     gF.appendChild(F2);
+    //     var x = document.getElementById("modifyRequest");
+    //     x.appendChild(gF);
+    // }
 
 }
