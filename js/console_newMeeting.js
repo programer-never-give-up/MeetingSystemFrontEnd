@@ -137,7 +137,7 @@ function uploadActivityInfo(){
         processData: false,
         success:function (data) {
 
-            toastMessage("创建会议成功，开始上传会议文件！");
+            toastMessage("创建会议成功，开始上传活动文件！");
             $('#upload-file-input').on('filepreupload', function(event,outData, previewId, i) {
 
                 outData.formdata.append('act_uuid',data["uuid"]);
@@ -149,23 +149,243 @@ function uploadActivityInfo(){
             toastMessage("创建会议失败！");
             return false;
         }
-    })
-
+    });
 }
 
+/**
+ * @author chonepieceyb
+ * @param act_uuid
+ * @param api 保存的api
+ * @usage : 编辑保存时候的函数（区别于新建会议）
+ */
+function uploadSaveChange(act_uuid,api='#'){
+    let form= new FormData();
+    let logo = $("#upload-activity-logo")[0].files[0];
+    let name= $('#name-input').val();
+    let location = $('#location-input').val();
+    let organizer =  $('#organizer-input').val();
+    let introduction =$('#introduction-input').val();
+    let type = $('input[name="activity-type"]:checked').parent('label').text();
+    let startTime=$('#start-time-input').val();
+    let endTime=$('#end-time-input').val();
+    form.append('logo',logo);
+    form.append('name',name);
+    form.append('start_time',startTime);
+    form.append('end_time',endTime);
+    form.append('location',location);
+    form.append('organizer',organizer);
+    form.append('introduction',introduction);
+    form.append('type',type);
+    form.append('act_uuid',act_uuid);
+    $.ajax({
+        url:api,
+        data:form,
+        type:"POST",
+        contentType: false,
+        processData: false,
+        success:function (data) {
+
+            toastMessage("编辑请求提交成功！开始上传活动文件！"+data['message']);
+            $('#upload-file-input').on('filepreupload', function(event,outData, previewId, i) {
+
+                outData.formdata.append('act_uuid',data["uuid"]);
+            });
+            $('#upload-file-input').fileinput("upload");
+            return true;
+        },
+        error:function () {
+            toastMessage("编辑请求提交失败！");
+            return false;
+        }
+    });
+}
+/**
+ * @author chonepieceyb
+ * @param status_published  活动发布状态
+ * @param status_process    活动进行状态
+ * @usage 根据活动的状态将有些输入框disable
+ */
+function setPageInput(status_published,status_process){
+    $('.card-header *h5').text('编辑');
+    if(status_published != "unpublished"){
+        $('.card').find('input').attr('disabled','disabled')   //禁止所有input框
+        $('textarea').attr('disabled','disabled');
+    }
+    if(status_published == "published"){     //如果是已发布 需要控制权限
+        if(status_process=='not_start'){    //只能编辑未开始活动
+            //移除可编辑选项的input
+            $('#start-time-input').removeAttr('disabled');
+            $('#end-time-input').removeAttr('disabled');
+            $('#location-input').removeAttr('disabled');
+            $('#introduction-input').removeAttr('disabled');
+            $('#upload-file-input').removeAttr('disabled');
+        }else{
+            $('#upload-file-input').removeAttr('disabled');   //只能上传文件
+        }
+    }
+}
+
+/**
+ * @author choenpeiceyb
+ * @param className  内容发生变化时,添加的类名
+ * @param data, 原始数据
+ * usage:监听输入框，当输入框内容生变化时和原始内容比较，如果和原始内容不同，添加className 否则移除className
+ */
+function monittorInput(className,data){
+    //监听文本框
+    var myDict={      //字典，定义映射关系，方便查数据
+        'name-input':'name',
+        'upload-activity-logo':'logo',
+        'start-time-input':'start_time',
+        'end-time-input':'end_time',
+        'location-input' :'location',
+        'organizer-input':'organizer',
+        'introduction-input' :'introduction',
+        'radio':'type'
+    };
+    //监听文本框
+    $('input[type="text"]').on('blur',function () {
+        if($(this).val()!=data[myDict[$(this).attr('id')]]){
+            $(this).addClass(className);
+        }else{
+            $(this).removeClass(className);
+        }
+    });
+    //监听头像上传
+    $('#upload-activity-logo').on('change',function () {
+        $(this).addClass(className);
+    });
+    //监听 单选框
+    $('input[type="radio"]').on('change',function () {
+        console.log('监听单选框');
+        if ($(this).parent('label').text()!=data['type']){
+            $(this).addClass(className);
+        }else{
+            $(this).removeClass(className);
+        }
+
+    });
+    //监听简介框
+    $('#introduction-input').on('blur',function () {
+        console.log('进入个人简介模块');
+        console.log($(this).val());
+        console.log(myDict[$(this).attr('id')]);
+        console.log(data[myDict[$(this).attr('id')]]);
+        if($(this).val()!=data[myDict[$(this).attr('id')]]){
+            $(this).addClass(className);
+        }else{
+            $(this).removeClass(className);
+        }
+    });
+    //监听日期框框
+    $('#start-time-input').on('change',function () {
+        if($(this).val()!=data['start_time'].replace(' ','T')){
+            $(this).addClass(className);
+        }else{
+            $(this).removeClass(className);
+        }
+    })
+    $('#end-time-input').on('change',function () {
+        if($(this).val()!=data['end_time'].replace(' ','T')){
+            $(this).addClass(className);
+        }else{
+            $(this).removeClass(className);
+        }
+    })
+}
+/**
+ * @author chonepieceyb
+ * @param data 从服务器获取的数据
+ * @usage : 遍及页面将原来的值作为预设值
+ */
+function setPageInfo(data){
+    $('#activity-logo').attr('src',data["logo"]);
+    $('#name-input').val(data['name']);
+    //$('#name-input').data("name",data['name']);
+
+    startTime = data['start_time'].replace(' ','T');
+    $('#start-time-input').val(startTime);
+   // $('#start-time-input').data('startTime',data['start_time']);
+
+    endTime = data['end_time'].replace(' ','T');
+    $('#end-time-input').val(endTime);
+   // $('#end-time-input').data('endTime',data['end_time']);
+
+    $('#location-input').val(data['location']);
+   // $('#location-input').data('location',data['location']);
+
+    $('#organizer-input').val(data['organizer']);
+   // $('#organizer-input').data('organizer',data['organizer']);
+
+    $('#introduction-input').val(data['introduction']);
+   // $('#introduction-input').data('introduction',data['introduction']);
+
+    $(".radio-inline").each(function (index,element) {
+       // $(this).data('type',data['tyoe']);
+        if($(this).text()==data['type']){
+            $(this).attr('checked','true');
+        }
+    });
+}
 
 //浏览器加载时运行
 $(function () {
+    //给必选的元素前添加星号
+    $('.required').prepend('<span style="color:red">*</span>');
 
     initFileInput("upload-file-input","api/activity/uploadFile/");
 
     $("#upload-activity-logo").on('change',uploadActivityLogo);    //上传图片
 
-    //保存按钮(还没有上传文件）
-    $("#activity-save-btn").on('click',uploadActivityInfo);
+    var id = getParameter()["id"];    //获取uuid
+    if(id){                          //如果是编辑按钮
+        //向服务器请求数据
+        $.ajax({
+            url:"api/activity/showActivity/",
+            data:{uuid:id},
+            type:"post",
+            dataType:'json',
+            success:function (data) {
+                toastMessage("获取会议信息成功！");
+                setPageInfo(data);
+                setPageInput(data['status_publish'],data['status_process']);
+                monittorInput('input-change',data);
+                $("#activity-save-btn").on('click',function () {
+                    uploadSaveChange(id,'#');
+                });
+            },
+            error:function () {
+                toastMessage("获取会议信息失败！");
+            }
+        })
+    }else{
+        //保存按钮(还没有上传文件）
+        $("#activity-save-btn").on('click',uploadActivityInfo);
+    }
+
     //取消按钮
     $("#activity-cancel-btn").on('click',function () {
         window.location.href='console.html';
     })
 
 });
+
+
+
+
+
+//测试
+// var data = {
+//     logo:"https://y4ngyy.xyz/assets/avatar.jpg",
+//     name:"东南大学实训宣讲会",
+//     start_time:"2019-06-08 17:00",
+//     end_time:'2019-06-09 08:00',
+//     location:"计算机楼",
+//     organizer:'东南大学计算机科学与工程学院',
+//     introduction:'',
+//     files:[{"fileName":"1.pdf","fileSrc":"#"},{"fileName":"1.pdf","fileSrc":"#"}],
+//     status_publish:"to_be_audited",
+//     status_process:'processing',
+//     type:'讲座'
+//
+// }
