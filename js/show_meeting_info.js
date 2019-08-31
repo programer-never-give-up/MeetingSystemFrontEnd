@@ -2,11 +2,10 @@
  * @author:chonepieceyb
  * @type {string}
  */
-    var activityInfoApi="#" ;  //获取活动信息的api
-    /*
-    字典格式 {logoSrc:"#",activityName:"#",time:{startTime:"#",endTime:"#"},location:"#",organizer:"#",introduction:"#",files:[{fileName:"#",fileSrc:"#"},..],type:"#","status":int}
-    status: 0未开始 1进行中 2已结束
-     */
+/*
+字典格式 {logoSrc:"#",activityName:"#",time:{startTime:"#",endTime:"#"},location:"#",organizer:"#",introduction:"#",files:[{fileName:"#",fileSrc:"#"},..],type:"#","status":int}
+status: 0未开始 1进行中 2已结束
+ */
 
     //可识别的扩展名列表
     extIcons={
@@ -26,6 +25,39 @@
         "unknown":"icon_txt.gif"
     }
 
+/**
+ *
+ * @param isHold  是否是该用户举办的
+ * @param status_publish   发布状态
+ * @param status_process     进行状态
+ */
+function setPageButton(isHold,status_publish,status_process){
+    if(isHold){
+        if(status_publish=='unpublished'){
+            //生成发布按钮
+            $btnPublish = $('<button type="button" class="btn btn-primary" id="btn-publish">发布</button>');
+            $('#user-button-group').append($btnPublish);
+            $('#btn-publish').on('click',function () {
+                ;
+            })
+        }
+    }else{
+        if(status_publish=='published' && status_process=='not_start' ){
+            //添加参加按钮
+            $btnSignup =  $('<button type="button" class="btn btn-primary" id="btn-signup">报名</button>');
+            $('#user-button-group').append($btnSignup);
+            $('#btn-signup').on('click',function () {
+                ;
+            })
+        }
+        //添加收藏按钮
+        $btnCollection =  $('<button type="button" class="btn btn-warning" id="btn-collection">收藏</button>');
+        $('#user-button-group').append($btnCollection );
+        $('#btnCollection ').on('click',function () {
+            ;
+        })
+    }
+}
 /**
  * usuage:渲染页面信息的函数
  * @param data:json文件，格式为： 字典格式 {logo:"#",name:"#",start_time:"#",end_time:"#",location:"#",organizer:"#",introduction:"#",files:[{fileName:"#",fileSrc:"#"},..],type:"#","status":int}
@@ -102,15 +134,19 @@
 
 //浏览器刷新时执行
 $(function () {
-    //获取会议id
-    var act_uuid=getParameter()['id'];
     //ajax请求
+    var act_uuid = getParameter()['id']
     $.ajax({
         url:"api/activity/showActivity/",
-        data:{uuid:act_uuid},
-        type:"post",
+        data:{uuid: act_uuid},
+            type:"GET",
         dataType:'json',
         success:function (data) {
+            //设置按钮
+            console.log(data['isHold']);
+            console.log(data['status_publish']);
+            console.log(data['status_process']);
+            setPageButton(data['isHold'],data['status_publish'],data['status_process']);
             setActivityInfo(data);
             toastMessage("获取会议信息成功！");
         },

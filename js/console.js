@@ -222,7 +222,6 @@ function generatePageItems(btnID,pageNum,pageShowNum=0){
 //浏览器加载时运行
 $(function () {
     //分页按钮点击
-    var perPage=5;
     //面包屑导航栏要用的字典
     var breadDict={
         "management-unpublished":['活动管理','未发布'],
@@ -252,7 +251,7 @@ $(function () {
         $('.breadcrumb').append(' <li class="breadcrumb-item"><a herf="#">'+items[0]+'</a></li>');
         $('.breadcrumb').append(' <li class="breadcrumb-item active"><a herf="#">'+items[1]+'</a></li>');
         //向前端请求数据 并更新首页列表,产生分页栏
-        getActivityList("api/activity/pageDisplay/",$(this).attr('id'),1,perPage,true);
+        getActivityList("api/activity/pageDisplay/",$(this).attr('id'),1,5,true);
     });
 
 
