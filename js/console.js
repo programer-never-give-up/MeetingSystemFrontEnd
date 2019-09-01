@@ -159,7 +159,6 @@ function generatePageItems(btnID,pageNum,pageShowNum=0){
         var pageNum = $('#page-bar').data('pageNum');
         var currentPage=$('#page-bar').data('currentPage');
         $('#page-'+currentPage).parent().removeClass('active');
-
         if($(this).attr('id')=="page-previous"){                                 //获取当前的active
             currentPage-=1;                                                         //当前页-1
             $('#page-'+currentPage).parent().addClass('active');                     //激活效果
@@ -174,8 +173,11 @@ function generatePageItems(btnID,pageNum,pageShowNum=0){
             currentPage =  $(this).attr('id').split('-')[1];
             $('#page-bar').data('currentPage',currentPage);
         }
-
-        if(currentPage==1){
+        if(pageNum==1){
+            $('#page-previous').parent().addClass('disabled');
+            $("#page-next").parent().addClass('disabled');
+        }
+        else if(currentPage==1){
             $('#page-previous').parent().addClass('disabled');
             $("#page-next").parent().removeClass('disabled');
         }else if(currentPage==pageNum){
