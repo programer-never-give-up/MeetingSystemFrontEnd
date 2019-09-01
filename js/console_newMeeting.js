@@ -177,7 +177,9 @@ function uploadSaveChange(act_uuid,api='#',deleteFiles=null){
     form.append('introduction',introduction);
     form.append('type',type);
     form.append('act_uuid',act_uuid);
+    deleteFiles = JSON.stringify(deleteFiles);
     form.append('delete_files',deleteFiles);
+    console.log(deleteFiles);
     $.ajax({
         url:api,
         data:form,
@@ -403,8 +405,8 @@ $(function () {
                 $('.delete-file-link').on('click',function () {
                     deleteFiles.push($(this).parent().prev().children('a').text());
                     $(this).parent().parent('tr').remove();
+                    console.log(deleteFiles);
                 })
-
                 $("#activity-save-btn").on('click',function () {
                     if(checkRequired('required-input')) {
                         uploadSaveChange(id, 'api/activity/editActivity/', deleteFiles);
