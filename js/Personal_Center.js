@@ -171,10 +171,10 @@ $(function () {
                 toastMessage("上传头像成功");
 
                 var name = $('#upload-logo')[0].files[0].name;
-                var src = $('#user-logo-info-div').attr('src');
-                src = src.split('/');
-                src[2]=name;
-                src= src.join('/');
+                var srcImg = $('#user-logo-info-div').attr('src').toString();
+                srcImg = srcImg.split('/');
+                srcImg[2]=name;
+                srcImg= srcImg.join('/');
                 $('#user-logo-info *img').attr('src',src);
                 $('#user-logo-info-div').show();
                 $('#user-logo-input-div').hide();
