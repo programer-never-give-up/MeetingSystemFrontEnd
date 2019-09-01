@@ -106,3 +106,18 @@ function getParameter() {
     }
     return parameters;
 }
+
+/**
+ * @author :chonepieceyb
+ * @usage:必填信息检查函数，检查所有拥有className类的input值(用在文本框）是否为空
+ * @param className
+ */
+function checkRequired(className){
+    flag=true;
+    $('.'+className).each(function (index,element) {
+        if($(this).val()=="" ||$(this).val()==undefined ||$(this).val()==null ){
+            flag=false;
+        }
+    });
+    return flag;
+}
