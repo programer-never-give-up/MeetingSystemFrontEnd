@@ -150,6 +150,9 @@ function generatePageItems(btnID,pageNum,pageShowNum=0){
     var $liN = $('<li class="page-item">\n' +
         '                            <a class="page-link" href="#" id="page-next">next</a>\n' +
         '                        </li>');
+    if(pageNum==1){
+        $liN.addClass('disabled');
+    }
     $('#page-bar').append($liN);
 
     //添加激活效果
