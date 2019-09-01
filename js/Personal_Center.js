@@ -105,7 +105,7 @@ $(function () {
             error:function () {
                 toastMessage("加载个人信息出错");
             }
-        })
+        });
     $("#base-edit-link").on('click',function () {
         $("#base-info-col").hide();
         $("#base-input-col").show();
@@ -114,7 +114,7 @@ $(function () {
         $('#user-mail-input').html($('#user-mail-info').text());
         $('#user-telephone-input').val($('#user-telphone-info').text());
         $('#user-type-input').html($('#user-type-info').text());
-    })
+    });
 
     $("#ext-edit-link").on('click',function () {
         $("#exp-info-col").hide();
@@ -122,34 +122,33 @@ $(function () {
         $('#user-address-input').val($('#user-address-info').text());
         $('#user-company-input').val($('#user-company-info').text());
         $('#user-job-input').val($('#user-job-info').text());
-    })
+    });
 
     $("#intro-edit-link").on('click',function (){
         $("#intro-info-col").hide();
         $("#intro-input-col").show();
         $('#user-introduction-input').val($('#user-introduction-info').text());
-    })
+    });
 
 //取消编辑按钮
     $("#logo-cancel-button").on('click',function (){
         $("#user-logo-info-div").show();
         $("#user-logo-input-div").hide();
         $("#upload-logo").val("");
-    })
+    });
     $("#base-cancel-link").on('click',function () {
         $("#base-info-col").show();
         $("#base-input-col").hide();
-    })
-
+    });
     $("#exp-cancel-link").on('click',function () {
         $("#exp-info-col").show();
         $("#exp-input-col").hide();
-    })
+    });
 
     $("#intro-cancel-save").on('click',function () {
         $("#intro-info-col").show();
         $("#intro-input-col").hide();
-    })
+    });
 //图片上传
     $('#upload-logo').on('change',uploadLogo);
 
@@ -178,7 +177,7 @@ $(function () {
                 toastMessage("上传头像失败！");
             }
         })
-    })
+    });
 
     //保存基本信息
     $('#base-save-link').on('click',function () {
@@ -207,7 +206,7 @@ $(function () {
                 toastMessage("保存基本信息失败！");
             }
         })
-    })
+    });
 
     //保存扩展信息
     $('#exp-save-link').on('click',function () {
@@ -239,7 +238,7 @@ $(function () {
                 toastMessage("保存扩展信息失败！");
             }
         })
-    })
+    });
 
     //保存个人简介
     $('#intro-save-link').on('click',function () {
@@ -266,7 +265,7 @@ $(function () {
             }
         })
     })
-})
+});
 //控制代码
 //编辑按钮
 // var data={
