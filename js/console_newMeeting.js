@@ -186,7 +186,8 @@ function uploadSaveChange(act_uuid,api='#',deleteFiles=null){
         processData: false,
         success:function (data) {
 
-            toastMessage("编辑请求提交成功！开始上传活动文件！"+data['message']);
+            toastMessage(data['message']);
+            toastMessage('开始上传活动文件！');
             $('#upload-file-input').on('filepreupload', function(event,outData, previewId, i) {
 
                 outData.formdata.append('act_uuid',data["uuid"]);
@@ -400,13 +401,13 @@ $(function () {
                 var deleteFiles=[];
                 //获取已删除文件列表
                 $('.delete-file-link').on('click',function () {
-                    deleteFiles.push($(this).attr('id').split('-delete-')[0])
+                    deleteFiles.push($(this).parent().prev().children('a').text());
                     $(this).parent().parent('tr').remove();
                 })
 
                 $("#activity-save-btn").on('click',function () {
                     if(checkRequired('required-input')) {
-                        uploadSaveChange(id, 'api/activity/editActivity', deleteFiles);
+                        uploadSaveChange(id, 'api/activity/editActivity/', deleteFiles);
                     }else{
                         toastMessage('请填写所有必填内容！');
                     }
