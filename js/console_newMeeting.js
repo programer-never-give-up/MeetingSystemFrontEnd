@@ -158,7 +158,7 @@ function uploadActivityInfo(){
  * @param api 保存的api
  * @usage : 编辑保存时候的函数（区别于新建会议）
  */
-function uploadSaveChange(act_uuid,api='#'){
+function uploadSaveChange(act_uuid,api='#',deleteFiles=null){
     let form= new FormData();
     let logo = $("#upload-activity-logo")[0].files[0];
     let name= $('#name-input').val();
@@ -177,6 +177,7 @@ function uploadSaveChange(act_uuid,api='#'){
     form.append('introduction',introduction);
     form.append('type',type);
     form.append('act_uuid',act_uuid);
+    form.append('delete_files',deleteFiles);
     $.ajax({
         url:api,
         data:form,
@@ -296,6 +297,24 @@ function monittorInput(className,data){
  * @usage : 遍及页面将原来的值作为预设值
  */
 function setPageInfo(data){
+    //可识别的扩展名列表
+    extIcons={
+        "docx":"icon_doc.gif",
+        "doc":"icon_doc.gif",
+        "xls":"icon_xls.gif",
+        "xlsx":"icon_xls.gif",
+        "txt" :"icon_txt.gif",
+        "png":"icon_img.gif",
+        "jpg":"icon_img.gif",
+        "jpeg":"icon_img.gif",
+        "gif":"icon_img.gif",
+        "zip":"icon_rar.gif",
+        "rar":"icon_rar.gif",
+        "7z":"icon_rar.gif",
+        "pdf":"icon_pdf.gif",
+        "unknown":"icon_txt.gif"
+    };
+
     $('#activity-logo').attr('src',data["logo"]);
     $('#name-input').val(data['name']);
     //$('#name-input').data("name",data['name']);
@@ -324,6 +343,35 @@ function setPageInfo(data){
                 $(this).children('input').attr('checked',true);
         }
     });
+    //添加删除文件列表
+    var $filesDiv=$(' <div class="form-group row" id="uploaded-files-div">\n' +
+        '                                <label class="col-2 control-label inputLabel" >已上传资料:</label>\n' +
+        '                                <div class="col-10" >\n' +
+        '                                </div>\n' +
+        '                            </div>');
+    //循环添加文件列表
+    //生成文件下载列表
+    for(index in data["files"]){
+        var $fileDiv =$('<div></div>')
+        var item=data["files"][index];
+        var name = item["fileName"];
+        var ext = name.split(".")[1];
+        iconSrc=extIcons["unknown"];
+        if(ext in extIcons) {
+            iconSrc=extIcons[ext];
+        }
+        iconSrc = "images/icons/" + iconSrc;
+        html='<img src="'+iconSrc+'" >'+'<a href="'+item["fileSrc"]+item['fileName']+'">'+item["fileName"]+'</a>';
+        $fileDiv.append(html);
+        //添加删除按钮
+        var $deleteLink = $('<a style="margin-left:10px; color:white; hight:15px;width:50px;padding:1px" class="btn btn-danger delete-file-link">删除</a>');
+        $deleteLink.attr('id',name + '-delete-'+index);
+        $fileDiv.append($deleteLink);
+        $filesDiv.children('div').append($fileDiv);
+        //$filesDiv.children('div').append("</br>")
+
+    }
+    $('#uplodeFileGroup').before($filesDiv);
 }
 
 //浏览器加载时运行
@@ -348,8 +396,16 @@ $(function () {
                 setPageInfo(data);
                 setPageInput(data['status_publish'],data['status_process']);
                 monittorInput('input-change',data);
+                var deleteFiles=[];
+                //获取已删除文件列表
+                $('.delete-file-link').on('click',function () {
+                    deleteFiles.push($(this).attr('id').split('-delete-')[0])
+                    $(this).parent('div').remove();
+                    console.log(deleteFiles);
+                })
+
                 $("#activity-save-btn").on('click',function () {
-                    uploadSaveChange(id,'#');
+                    uploadSaveChange(id,'#',deleteFiles);
                 });
             },
             error:function () {

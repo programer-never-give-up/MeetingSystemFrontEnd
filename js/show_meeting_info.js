@@ -31,30 +31,58 @@ status: 0未开始 1进行中 2已结束
  * @param status_publish   发布状态
  * @param status_process     进行状态
  */
-function setPageButton(isHold,status_publish,status_process){
+function setPageButton(isHold,status_publish,status_process,act_uuid){
     if(isHold){
         if(status_publish=='unpublished'){
             //生成发布按钮
-            $btnPublish = $('<button type="button" class="btn btn-primary" id="btn-publish">发布</button>');
+            $btnPublish = $('<button type="button" class="btn btn-primary" id="btn-publish" >发布</button>');
             $('#user-button-group').append($btnPublish);
             $('#btn-publish').on('click',function () {
-                ;
+;
             })
         }
     }else{
-        if(status_publish=='published' && status_process=='not_start' ){
-            //添加参加按钮
-            $btnSignup =  $('<button type="button" class="btn btn-primary" id="btn-signup">报名</button>');
-            $('#user-button-group').append($btnSignup);
-            $('#btn-signup').on('click',function () {
-                ;
-            })
+        if(status_publish=='published'  ){
+            //添加报名按钮
+            if(status_process=='not_start') {
+                $btnSignup = $('<button type="button" class="btn btn-primary" id="btn-signup">报名</button>');
+                $('#user-button-group').append($btnSignup);
+                console.log(act_uuid);
+                $('#btn-signup').on('click', function () {
+                    $.ajax({
+                        url: "api/yw/apply/",
+                        type: "POST",
+                        data: {uuid_act: act_uuid},
+                        dataType: 'json',
+                        success: function (data) {
+                            toastMessage('报名请求提交成功！' + data['message']);
+                        },
+                        error: function () {
+                            toastMessage("报名失败");
+                        }
+                    });
+                })
+            }else{
+                $btnSignup = $('<button type="button" class="btn btn-primary disabled" id="btn-signup" disabled="disabled">报名</button>');
+                $('#user-button-group').append($btnSignup);
+            }
         }
         //添加收藏按钮
         $btnCollection =  $('<button type="button" class="btn btn-warning" id="btn-collection">收藏</button>');
         $('#user-button-group').append($btnCollection );
-        $('#btnCollection ').on('click',function () {
-            ;
+        $('#btn-collection').on('click',function () {
+            $.ajax({
+                url: "api/yw/collect/",
+                type: "POST",
+                data: {uuid_act: act_uuid},
+                dataType: 'json',
+                success: function (data) {
+                    toastMessage('收藏成功！' + data['message']);
+                },
+                error: function () {
+                    toastMessage("收藏失败");
+                }
+            });
         })
     }
 }
@@ -115,8 +143,6 @@ function setPageButton(isHold,status_publish,status_process){
         $("#activity-label-row").append( typeLabel);
         //生成文件下载列表
         for(index in data["files"]){
-            console.log(index);
-            console.log(item);
             var item=data["files"][index];
             var name = item["fileName"];
             var ext = name.split(".")[1];
@@ -143,10 +169,7 @@ $(function () {
         dataType:'json',
         success:function (data) {
             //设置按钮
-            console.log(data['isHold']);
-            console.log(data['status_publish']);
-            console.log(data['status_process']);
-            setPageButton(data['isHold'],data['status_publish'],data['status_process']);
+            setPageButton(data['isHold'],data['status_publish'],data['status_process'],act_uuid);
             setActivityInfo(data);
             toastMessage("获取会议信息成功！");
         },
