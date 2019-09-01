@@ -67,7 +67,7 @@ var data=
 //             {
 //                 "uuid":123,
 //                 "logoSrc":"https://y4ngyy.xyz/assets/avatar.jpg",
-//                 "activityName":"东南大学实训宣讲会1",
+//                 "activityName":"东南大学实训宣讲1",
 //                 "time":{"startTime":"2019-6-8","endTime":"2019-6-9"},
 //                 "location":"计算机楼"
 //             },
@@ -125,10 +125,10 @@ function Render ()
 
         url: "api/yw/showRecent/",
         dataType: "json",
-        type: "post",
+        type: "GET",
         success: function (data)
         {
-            for (var i = 0; i < latestData.act.length; i++)
+            for (var i = 0; i <data["list_activity"].length; i++)
             {
                 var gF = document.createElement("li");
                 gF.className = "recent_activity_item";
@@ -141,12 +141,14 @@ function Render ()
                 S2.className = "recent_activity_info";
                 var gS2 = document.createElement("span");
                 var gS3 = document.createElement("span");
-                S1.setAttribute('href', latestData.act[i].detail);
+				var baseUrl = "show_meeting_info.html";
+                var Url = baseUrl + "?id=" +data["list_activity"][i]["uuid_act"];
+                S1.setAttribute('href', Url);
                 var gS1 = document.createElement("h3");
-                gS3.innerText = latestData.act[i].location;
-                gS2.innerText = latestData.act[i].time.startTime + "-" + latestData.act[i].time.endTime + " ";
-                gS1.innerText = latestData.act[i].activityName;
-                F1.src = latestData.act[i].logoSrc;
+                gS3.innerText = data["list_activity"][i]["location"];
+                gS2.innerText =data["list_activity"][i]["start_time"]+ "-" + data["list_activity"][i]["end_time"]+ " ";
+                gS1.innerText =  data["list_activity"][i]["name_act"];
+                F1.src =  data["list_activity"][i]["logo"];
                 F2.appendChild(S1);
                 F2.appendChild(S2);
                 S1.appendChild(gS1);
