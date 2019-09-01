@@ -4,7 +4,7 @@ function Render()
 
         url: "api/personal_center/history_organize/",
         dataType: "json",
-        type: "post",
+        type: "get",
         success: function (data)
         {
             for (var i = 0; i <data["list_activity"].length; i++)
