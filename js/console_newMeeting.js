@@ -406,7 +406,7 @@ $(function () {
 
                 $("#activity-save-btn").on('click',function () {
                     if(checkRequired('required-input')) {
-                        uploadSaveChange(id, '#', deleteFiles);
+                        uploadSaveChange(id, 'api/activity/editActivity', deleteFiles);
                     }else{
                         toastMessage('请填写所有必填内容！');
                     }

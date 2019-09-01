@@ -31,8 +31,15 @@ status: 0未开始 1进行中 2已结束
  * @param status_publish   发布状态
  * @param status_process     进行状态
  */
-function setPageButton(isHold,status_publish,status_process,act_uuid){
-    if(isHold){
+function setPageButton(roleType,status_publish,status_process,act_uuid){
+    if(roleTye==0){      //游客
+        $btnSignup = $('<button type="button" class="btn btn-primary" id="btn-signup">报名</button>');
+        $('#user-button-group').append($btnSignup);
+        $btnSignup.on('click',function () {
+            window.location.href='login.html';
+        })
+    }
+    else if(roleTye==2){     //主办方
         if(status_publish=='unpublished'){
             //生成发布按钮
             $btnPublish = $('<button type="button" class="btn btn-primary" id="btn-publish" >发布</button>');
@@ -41,13 +48,12 @@ function setPageButton(isHold,status_publish,status_process,act_uuid){
 ;
             })
         }
-    }else{
+    }else if(roleType==1){            //非主办方
         if(status_publish=='published'  ){
             //添加报名按钮
             if(status_process=='not_start') {
                 $btnSignup = $('<button type="button" class="btn btn-primary" id="btn-signup">报名</button>');
                 $('#user-button-group').append($btnSignup);
-                console.log(act_uuid);
                 $('#btn-signup').on('click', function () {
                     $.ajax({
                         url: "api/yw/apply/",
@@ -169,7 +175,7 @@ $(function () {
         dataType:'json',
         success:function (data) {
             //设置按钮
-            setPageButton(data['isHold'],data['status_publish'],data['status_process'],act_uuid);
+            setPageButton(data['roleType'],data['status_publish'],data['status_process'],act_uuid);
             setActivityInfo(data);
             toastMessage("获取会议信息成功！");
         },
