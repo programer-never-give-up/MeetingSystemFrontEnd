@@ -128,7 +128,6 @@ function Render ()
         type: "GET",
         success: function (data)
         {
-			console.log(data);
             for (var i = 0; i <data["list_activity"].length; i++)
             {
                 var gF = document.createElement("li");
@@ -142,12 +141,14 @@ function Render ()
                 S2.className = "recent_activity_info";
                 var gS2 = document.createElement("span");
                 var gS3 = document.createElement("span");
-                //S1.setAttribute('href', latestData.act[i].detail);
+				var baseUrl = "show_meeting_info.html";
+                var Url = baseUrl + "?id=" +data["list_activity"][i]["uuid_act"];
+                S1.setAttribute('href', Url);
                 var gS1 = document.createElement("h3");
-                gS3.innerText = latestData.act[i].location;
+                gS3.innerText = data["list_activity"][i]["location"];
                 gS2.innerText =data["list_activity"][i]["start_time"]+ "-" + data["list_activity"][i]["end_time"]+ " ";
                 gS1.innerText =  data["list_activity"][i]["name_act"];
-                F1.src = latestData.act[i].logoSrc;
+                F1.src =  data["list_activity"][i]["logo"];
                 F2.appendChild(S1);
                 F2.appendChild(S2);
                 S1.appendChild(gS1);
