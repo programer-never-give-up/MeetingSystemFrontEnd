@@ -32,14 +32,15 @@ status: 0未开始 1进行中 2已结束
  * @param status_process     进行状态
  */
 function setPageButton(roleType,status_publish,status_process,act_uuid){
-    if(roleTye==0){      //游客
+    if(roleType==0){      //游客
+        console.log(roleType);
         $btnSignup = $('<button type="button" class="btn btn-primary" id="btn-signup">报名</button>');
         $('#user-button-group').append($btnSignup);
         $btnSignup.on('click',function () {
             window.location.href='login.html';
         })
     }
-    else if(roleTye==2){     //主办方
+    else if(roleType==2){     //主办方
         if(status_publish=='unpublished'){
             //生成发布按钮
             $btnPublish = $('<button type="button" class="btn btn-primary" id="btn-publish" >发布</button>');
@@ -83,7 +84,7 @@ function setPageButton(roleType,status_publish,status_process,act_uuid){
                 data: {uuid_act: act_uuid},
                 dataType: 'json',
                 success: function (data) {
-                    toastMessage('收藏成功！' + data['message']);
+                    toastMessage(data['message']);
                 },
                 error: function () {
                     toastMessage("收藏失败");
@@ -175,6 +176,7 @@ $(function () {
         dataType:'json',
         success:function (data) {
             //设置按钮
+            console.log(data);
             setPageButton(data['roleType'],data['status_publish'],data['status_process'],act_uuid);
             setActivityInfo(data);
             toastMessage("获取会议信息成功！");
