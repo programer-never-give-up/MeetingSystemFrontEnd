@@ -83,7 +83,8 @@ var data=
 
 function Render ()
 {
-    for (var i = 0; i < data.act.length; i++) {
+    for (var i = 0; i < data.act.length; i++)
+    {
         var gF = document.createElement("li");
         gF.className = "item-card";
         var F1 = document.createElement("h1");

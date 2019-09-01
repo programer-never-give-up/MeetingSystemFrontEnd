@@ -68,7 +68,7 @@
                                 <a href="undefined">
                                     <button class="btn btn-info">详情</button>
                                 </a>
-                                <button class="btn btn-primary">同意</button>
+                                <button class="btn btn-primary ">同意</button>
                                 <button class="btn btn-danger">拒绝</button>
                             </div>
                         </li>
@@ -97,7 +97,31 @@
                                 <a href="undefined">
                                     <button class="btn btn-info">详情</button>
                                 </a>
-                                <button class="btn btn-primary">同意</button>
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#myAgree">同意</button>
+                                <div class="modal fade" id="myAgree" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                    &times;
+                                                </button>
+<!--                                                <h4 class="modal-title" id="myModalLabel">-->
+<!--                                                   确定要同意吗？-->
+<!--                                                </h4>-->
+                                            </div>
+                                            <div class="modal-body">
+                                                确定要同意吗
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">取消
+                                                </button>
+                                                <button type="button" class="btn btn-primary">
+                                                    确定
+                                                </button>
+                                            </div>
+                                        </div><!-- /.modal-content -->
+                                    </div><!-- /.modal -->
+                                </div>
                                 <button class="btn btn-danger">拒绝</button>
                             </div>
                         </li>
