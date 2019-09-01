@@ -83,7 +83,7 @@ function setPageButton(roleType,status_publish,status_process,act_uuid){
                 data: {uuid_act: act_uuid},
                 dataType: 'json',
                 success: function (data) {
-                    toastMessage('收藏成功！' + data['message']);
+                    toastMessage(data['message']);
                 },
                 error: function () {
                     toastMessage("收藏失败");
