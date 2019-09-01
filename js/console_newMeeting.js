@@ -191,8 +191,7 @@ function uploadSaveChange(act_uuid,api='#',deleteFiles=null){
             toastMessage(data['message']);
             toastMessage('开始上传活动文件！');
             $('#upload-file-input').on('filepreupload', function(event,outData, previewId, i) {
-
-                outData.formdata.append('act_uuid',data["uuid"]);
+                outData.formdata.append('act_uuid',act_uuid);
             });
             $('#upload-file-input').fileinput("upload");
             return true;
