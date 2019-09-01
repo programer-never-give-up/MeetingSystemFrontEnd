@@ -27,7 +27,7 @@ function Render()
 
         url: "api/personal_center/history_attend/",
         dataType: "json",
-        type: "post",
+        type: "get",
         success: function (data)
         {
             
