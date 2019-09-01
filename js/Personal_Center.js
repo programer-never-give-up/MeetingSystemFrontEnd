@@ -169,7 +169,13 @@ $(function () {
             processData: false,
             success:function (data) {
                 toastMessage("上传头像成功");
-                //向服务器请求新的头像的链接
+
+                var name = $('#upload-logo')[0].files[0].name;
+                var src = $('#user-logo-info-div').attr('src');
+                src = src.split('/');
+                src[2]=name;
+                src= src.join('/');
+                $('#user-logo-info *img').attr('src',src);
                 $('#user-logo-info-div').show();
                 $('#user-logo-input-div').hide();
             },
