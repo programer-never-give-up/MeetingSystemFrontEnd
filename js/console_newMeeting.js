@@ -118,7 +118,7 @@ function uploadActivityInfo(){
     let location = $('#location-input').val();
     let organizer =  $('#organizer-input').val();
     let introduction =$('#introduction-input').val();
-    let type = $('input[name="activity-type"]:checked').parent('label').text();
+    let type = $('input[name="activity-type"]:checked').val();
     let startTime=$('#start-time-input').val();
     let endTime=$('#end-time-input').val();
     form.append('logo',logo);
@@ -165,7 +165,7 @@ function uploadSaveChange(act_uuid,api='#',deleteFiles=null){
     let location = $('#location-input').val();
     let organizer =  $('#organizer-input').val();
     let introduction =$('#introduction-input').val();
-    let type = $('input[name="activity-type"]:checked').parent('label').text();
+    let type = $('input[name="activity-type"]:checked').val();
     let startTime=$('#start-time-input').val();
     let endTime=$('#end-time-input').val();
     form.append('logo',logo);
@@ -259,7 +259,7 @@ function monittorInput(className,data){
     //监听 单选框
     $('input[type="radio"]').on('change',function () {
         $('.radio-inline').removeClass(className);
-        if ($(this).parent('label').text()!=data['type']) {
+        if ($(this).val()!=data['type']) {
             $(this).parent('label').addClass(className);
         }
     });
@@ -336,11 +336,10 @@ function setPageInfo(data){
     $('#introduction-input').val(data['introduction']);
    // $('#introduction-input').data('introduction',data['introduction']);
 
-    $(".radio-inline").each(function (index,element) {
+    $("input[name='activity-type']").each(function (index,element) {
         //($(this).data('type',data['type']));
-        console.log(data['type']);
-        if($(this).text()==data['type']){
-                $(this).children('input').attr('checked',true);
+        if($(this).val()==data['type']){
+                $(this).attr('checked',true);
         }
     });
     //添加删除文件列表
@@ -351,8 +350,10 @@ function setPageInfo(data){
         '                            </div>');
     //循环添加文件列表
     //生成文件下载列表
+    var $fileTable = $('<table class="table table-hover"><tbody></tbody></table>');
+    $filesDiv.children('div').append($fileTable);
     for(index in data["files"]){
-        var $fileDiv =$('<div></div>')
+        var $fileRow=$('<tr></tr>');
         var item=data["files"][index];
         var name = item["fileName"];
         var ext = name.split(".")[1];
@@ -362,12 +363,12 @@ function setPageInfo(data){
         }
         iconSrc = "images/icons/" + iconSrc;
         html='<img src="'+iconSrc+'" >'+'<a href="'+item["fileSrc"]+item['fileName']+'">'+item["fileName"]+'</a>';
-        $fileDiv.append(html);
+        $fileRow.append('<td>'+html+'</td>');
         //添加删除按钮
         var $deleteLink = $('<a style="margin-left:10px; color:white; hight:15px;width:50px;padding:1px" class="btn btn-danger delete-file-link">删除</a>');
         $deleteLink.attr('id',name + '-delete-'+index);
-        $fileDiv.append($deleteLink);
-        $filesDiv.children('div').append($fileDiv);
+        $fileRow.append($('<td></td>').append($deleteLink));
+        $filesDiv.find('tbody').append($fileRow);
         //$filesDiv.children('div').append("</br>")
 
     }
@@ -400,12 +401,15 @@ $(function () {
                 //获取已删除文件列表
                 $('.delete-file-link').on('click',function () {
                     deleteFiles.push($(this).attr('id').split('-delete-')[0])
-                    $(this).parent('div').remove();
-                    console.log(deleteFiles);
+                    $(this).parent().parent('tr').remove();
                 })
 
                 $("#activity-save-btn").on('click',function () {
-                    uploadSaveChange(id,'#',deleteFiles);
+                    if(checkRequired('required-input')) {
+                        uploadSaveChange(id, '#', deleteFiles);
+                    }else{
+                        toastMessage('请填写所有必填内容！');
+                    }
                 });
             },
             error:function () {
@@ -414,7 +418,13 @@ $(function () {
         })
     }else{
         //保存按钮(还没有上传文件）
-        $("#activity-save-btn").on('click',uploadActivityInfo);
+        $("#activity-save-btn").on('click',function () {
+            if(checkRequired('required-input')){
+                uploadActivityInfo();
+            }else{
+                toastMessage('请填写所有必填内容！');
+            }
+        });
     }
 
     //取消按钮
