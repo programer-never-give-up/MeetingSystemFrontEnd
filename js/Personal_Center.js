@@ -172,13 +172,10 @@ $(function () {
 
                 var name = $('#upload-logo')[0].files[0].name;
                 var srcImg = $('#user-logo-info-div *img').attr('src');
-                console.log(srcImg);
                 srcImg = srcImg.split('/');
                 srcImg[2]=name;
-                console.log(name);
                 srcImg= srcImg.join('/');
-                console.log(srcImg);
-                $('#user-logo-info-div *img').attr('src',src);
+                $('#user-logo-info-div *img').attr('src',srcImg);
                 $('#user-logo-info-div').show();
                 $('#user-logo-input-div').hide();
             },
