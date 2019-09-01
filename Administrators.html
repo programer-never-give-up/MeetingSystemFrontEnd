@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="plugins/bootstrap-4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>管理员</title>
+    <title>模板</title>
 </head>
 <body>
 
@@ -18,22 +18,109 @@
     </div>
 </nav>
 <div class="container main-content">
-    在此填充
+        <h2>控制台</h2>
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                    审核请求
+                </a>
+            </div>
+            <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                <div class="card-body">
+                    <ul class="p-0" id="reviewRequset">
+                        <li class="item-card">
+                            <div class="item-info">
+                                <a href="undefined">
+                                    <h5>东南大学实训宣讲会1</h5>
+                                </a>
+                                <h6>地点：计算机楼 时间：2019-6-8——2019-6-9</h6>
+                                <h6>东南大学计算机科学与工程学院</h6>
+                                <h6>简介简介简介</h6>
+                                <a href="undefined">
+                                    <button class="btn btn-info">详情</button>
+                                </a>
+                                <button class="btn btn-primary">同意</button>
+                                <button class="btn btn-danger">拒绝</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                    修改请求
+                </a>
+            </div>
+            <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                <div class="card-body" >
+                    <ul class="p-0" id="modifyRequest">
+                        <li class="item-card">
+                            <div class="item-info">
+                                <a href="undefined">
+                                    <h5>东南大学实训宣讲会1</h5>
+                                </a>
+                                <h6>地点：计算机楼 时间：2019-6-8——2019-6-9</h6>
+                                <h6>东南大学计算机科学与工程学院</h6>
+                                <h6>简介简介简介</h6>
+                                <a href="undefined">
+                                    <button class="btn btn-info">详情</button>
+                                </a>
+                                <button class="btn btn-primary">同意</button>
+                                <button class="btn btn-danger">拒绝</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+                    删除请求
+                </a>
+            </div>
+            <div id="collapseThree" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    <ul class="p-0"  id="deleteRequest">
+                        <li class="item-card">
+                            <div class="item-info">
+                                <a href="undefined">
+                                    <h5>东南大学实训宣讲会1</h5>
+                                </a>
+                                <h6>地点：计算机楼 时间：2019-6-8——2019-6-9</h6>
+                                <h6>东南大学计算机科学与工程学院</h6>
+                                <h6>简介简介简介</h6>
+                                <a href="undefined">
+                                    <button class="btn btn-info">详情</button>
+                                </a>
+                                <button class="btn btn-primary">同意</button>
+                                <button class="btn btn-danger">拒绝</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<footer class="footer" id="footer">
-    这是页脚
-</footer>
+    <footer class="footer" id="footer">
+        这是页脚
+    </footer>
 
-<script src="plugins/fontawesome/font-awesome.js"></script>
-<script src="plugins/jquery/jquery-3.4.1.min.js"></script>
-<script src="plugins/popper/popper.min.js"></script>
-<script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
-<script src="js/nav.js"></script>
-<script src="js/administrators.js"></script>
-<script>
-    $(function () {
-        checkLogin(false);
-    })
-</script>
+    <script src="plugins/fontawesome/font-awesome.js"></script>
+    <script src="plugins/jquery/jquery-3.4.1.min.js"></script>
+    <script src="plugins/popper/popper.min.js"></script>
+    <script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/Administrators.js"></script>
+    <script>
+        $(function () {
+            checkLogin(false);
+        })
+    </script>
 </body>
 </html>
