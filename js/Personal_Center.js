@@ -12,7 +12,7 @@
 
 function setPersonalInfo(data){
     //生成图像
-    var logoSrc="avatar/"+data["avatar"];
+    var logoSrc=data["avatar"];
     console.log(logoSrc);
     $('#user-logo-info').attr('src',logoSrc);
     //设置基本信息
