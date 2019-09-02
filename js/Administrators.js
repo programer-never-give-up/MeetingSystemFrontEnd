@@ -61,6 +61,14 @@ function setInfo(data_min,elementId,baseUrl)
     F2.appendChild(S5);
     gF.appendChild(F1);
     gF.appendChild(F2);
+    var buttonAgree=document.createElement("button");
+    buttonAgree.className="btn btn-info";
+    var buttonDisagree=document.createElement("button");
+    buttonDisagree.className="btn btn-danger";
+    buttonAgree.innerText="同意";
+    buttonDisagree.innerText="不同意";
+    gF.appendChild(buttonAgree);
+    gF.appendChild(buttonDisagree);
     var x = document.getElementById(elementId);
     x.appendChild(gF);
 }
