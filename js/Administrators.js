@@ -66,9 +66,9 @@ function setInfo(data_min,elementId,baseUrl)
     var buttonDisagree=document.createElement("button");
     buttonDisagree.className="btn btn-danger";
     buttonAgree.innerText="同意";
-    buttonDisagree.innerText="不同意";
-    gF.appendChild(buttonAgree);
-    gF.appendChild(buttonDisagree);
+    buttonDisagree.innerText="拒绝";
+    F2.appendChild(buttonAgree);
+    F2.appendChild(buttonDisagree);
     var x = document.getElementById(elementId);
     x.appendChild(gF);
 }
