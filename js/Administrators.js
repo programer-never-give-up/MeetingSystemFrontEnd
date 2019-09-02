@@ -14,12 +14,12 @@ function Render ()
                     var baseUrl = "administrator_meeting_publish.html";
                     setInfo(data["list_activity"][i], "publishRequest", baseUrl)
                 }
-                if (data["list_activity"][i]["action"] == "publish")
+                if (data["list_activity"][i]["action"] == "modify")
                 {
                     var baseUrl = "administrator_meeting_modify.html";
                     setInfo(data["list_activity"][i], "modifyRequest", baseUrl)
                 }
-                if (data["list_activity"][i]["action"] == "publish")
+                if (data["list_activity"][i]["action"] == "delete")
                 {
                     var baseUrl = "administrator_meeting_delete.html";
                     setInfo(data["list_activity"][i], "deleteRequest", baseUrl)
