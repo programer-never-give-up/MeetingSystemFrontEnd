@@ -95,7 +95,7 @@ extIcons={
 // }
 /**
  * usuage:渲染页面信息的函数
- * @param data:json文件，格式为： 字典格式 {logo:"#",name:"#",start_time:"#",end_time:"#",location:"#",organizer:"#",introduction:"#",files:[{fileName:"#",fileSrc:"#"},..],type:"#","status":int}
+ * @param data:json文件，格式为： 字典格式 {logo:"#",name:"#",start_time:"#",end_time:"#",location:"#",organizer:"#",introduction:"#",files:[{fileName:"#",fileSrc:"#"},..]}
  status: 0未开始 1进行中 2已结束
  */
 function setActivityInfo(data){
