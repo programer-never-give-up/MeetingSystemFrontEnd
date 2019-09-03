@@ -101,29 +101,30 @@ extIcons=
  */
 function setActivityInfo(data)
 {
-    $("#old_logo *img").attr
-    (
-        {
-            "src": data["logo_old"]
-        }
-    );
-    $("#new_logo *img").attr
-    (
-        {
-            "src": data["new_old"]
-        }
-    );
+//    $("#old_logo *img").attr
+//    (
+//        {
+//            "src": data["logo_old"]
+//        }
+//    );
+//    $("#new_logo *img").attr
+//    (
+//        {
+//            "src": data["new_old"]
+//        }
+//    );
     //获取并设置图片标题
-    $("#title-info-new").text(data["name_old"]);
+	console.log(data["name_new"]);
+    $("#title-info-new").text(data["name_new"]);
     //获取并设置开始时间和结束时间
-    time = data["start_time_old"]+"至" +data["end_time_old"];
+    time = data["start_time_new"]+"至" +data["end_time_new"];
     $("#time-info-new").text(time);
     //获取地址
-    $("#location-info-new").text(data["location_old"])
+    $("#location-info-new").text(data["location_new"])
     //获取主办方
-    $("#organizer-info-new").text(data["organizer_old"]);
+    $("#organizer-info-new").text(data["organizer_new"]);
     //获取个人简介
-    $("#introduction-info-new").text(data["introduction_old"]);
+    $("#introduction-info-new").text(data["introduction_new"]);
     $("#title-info-old").text(data["name_old"]);
     //获取并设置开始时间和结束时间
     time = data["start_time_old"]+"至" +data["end_time_old"];
