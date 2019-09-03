@@ -10,7 +10,6 @@ function deleteActivity(uuid){
 }
 
 
-
 /**
  * @author chonepieceyb
      * @param data:活动数据 json对象。 格式为{activities:[{logoSrc:"#",activityName:"#",location:"#",startTime:"#",endTime:"#",id:"#"},{...}，{...}>]}
@@ -20,7 +19,6 @@ function setInfoList(data,buttomType){
     for(index in data["activities"]) {
         activity = data["activities"][index];
         var $itemCard = $('<tr class="item-card"></tr>');
-//<td><img src="https://y4ngyy.xyz/assets/avatar.jpg" alt="活动logo"></td>
 
         $itemCard.append('<td><img src="' + activity["logoSrc"] + '" alt="活动logo"></td>');   //添加缩略图
 
@@ -38,6 +36,7 @@ function setInfoList(data,buttomType){
         $buttonTd.append($a);
         $itemCard.append($buttonTd);
         $("tbody.activity-card").append($itemCard);
+
         //根据不同的模块生成不同的链接样式
         if (buttomType == 'management-unpublished' || buttomType == 'management-published') {      //活动管理的：未发布 和已发布
             var $aEdit = $('<a class="btn btn-my-edit">编辑</a>');     //编辑按钮
@@ -99,8 +98,10 @@ function getActivityList(api,btnID,pageID,perPage,isGeneratePage=false){
         success:function (data) {
             setInfoList(data,btnID);
             toastMessage("刷新成功！");
-            if(isGeneratePage){
-                generatePageItems(btnID,data['pageNum']);
+            if(isGeneratePage){       //如果点击新按钮生成导航栏的话
+                generatePageItems($('#page-bar'),function (currentPage) {
+                    getActivityList(api,btnID,currentPage,perPage);
+                },data['pageNum']);
             }
         },
         error:function () {
@@ -112,11 +113,12 @@ function getActivityList(api,btnID,pageID,perPage,isGeneratePage=false){
 /**
  * @author :chonepieceyb
  * usage:产生分页栏
- * @param btnID 缓存的当前是哪个按钮的页面
  * @param pageNum (总页数)
  * @param pageShowNum (最多展示的页数）>=3
+ * @param $fatherObject :父对象，将导航栏添加在父对象上
+ * @callBackfun 切换页面时执行的回调函数
  */
-function generatePageItems(btnID,pageNum,pageShowNum=0){
+function generatePageItems($fatherObject,callBackfun=null,pageNum=5,myID='console',){
     // if(pageShowNum<3){
     //     pageShowNum=3;
     // }
@@ -124,74 +126,72 @@ function generatePageItems(btnID,pageNum,pageShowNum=0){
     //     pageShowNum=pageNum;  //防止页面过少的情况
     // }
     //删除元素
-    $('#page-bar').find('*').remove();
+    $fatherObject.find('*').remove();
     //缓存当前页数（1）
-    $('#page-bar').data('currentPage',1);
-    //缓存按钮类型
-    $('#page-bar').data('btnID',btnID);
+    $fatherObject.data('currentPage',1);
     //缓存总页数
-    $('#page-bar').data('pageNum',pageNum);
+    $fatherObject.data('pageNum',pageNum);
     //上一页按钮
     var $liP = $('<li class="page-item disabled">\n' +
-        '                            <a class="page-link" href="#" id="page-previous">Previous</a>\n' +
+        '                            <a class="page-link" href="#" id="'+myID+'-page-previous">Previous</a>\n' +
         '                        </li>');
-    $('#page-bar').append($liP);
+    $fatherObject.append($liP);
 
     //动态添加
     for(var i=1;i<=pageNum;i++){
         var $li = $('<li class="page-item">\n' +
             '                            <a class="page-link" href="#"></a>\n' +
             '                        </li>');
-        $li.children('a').attr('id','page-'+i);
+        $li.children('a').attr('id',myID+'-page-'+i);
         $li.children('a').text(i);
-        $('#page-bar').append($li);
+        $fatherObject.append($li);
     }
     //添加next按钮
     var $liN = $('<li class="page-item">\n' +
-        '                            <a class="page-link" href="#" id="page-next">next</a>\n' +
+        '                            <a class="page-link" href="#" id="'+myID+'-page-next">next</a>\n' +
         '                        </li>');
     if(pageNum==1){
         $liN.addClass('disabled');
     }
-    $('#page-bar').append($liN);
+    $fatherObject.append($liN);
 
     //添加激活效果
-    $('#page-1').parent().addClass('active');
+    $('#'+myID+'-page-1').parent().addClass('active');
     $('#page-bar *a').on('click',function () {
         //取消激活状态
-        var pageNum = $('#page-bar').data('pageNum');
-        var currentPage=$('#page-bar').data('currentPage');
-        $('#page-'+currentPage).parent().removeClass('active');
+        var pageNum = $fatherObject.data('pageNum');
+        var currentPage=$fatherObject.data('currentPage');
+        $('#'+myID+'-page-'+currentPage).parent().removeClass('active');
         if($(this).attr('id')=="page-previous"){                                 //获取当前的active
             currentPage-=1;                                                         //当前页-1
-            $('#page-'+currentPage).parent().addClass('active');                     //激活效果
-            $('#page-bar').data('currentPage',currentPage);                           //储存
+            $('#'+myID+'-page-'+currentPage).parent().addClass('active');                     //激活效果
+            $fatherObject.data('currentPage',currentPage);                           //储存
         }
-        else if($(this).attr('id')=="page-next" ){
+        else if($(this).attr('id')==myID+"-page-next" ){
             currentPage+=1;  //当前页+1
-            $('#page-'+currentPage).parent().addClass('active');
-            $('#page-bar').data('currentPage',currentPage);
+            $('#'+myID+'-page-'+currentPage).parent().addClass('active');
+            $fatherObject.data('currentPage',currentPage);
         }else{
             $(this).parent().addClass('active');
-            currentPage =  $(this).attr('id').split('-')[1];
-            $('#page-bar').data('currentPage',currentPage);
+            currentPage =  $(this).attr('id').split('-').pop();
+            $fatherObject.data('currentPage',currentPage);
         }
         if(pageNum==1){
-            $('#page-previous').parent().addClass('disabled');
+            $('#'+myID+'-page-previous').parent().addClass('disabled');
             $("#page-next").parent().addClass('disabled');
         }
         else if(currentPage==1){
-            $('#page-previous').parent().addClass('disabled');
-            $("#page-next").parent().removeClass('disabled');
+            $('#'+myID+'-page-previous').parent().addClass('disabled');
+            $('#'+myID+'-page-next').parent().removeClass('disabled');
         }else if(currentPage==pageNum){
-            $('#page-previous').parent().removeClass('disabled');
-            $("#page-next").parent().addClass('disabled');
+            $('#'+myID+'-page-previous').parent().removeClass('disabled');
+            $('#'+myID+'-page-next').parent().addClass('disabled');
         }else{
-            $('#page-previous').parent().removeClass('disabled');
-            $("#page-next").parent().removeClass('disabled');
+            $('#'+myID+'-page-previous').parent().removeClass('disabled');
+            $('#'+myID+'-page-next').parent().removeClass('disabled');
         }
-        //像前端请求页面信息
-        getActivityList("api/activity/pageDisplay/",$('#page-bar').data('btnID'),currentPage,5,false);
+        //执行回调函数
+        callBackfun(currentPage,pageNum);
     });
 }
 
@@ -244,7 +244,5 @@ $(function () {
         getActivityList("api/activity/pageDisplay/",$(this).attr('id'),1,5,true);
     });
 
-
-
-})
+});
 //测试代码

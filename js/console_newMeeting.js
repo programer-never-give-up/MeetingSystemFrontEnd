@@ -202,6 +202,7 @@ function uploadSaveChange(act_uuid,api='#',deleteFiles=null){
         }
     });
 }
+
 /**
  * @author chonepieceyb
  * @param status_published  活动发布状态
