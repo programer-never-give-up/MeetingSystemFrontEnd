@@ -114,6 +114,7 @@ function setActivityInfo(data)
 //        }
 //    );
     //获取并设置图片标题
+
 	console.log(data["name_new"]);
     $("#title-info-new").text(data["name_new"]);
     //获取并设置开始时间和结束时间
@@ -127,8 +128,8 @@ function setActivityInfo(data)
     $("#introduction-info-new").text(data["introduction_new"]);
     $("#title-info-old").text(data["name_old"]);
     //获取并设置开始时间和结束时间
-    time = data["start_time_old"]+"至" +data["end_time_old"];
-    $("#time-info-old").text(time);
+    time2 = data["start_time_old"]+"至" +data["end_time_old"];
+    $("#time-info-old").text(time2);
     //获取地址
     $("#location-info-old").text(data["location_old"])
     //获取主办方
@@ -136,7 +137,8 @@ function setActivityInfo(data)
     //获取个人简介
     $("#introduction-info-old").text(data["introduction_old"]);
     //生成文件下载列表
-    for(index in data["files_new"]){
+    for(index in data["files_new"])
+    {
         var item=data["files_new"][index];
         var name = item["fileName"];
         var ext = name.split(".")[1];
@@ -149,6 +151,10 @@ function setActivityInfo(data)
         html='<img src="'+iconSrc+'" >'+'<a href="'+item["fileSrc"]+item['fileName']+'">'+item["fileName"]+'</a>';
         $("#activity-files-box-new").append(html);
         $("#activity-files-box-new").append("</br>")
+    }
+    if(time!=time2)
+    {
+        $("#time-info-new").className="changeBorder";
     }
 }
 
