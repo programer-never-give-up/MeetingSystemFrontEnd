@@ -116,39 +116,6 @@ function setActivityInfo(data){
     $("#organizer-info-old").text(data["organizer_old"]);
     //获取个人简介
     $("#introduction-info-old").text(data["introduction_old"]);
-    //获取会议的状态和类别 以标签的形式展示在右上角
-    // var status_process=data["status_process"];
-    // var status_publish=data["status_publish"];
-    // var statuslabel;
-    // if(status_publish=='published') {                       //已发布
-    //     //生成已发布标签
-    //     $("#activity-label-row").append('<div class="activity-label" style="background-color:#58b2fc;color:white">已发布</div>');
-    //     if(status_process=='not_start'){
-    //         statuslabel='<div class="activity-label" style="background-color:#f8fc20;color:white">未开始</div>';
-    //     }else  if(status_process=='processing'){
-    //         statuslabel='<div class="activity-label" style="background-color:#5DFC2C;color:white">进行中</div>';
-    //     }else if(status_process=='finished'){
-    //         statuslabel='<div class="activity-label" style="background-color:#FC0C2B;color:white">已结束</div>';
-    //     }
-    // }else if(status_publish=='unpublished'){
-    //     //生成未发布标签
-    //     $("#activity-label-row").append('<div class="activity-label" style="background-color:#58b2fc;color:white">未发布</div>');
-    // }else if(status_publish=='to_be_audited'){
-    //     //添加待审核标签
-    //     $("#activity-label-row").append('<div class="activity-label" style="background-color:#FC9C62;color:white">待审核</div>');
-    //     if(status_process=='not_start'){
-    //         statuslabel='<div class="activity-label" style="background-color:#f8fc20;color:white">未开始</div>';
-    //     }else  if(status_process=='processing'){
-    //         statuslabel='<div class="activity-label" style="background-color:#5DFC2C;color:white">进行中</div>';
-    //     }else if(status_process=='finished'){
-    //         statuslabel='<div class="activity-label" style="background-color:#FC0C2B;color:white">已结束</div>';
-    //     }
-    // }
-    // //生成标签
-    // $("#activity-label-row").append(statuslabel);
-    // //生成类别标签
-    var typeLabel='<div class="activity-label" style="background-color:#9A5DFC; color:white">'+data["type"]+'</div>';
-    $("#activity-label-row-old").append( typeLabel);
     //生成文件下载列表
     for(index in data["files_new"]){
         var item=data["files_new"][index];
