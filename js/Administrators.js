@@ -96,40 +96,106 @@ function agree(dataSent)
     if(dataSent["action"]=="publish")
     {
         $.ajax({
-            url: "api/yw/showActivityList/",
+            url: "api/activity/adminAgreePublish/",
             dataType: "json",
+            data:{uuid:dataSent["uuid_act"]},
             type: "post",
             success: function (data)
             {
-
+                window.location.reload()
             },
             error: function ()
             {
-                alert("连接失败");
+                alert("出问题了");
             }
         });
     }
     if(dataSent["action"]=="modify")
     {
-
+        $.ajax({
+            url: "api/activity/adminAgreeModify/",
+            dataType: "json",
+            data:{uuid:dataSent["uuid_act"]},
+            type: "post",
+            success: function (data)
+            {
+                window.location.reload()
+            },
+            error: function ()
+            {
+                alert("出问题了");
+            }
+        });
     }
     if(dataSent["action"]=="delete")
     {
-
+        $.ajax({
+            url: "api/activity/adminAgreeDelete/",
+            dataType: "json",
+            data:{uuid:dataSent["uuid_act"]},
+            type: "post",
+            success: function (data)
+            {
+                window.location.reload()
+            },
+            error: function ()
+            {
+                alert("出问题了");
+            }
+        });
     }
 }
 function disagree(dataSent)
 {
     if(dataSent["action"]=="publish")
     {
-
+        $.ajax({
+            url: "api/activity/adminRefusePublish/",
+            dataType: "json",
+            data:{uuid:dataSent["uuid_act"]},
+            type: "post",
+            success: function (data)
+            {
+                window.location.reload()
+            },
+            error: function ()
+            {
+                alert("出问题了");
+            }
+        });
     }
     if(dataSent["action"]=="modify")
     {
-
+        $.ajax({
+            url: "api/activity/adminRefuseModify/",
+            dataType: "json",
+            data:{uuid:dataSent["uuid_act"]},
+            type: "post",
+            success: function (data)
+            {
+                window.location.reload()
+            },
+            error: function ()
+            {
+                alert("出问题了");
+            }
+        });
     }
     if(dataSent["action"]=="delete")
     {
-
+        $.ajax({
+            url: "api/activity/adminRefuseDelete/",
+            dataType: "json",
+            data:{uuid:dataSent["uuid_act"]},
+            type: "post",
+            success: function (data)
+            {
+                window.location.reload()
+            },
+            error: function ()
+            {
+                alert("出问题了");
+            }
+        });
     }
 }
