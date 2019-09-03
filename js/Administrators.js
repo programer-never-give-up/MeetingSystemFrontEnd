@@ -9,22 +9,18 @@ function Render ()
         {
             for (var i = 0; i < data["list_activity"].length; i++)
             {	
-				console.log("for");
                 if (data["list_activity"][i]["action"] == "publish")
                 {
-					console.log("publish");
                     var baseUrl = "administrator_meeting_publish.html";
                     setInfo(data["list_activity"][i], "publishRequest", baseUrl)
                 }
                 if (data["list_activity"][i]["action"] == "modify")
                 {
-					console.log("modify");
                     var baseUrl = "administrator_meeting_modify.html";
                     setInfo(data["list_activity"][i], "modifyRequest", baseUrl)
                 }
                 if (data["list_activity"][i]["action"] == "delete")
                 {
-					console.log("delete");
                     var baseUrl = "administrator_meeting_delete.html";
                     setInfo(data["list_activity"][i], "deleteRequest", baseUrl)
                 }
@@ -95,10 +91,11 @@ function agree(dataSent)
 {
     if(dataSent["action"]=="publish")
     {
+		console.log(dataSent["uuid_act"]);
         $.ajax({
             url: "api/activity/adminAgreePublish/",
             dataType: "json",
-            data:{uuid:dataSent["uuid_act"]},
+            data:{act_uuid:dataSent["uuid_act"]},
             type: "post",
             success: function (data)
             {
@@ -115,7 +112,7 @@ function agree(dataSent)
         $.ajax({
             url: "api/activity/adminAgreeModify/",
             dataType: "json",
-            data:{uuid:dataSent["uuid_act"]},
+            data:{act_uuid:dataSent["uuid_act"]},
             type: "post",
             success: function (data)
             {
@@ -132,7 +129,7 @@ function agree(dataSent)
         $.ajax({
             url: "api/activity/adminAgreeDelete/",
             dataType: "json",
-            data:{uuid:dataSent["uuid_act"]},
+            data:{act_uuid:dataSent["uuid_act"]},
             type: "post",
             success: function (data)
             {
@@ -152,7 +149,7 @@ function disagree(dataSent)
         $.ajax({
             url: "api/activity/adminRefusePublish/",
             dataType: "json",
-            data:{uuid:dataSent["uuid_act"]},
+            data:{act_uuid:dataSent["uuid_act"]},
             type: "post",
             success: function (data)
             {
@@ -169,7 +166,7 @@ function disagree(dataSent)
         $.ajax({
             url: "api/activity/adminRefuseModify/",
             dataType: "json",
-            data:{uuid:dataSent["uuid_act"]},
+            data:{act_uuid:dataSent["uuid_act"]},
             type: "post",
             success: function (data)
             {
@@ -186,7 +183,7 @@ function disagree(dataSent)
         $.ajax({
             url: "api/activity/adminRefuseDelete/",
             dataType: "json",
-            data:{uuid:dataSent["uuid_act"]},
+            data:{act_uuid:dataSent["uuid_act"]},
             type: "post",
             success: function (data)
             {
