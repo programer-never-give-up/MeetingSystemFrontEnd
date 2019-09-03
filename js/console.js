@@ -6,6 +6,7 @@
  * @param uuid 会议的id
  */
 function deleteActivity(uuid){
+    console.log(uuid);
     $.ajax({
         url:'api/activity/deleteActivity/',
         type : 'POST',
@@ -82,7 +83,7 @@ function generateActivityTable(data,buttomType){
             $aDel = $('<a class="btn btn-danger">删除</a>');
             $aDel.attr("id", "delete-button-" + activity["id"]);
             $aDel.on("click", function () {
-                if(deleteActivity(activity["id"])){
+                if(deleteActivity($(this).id.split('delete-button-')[1])){
                     $(this).parent().parent().remove();
                 };
             })
@@ -95,12 +96,12 @@ function generateActivityTable(data,buttomType){
             $(".buttonTd").append($a);
         } else if (buttomType == "my-not_start") {    //我的活动的 未开始
             //查看二维码按钮
-
+            $acheck=$('<a class="btn btn-primary"></a>');
             //取消报名的按钮
             $aDel = $('<a class="btn btn-danger">取消报名</a>');
             $aDel.attr("id", "delete-button-" + activity["id"]);
             $aDel.on("click", function () {
-                if(deleteActivity(activity["id"])){
+                if(deleteActivity($(this).id.split('delete-button-')[1])){
                     $(this).parent().parent().remove();
                 };
             });
@@ -110,7 +111,7 @@ function generateActivityTable(data,buttomType){
             $aDel = $('<a class="btn btn-danger">删除</a>');
             $aDel.attr("id", "delete-button-" + activity["id"]);
             $aDel.on("click", function () {
-                if(deleteActivity(activity["id"])){
+                if(deleteActivity($(this).id.split('delete-button-')[1])){
                     $(this).parent().parent().remove();
                 };
             });
@@ -260,6 +261,7 @@ function showQRCode(act_uuid){
         dataType: 'json',
         success:function (data) {
             url='QRCode.html?src='+data['qrcode'];
+            window.open(url, '入场二维码','height:500px,width=500px,location=no,menubar=no,toolbar=no');
         }
     })
 }
