@@ -10,7 +10,6 @@ function deleteActivity(uuid){
 }
 
 
-
 /**
  * @author chonepieceyb
      * @param data:活动数据 json对象。 格式为{activities:[{logoSrc:"#",activityName:"#",location:"#",startTime:"#",endTime:"#",id:"#"},{...}，{...}>]}
@@ -20,7 +19,6 @@ function setInfoList(data,buttomType){
     for(index in data["activities"]) {
         activity = data["activities"][index];
         var $itemCard = $('<tr class="item-card"></tr>');
-//<td><img src="https://y4ngyy.xyz/assets/avatar.jpg" alt="活动logo"></td>
 
         $itemCard.append('<td><img src="' + activity["logoSrc"] + '" alt="活动logo"></td>');   //添加缩略图
 
@@ -38,6 +36,7 @@ function setInfoList(data,buttomType){
         $buttonTd.append($a);
         $itemCard.append($buttonTd);
         $("tbody.activity-card").append($itemCard);
+
         //根据不同的模块生成不同的链接样式
         if (buttomType == 'management-unpublished' || buttomType == 'management-published') {      //活动管理的：未发布 和已发布
             var $aEdit = $('<a class="btn btn-my-edit">编辑</a>');     //编辑按钮
@@ -174,7 +173,7 @@ function generatePageItems($fatherObject,callBackfun=null,pageNum=5,myID='consol
             $fatherObject.data('currentPage',currentPage);
         }else{
             $(this).parent().addClass('active');
-            currentPage =  $(this).attr('id').split('-')[1];
+            currentPage =  $(this).attr('id').split('-').pop();
             $fatherObject.data('currentPage',currentPage);
         }
         if(pageNum==1){
@@ -245,7 +244,5 @@ $(function () {
         getActivityList("api/activity/pageDisplay/",$(this).attr('id'),1,5,true);
     });
 
-
-
-})
+});
 //测试代码
