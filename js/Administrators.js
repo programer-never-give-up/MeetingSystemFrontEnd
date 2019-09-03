@@ -36,7 +36,6 @@ function Render ()
             alert("出问题了喔");
         }
     });
-
 }
 function setInfo(data_min,elementId,baseUrl)
 {
@@ -66,8 +65,8 @@ function setInfo(data_min,elementId,baseUrl)
     var buttonDisagree=document.createElement("button");
     buttonDisagree.className="btn btn-danger";
     buttonAgree.innerText="同意";
-    buttonDisagree.onclick=disagreeClick(data_min);
-    buttonAgree.onclick=agreeClick(data_min);
+    buttonDisagree.onclick="disagreeClick(data_min)";
+    buttonAgree.onclick="agreeClick(data_min)";
     buttonDisagree.innerText="拒绝";
     F2.appendChild(buttonAgree);
     F2.appendChild(buttonDisagree);
