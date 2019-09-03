@@ -83,7 +83,7 @@ function generateActivityTable(data,buttomType){
             $aDel = $('<a class="btn btn-danger">删除</a>');
             $aDel.attr("id", "delete-button-" + activity["id"]);
             $aDel.on("click", function () {
-                if(deleteActivity($(this).id.split('delete-button-')[1])){
+                if(deleteActivity($(this).attr('id').split('delete-button-')[1])){
                     $(this).parent().parent().remove();
                 };
             })
@@ -101,7 +101,7 @@ function generateActivityTable(data,buttomType){
             $aDel = $('<a class="btn btn-danger">取消报名</a>');
             $aDel.attr("id", "delete-button-" + activity["id"]);
             $aDel.on("click", function () {
-                if(deleteActivity($(this).id.split('delete-button-')[1])){
+                if(deleteActivity($(this).attr('id').split('delete-button-')[1])){
                     $(this).parent().parent().remove();
                 };
             });
@@ -111,7 +111,7 @@ function generateActivityTable(data,buttomType){
             $aDel = $('<a class="btn btn-danger">删除</a>');
             $aDel.attr("id", "delete-button-" + activity["id"]);
             $aDel.on("click", function () {
-                if(deleteActivity($(this).id.split('delete-button-')[1])){
+                if(deleteActivity($(this).attr('id').split('delete-button-')[1])){
                     $(this).parent().parent().remove();
                 };
             });
