@@ -66,9 +66,70 @@ function setInfo(data_min,elementId,baseUrl)
     var buttonDisagree=document.createElement("button");
     buttonDisagree.className="btn btn-danger";
     buttonAgree.innerText="同意";
+    buttonDisagree.onclick=disagreeClick(data_min);
+    buttonAgree.onclick=agreeClick(data_min);
     buttonDisagree.innerText="拒绝";
     F2.appendChild(buttonAgree);
     F2.appendChild(buttonDisagree);
     var x = document.getElementById(elementId);
     x.appendChild(gF);
+}
+function agreeClick(dataSent)
+{
+    var x;
+    var r=confirm("确定同意吗!");
+    if (r==true)
+    {
+        agree(dataSent);
+    }
+}
+function disagreeClick(dataSent)
+{
+    var x;
+    var r=confirm("确定拒绝吗!");
+    if (r==true)
+    {
+        disagree(dataSent);
+    }
+}
+function agree(dataSent)
+{
+    if(dataSent["action"]=="publish")
+    {
+        $.ajax({
+            url: "api/yw/showActivityList/",
+            dataType: "json",
+            type: "post",
+            success: function (data)
+            {
+                alert("连接成功");
+            },
+            error: function ()
+            {
+                alert("连接失败");
+            }
+        });
+    }
+    if(dataSent["action"]=="modify")
+    {
+    }
+    if(dataSent["action"]=="delete")
+    {
+
+    }
+}
+function disagree(dataSent)
+{
+    if(dataSent["action"]=="publish")
+    {
+
+    }
+    if(dataSent["action"]=="modify")
+    {
+
+    }
+    if(dataSent["action"]=="delete")
+    {
+
+    }
 }
