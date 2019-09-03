@@ -101,7 +101,7 @@ function agree(dataSent)
             type: "post",
             success: function (data)
             {
-                alert("连接成功");
+
             },
             error: function ()
             {
@@ -111,6 +111,7 @@ function agree(dataSent)
     }
     if(dataSent["action"]=="modify")
     {
+
     }
     if(dataSent["action"]=="delete")
     {

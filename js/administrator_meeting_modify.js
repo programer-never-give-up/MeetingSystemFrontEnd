@@ -170,7 +170,7 @@ $(function () {
     //ajax请求
     var act_uuid = getParameter()['id']
     $.ajax({
-        url:"api/activity/showActivity/",
+        url:"api/activity/showModification/",
         data:{uuid: act_uuid,},
         type:"GET",
         dataType:'json',
