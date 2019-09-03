@@ -6,7 +6,19 @@
  * @param uuid 会议的id
  */
 function deleteActivity(uuid){
-
+    $.ajax({
+        url:'api/activity/deleteActivity/',
+        type : 'POST',
+        data:{uuid:uuid},
+        success:function (data) {
+            toastMessage(data['message']);
+            return true;
+        },
+        error:function () {
+            toastMessage('请求提交失败');
+            return false;
+        }
+    })
 }
 
 
@@ -70,8 +82,9 @@ function generateActivityTable(data,buttomType){
             $aDel = $('<a class="btn btn-danger">删除</a>');
             $aDel.attr("id", "delete-button-" + activity["id"]);
             $aDel.on("click", function () {
-                $(this).parent().parent().remove();
-                deleteActivity(activity["id"]);
+                if(deleteActivity(activity["id"])){
+                    $(this).parent().parent().remove();
+                };
             })
             $buttonTd.append($aDel);
 
@@ -81,12 +94,15 @@ function generateActivityTable(data,buttomType){
             $a.attr("href", "console_newMeeting.html?id=" + activity["id"]);
             $(".buttonTd").append($a);
         } else if (buttomType == "my-not_start") {    //我的活动的 未开始
+            //查看二维码按钮
+
             //取消报名的按钮
             $aDel = $('<a class="btn btn-danger">取消报名</a>');
             $aDel.attr("id", "delete-button-" + activity["id"]);
             $aDel.on("click", function () {
-                $(this).parent().parent().remove();
-                deleteActivity(activity["id"]);
+                if(deleteActivity(activity["id"])){
+                    $(this).parent().parent().remove();
+                };
             });
             $buttonTd.append($aDel);
         } else if (buttomType == "fav-not_start" || buttomType == "fav-processing" || buttomType == "fav-finished") {   //我的收藏模块的按钮
@@ -94,8 +110,9 @@ function generateActivityTable(data,buttomType){
             $aDel = $('<a class="btn btn-danger">删除</a>');
             $aDel.attr("id", "delete-button-" + activity["id"]);
             $aDel.on("click", function () {
-                $(this).parent().parent().remove();
-                deleteActivity(activity["id"]);
+                if(deleteActivity(activity["id"])){
+                    $(this).parent().parent().remove();
+                };
             });
             $buttonTd.append($aDel);
         }
@@ -236,6 +253,16 @@ function setNumInfo(id,num,maxNum=99){
     }
 }
 
+function showQRCode(act_uuid){
+    $.ajax({
+        type:'GET',
+        data:{uuid_act:act_uuid},
+        dataType: 'json',
+        success:function (data) {
+            url='QRCode.html?src='+data['qrcode'];
+        }
+    })
+}
 //浏览器加载时运行
 $(function () {
     //分页按钮点击
