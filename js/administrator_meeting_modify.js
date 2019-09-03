@@ -99,13 +99,31 @@ extIcons=
  * @param data:json文件，格式为： 字典格式 {logo:"#",name:"#",start_time:"#",end_time:"#",location:"#",organizer:"#",introduction:"#",files:[{fileName:"#",fileSrc:"#"},..],type:"#","status":int}
  status: 0未开始 1进行中 2已结束
  */
-function setActivityInfo(data){
-    $(".meeting-article *img").attr(
+function setActivityInfo(data)
+{
+    $("#old_logo *img").attr
+    (
         {
             "src": data["logo_old"]
         }
     );
+    $("#new_logo *img").attr
+    (
+        {
+            "src": data["new_old"]
+        }
+    );
     //获取并设置图片标题
+    $("#title-info-new").text(data["name_old"]);
+    //获取并设置开始时间和结束时间
+    time = data["start_time_old"]+"至" +data["end_time_old"];
+    $("#time-info-new").text(time);
+    //获取地址
+    $("#location-info-new").text(data["location_old"])
+    //获取主办方
+    $("#organizer-info-new").text(data["organizer_old"]);
+    //获取个人简介
+    $("#introduction-info-new").text(data["introduction_old"]);
     $("#title-info-old").text(data["name_old"]);
     //获取并设置开始时间和结束时间
     time = data["start_time_old"]+"至" +data["end_time_old"];
