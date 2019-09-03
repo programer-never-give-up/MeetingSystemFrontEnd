@@ -115,7 +115,7 @@ function setActivityInfo(data)
 //    );
     //获取并设置图片标题
 
-	console.log(data["name_new"]);
+	//console.log(data["name_new"]);
     $("#title-info-new").text(data["name_new"]);
     //获取并设置开始时间和结束时间
     time = data["start_time_new"]+"至" +data["end_time_new"];
@@ -137,6 +137,7 @@ function setActivityInfo(data)
     //获取个人简介
     $("#introduction-info-old").text(data["introduction_old"]);
     //生成文件下载列表
+	console.log("nihao")
     for(index in data["files_new"])
     {
         var item=data["files_new"][index];
@@ -152,9 +153,28 @@ function setActivityInfo(data)
         $("#activity-files-box-new").append(html);
         $("#activity-files-box-new").append("</br>")
     }
-    if(time!=time2)
-    {
-        $("#time-info-new").className="changeBorder";
+	
+	console.log(time2)
+
+    if(data["location_old"]!==data["location_new"])
+    {	
+		var p1=document.getElementById("location-info-new")
+		p1.setAttribute("style","border-color:#FF3333");
+    }
+	    if(time!==time2)
+    {	
+		var p1=document.getElementById("time-info-new")
+		p1.setAttribute("style","border-color:#FF3333");
+    }
+	    if(data["organizer_old"]!==data["organizer_new"])
+    {	
+		var p1=document.getElementById("organizer-info-new")
+		p1.setAttribute("style","border-color:#FF3333");
+    }
+	    if(data["introduction_old"]!==data["introduction_new"])
+    {	
+		var p1=document.getElementById("introduction-info-new")
+		p1.setAttribute("style","border-color:#FF3333");
     }
 }
 
