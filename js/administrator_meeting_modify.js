@@ -8,22 +8,23 @@ status: 0未开始 1进行中 2已结束
  */
 
 //可识别的扩展名列表
-extIcons={
-    "docx":"icon_doc.gif",
-    "doc":"icon_doc.gif",
-    "xls":"icon_xls.gif",
-    "xlsx":"icon_xls.gif",
-    "txt" :"icon_txt.gif",
-    "png":"icon_img.gif",
-    "jpg":"icon_img.gif",
-    "jpeg":"icon_img.gif",
-    "gif":"icon_img.gif",
-    "zip":"icon_rar.gif",
-    "rar":"icon_rar.gif",
-    "7z":"icon_rar.gif",
-    "pdf":"icon_pdf.gif",
-    "unknown":"icon_txt.gif"
-}
+extIcons=
+    {
+        "docx": "icon_doc.gif",
+        "doc": "icon_doc.gif",
+        "xls": "icon_xls.gif",
+        "xlsx": "icon_xls.gif",
+        "txt": "icon_txt.gif",
+        "png": "icon_img.gif",
+        "jpg": "icon_img.gif",
+        "jpeg": "icon_img.gif",
+        "gif": "icon_img.gif",
+        "zip": "icon_rar.gif",
+        "rar": "icon_rar.gif",
+        "7z": "icon_rar.gif",
+        "pdf": "icon_pdf.gif",
+        "unknown": "icon_txt.gif"
+    }
 
 /**
  *
@@ -101,20 +102,20 @@ extIcons={
 function setActivityInfo(data){
     $(".meeting-article *img").attr(
         {
-            "src": data["logo"]
+            "src": data["logo_old"]
         }
     );
     //获取并设置图片标题
-    $("#title-info").text(data["name"]);
+    $("#title-info-old").text(data["name_old"]);
     //获取并设置开始时间和结束时间
-    time = data["start_time"]+"至" +data["end_time"];
-    $("#time-info").text(time);
+    time = data["start_time_old"]+"至" +data["end_time_old"];
+    $("#time-info-old").text(time);
     //获取地址
-    $("#location-info").text(data["location"])
+    $("#location-info-old").text(data["location_old"])
     //获取主办方
-    $("#organizer-info").text(data["organizer"]);
+    $("#organizer-info-old").text(data["organizer_old"]);
     //获取个人简介
-    $("#introduction-info").text(data["introduction"]);
+    $("#introduction-info-old").text(data["introduction_old"]);
     //获取会议的状态和类别 以标签的形式展示在右上角
     // var status_process=data["status_process"];
     // var status_publish=data["status_publish"];
@@ -147,10 +148,10 @@ function setActivityInfo(data){
     // $("#activity-label-row").append(statuslabel);
     // //生成类别标签
     var typeLabel='<div class="activity-label" style="background-color:#9A5DFC; color:white">'+data["type"]+'</div>';
-    $("#activity-label-row").append( typeLabel);
+    $("#activity-label-row-old").append( typeLabel);
     //生成文件下载列表
-    for(index in data["files"]){
-        var item=data["files"][index];
+    for(index in data["files_new"]){
+        var item=data["files_new"][index];
         var name = item["fileName"];
         var ext = name.split(".")[1];
         iconSrc=extIcons["unknown"];
@@ -160,8 +161,8 @@ function setActivityInfo(data){
         }
         iconSrc = "images/icons/" + iconSrc;
         html='<img src="'+iconSrc+'" >'+'<a href="'+item["fileSrc"]+item['fileName']+'">'+item["fileName"]+'</a>';
-        $("#activity-files-box").append(html);
-        $("#activity-files-box").append("</br>")
+        $("#activity-files-box-new").append(html);
+        $("#activity-files-box-new").append("</br>")
     }
 }
 
@@ -177,7 +178,6 @@ $(function () {
         success:function (data) {
             //设置按钮
             console.log(data);
-            setPageButton(data['roleType'],data['status_publish'],data['status_process'],act_uuid);
             setActivityInfo(data);
             toastMessage("获取会议信息成功！");
         },
