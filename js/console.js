@@ -96,7 +96,11 @@ function generateActivityTable(data,buttomType){
             $(".buttonTd").append($a);
         } else if (buttomType == "my-not_start") {    //我的活动的 未开始
             //查看二维码按钮
-            $acheck=$('<a class="btn btn-primary"></a>');
+            $acheck=$('<a class="btn btn-primary">查看门票</a>');
+            $acheck.data('act_uuid',activity['id']);
+            $acheck.on('click',function () {
+                showQRCode($(this).data('act_uuid'));
+            })
             //取消报名的按钮
             $aDel = $('<a class="btn btn-danger">取消报名</a>');
             $aDel.attr("id", "delete-button-" + activity["id"]);
@@ -106,6 +110,15 @@ function generateActivityTable(data,buttomType){
                 };
             });
             $buttonTd.append($aDel);
+            $buttonTd.append($acheck);
+        } else if(buttomType=='my-processing'){
+            //查看二维码按钮
+            $acheck=$('<a class="btn btn-primary">查看门票</a>');
+            $acheck.data('act_uuid',activity['id']);
+            $acheck.on('click',function () {
+                showQRCode($(this).data('act_uuid'));
+            });
+            $buttonTd.append($acheck);
         } else if (buttomType == "fav-not_start" || buttomType == "fav-processing" || buttomType == "fav-finished") {   //我的收藏模块的按钮
             //添加删除按钮
             $aDel = $('<a class="btn btn-danger">删除</a>');
