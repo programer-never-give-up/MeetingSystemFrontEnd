@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="plugins/bootstrap-4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/console.css">
     <title>控制台</title>
     <style>
         .item-card {
@@ -73,12 +74,12 @@
     <div class="container main-content">
         <div class="row header">
             <div class="col-3">
-                <button type="button" class="btn w-100" id="new-activity-bottom" style="background-color: #f55d54; color: #fff;">
-                    <i class="fas fa-plus"></i>
-                    新建活动
-                </button>
+                    <button type="button" class="btn w-100 btn-primary-shadow" id="new-activity-bottom" style="background-color: #f55d54; color: #fff;">
+                        <i class="fas fa-plus"></i>
+                        新建活动
+                    </button>
             </div>
-            <div class="col-9 title">
+            <div class="col-9 title shadow-box">
                 <ol class="breadcrumb" style="background-color: rgba(255,255,255,0); margin-bottom: 0px">
                     <li class="breadcrumb-item"><a herf="#">控制台</a></li>
                 </ol>
@@ -86,7 +87,7 @@
         </div>
         <div class="row">
             <div class="col-3 function-list">
-                <div class="w-100  list-group" id="control-function-list">
+                <div class="w-100  list-group shadow-box" id="control-function-list">
                     <a href="#"  class="list-group-item" data-toggle="collapse"  data-target="#activity-management" id="management">活动管理</a>
                     <div id="activity-management" class="collapse" data-parent="#control-function-list">
                         <a href="#" class="list-group-item" id="management-unpublished">未发布</a>
@@ -109,7 +110,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-9 content-show" id="activity-content-div">
+            <div class="col-9 content-show shadow-box" id="activity-content-div">
 
             </div>
         </div>
