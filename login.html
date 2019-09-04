@@ -94,10 +94,21 @@
             var password = $('#password').val();
             $.post('api/login/', {username:username, password: password}, function (data) {
                 console.log(data);
-                if (data.status) {
-                    toastMessage('登录成功,正在跳转...');
-                    window.location.href='index.html';
-                } else {
+                if (data.status)
+                {
+                    if(data.isAdmin) 
+                    {
+                        toastMessage('登录成功,正在跳转...');
+                        window.location.href = 'Administrators.html';
+                    }
+                    else
+                    {
+                        toastMessage('登录成功,正在跳转...');
+                        window.location.href = 'index.html';
+                    }
+                }
+                else
+                {
                    toastMessage(data.message);
 
                 }
