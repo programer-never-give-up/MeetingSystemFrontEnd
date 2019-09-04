@@ -199,22 +199,49 @@ $(function () {
     })
 })
 
-
-
-//  //测试代码
-// var data = {
-//     logo:"https://y4ngyy.xyz/assets/avatar.jpg",
-//     activityName:"东南大学实训宣讲会",
-//     start_time:"2019-6-8",
-//     end_time:'2019-6-9',
-//     location:"计算机楼",
-//     organizer:'东南大学计算机科学与工程学院',
-//     files:[{"fileName":"1.pdf","fileSrc":"#"},{"fileName":"1.pdf","fileSrc":"#"}],
-//     status_publish:"to_be_audited",
-//     status_process:'processing',
-//     type:'讲座'
-//
-// }
-//  $(function () {
-//      setActivityInfo(data);
-// });
+function agree()
+{
+    var x;
+    var r=confirm("确定同意吗!");
+    if (r==true)
+    {
+        var act_uuid = getParameter()['id']
+        $.ajax({
+            url: "api/activity/adminAgreeModify/",
+            dataType: "json",
+            data:{act_uuid:act_uuid},
+            type: "post",
+            success: function (data)
+            {
+                window.location.reload()
+            },
+            error: function ()
+            {
+                alert("出问题了");
+            }
+        });
+    }
+}
+function disagree()
+{
+    var x;
+    var r=confirm("确定拒绝吗!");
+    if (r==true)
+    {
+        var act_uuid = getParameter()['id']
+        $.ajax({
+            url: "api/activity/adminRefuseModify/",
+            dataType: "json",
+            data:{act_uuid:act_uuid},
+            type: "post",
+            success: function (data)
+            {
+                window.location.reload()
+            },
+            error: function ()
+            {
+                alert("出问题了");
+            }
+        });
+    }
+}
