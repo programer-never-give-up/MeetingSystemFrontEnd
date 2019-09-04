@@ -6,16 +6,49 @@
  * @param uuid 会议的id
  */
 function deleteActivity(uuid){
-
+    console.log(uuid);
+    $.ajax({
+        url:'api/activity/deleteActivity/',
+        type : 'POST',
+        data:{uuid:uuid},
+        success:function (data) {
+            toastMessage(data['message']);
+            $('#delete-button-'+uuid).parent().remove();
+        },
+        error:function () {
+            toastMessage('请求提交失败');
+        }
+    })
 }
 
 
 /**
  * @author chonepieceyb
-     * @param data:活动数据 json对象。 格式为{activities:[{logoSrc:"#",activityName:"#",location:"#",startTime:"#",endTime:"#",id:"#"},{...}，{...}>]}
- * @param buttomID  buttomType参数说明  block-subBlock 例如 活动管理模块下面的未发布为 mangement-Unpublished  ,mengement-published ....
+ * @param data
+ * @param buttomType   生成的类型
+ * @returns {number | jQuery | HTMLElement}      //返回生成的jquery对象
  */
-function setInfoList(data,buttomType){
+
+function generateActivityTable(data,buttomType){
+    $activityTable = $('<table class="w-100" style="margin-top: 3%"></table>');
+    //生成表头
+    $actTableHead = $('<thead></thead>');
+    $actTableHead.append('<tr></tr>');
+
+    $actTableHead.children('tr').append('<th>活动logo</th>');
+    $actTableHead.children('tr').append('<th>活动名称</th>');
+    $actTableHead.children('tr').append('<th>活动地点</th>');
+    $actTableHead.children('tr').append('<th>活动时间</th>');
+    if(buttomType=="management-to_be_audited"){
+        $actTableHead.children('tr').append('<th>操作类型</th>');
+    }
+    $activityTable.append($actTableHead);
+
+    //生成表体
+    $actTableBody = $('<tbody class="activity-card">\n' +
+        '\n' +
+        '                    </tbody>');
+
     for(index in data["activities"]) {
         activity = data["activities"][index];
         var $itemCard = $('<tr class="item-card"></tr>');
@@ -30,12 +63,15 @@ function setInfoList(data,buttomType){
         $timeTd.append(activity["startTime"] + "</br>" + activity["endTime"]);
         $itemCard.append($timeTd);
 
+        //如果是待审核添加操作类型
+        if(buttomType=='management-to_be_audited'){
+            $itemCard.append('<td>' + activity["action"] + '</td>');
+        }
+
         var $buttonTd = $("<td class='buttonTd'></td>");    //添加查看详情按钮
         var $a = $('<a class="btn btn-primary">查看</a>');
         $a.attr("href", "show_meeting_info.html?id=" + activity["id"]);
         $buttonTd.append($a);
-        $itemCard.append($buttonTd);
-        $("tbody.activity-card").append($itemCard);
 
         //根据不同的模块生成不同的链接样式
         if (buttomType == 'management-unpublished' || buttomType == 'management-published') {      //活动管理的：未发布 和已发布
@@ -46,8 +82,9 @@ function setInfoList(data,buttomType){
             $aDel = $('<a class="btn btn-danger">删除</a>');
             $aDel.attr("id", "delete-button-" + activity["id"]);
             $aDel.on("click", function () {
-                $(this).parent().parent().remove();
-                deleteActivity(activity["id"]);
+                if(deleteActivity($(this).attr('id').split('delete-button-')[1])){
+                    $(this).parent().parent().remove();
+                };
             })
             $buttonTd.append($aDel);
 
@@ -57,52 +94,80 @@ function setInfoList(data,buttomType){
             $a.attr("href", "console_newMeeting.html?id=" + activity["id"]);
             $(".buttonTd").append($a);
         } else if (buttomType == "my-not_start") {    //我的活动的 未开始
+            //查看二维码按钮
+            $acheck=$('<a class="btn btn-primary">查看门票</a>');
+            $acheck.data('act_uuid',activity['id']);
+            $acheck.on('click',function () {
+                showQRCode($(this).data('act_uuid'));
+            })
             //取消报名的按钮
             $aDel = $('<a class="btn btn-danger">取消报名</a>');
             $aDel.attr("id", "delete-button-" + activity["id"]);
             $aDel.on("click", function () {
-                $(this).parent().parent().remove();
-                deleteActivity(activity["id"]);
+                if(deleteActivity($(this).attr('id').split('delete-button-')[1])){
+                    $(this).parent().parent().remove();
+                };
             });
             $buttonTd.append($aDel);
+            $buttonTd.append($acheck);
+        } else if(buttomType=='my-processing'){
+            //查看二维码按钮
+            $acheck=$('<a class="btn btn-primary">查看门票</a>');
+            $acheck.data('act_uuid',activity['id']);
+            $acheck.on('click',function () {
+                showQRCode($(this).data('act_uuid'));
+            });
+            $buttonTd.append($acheck);
         } else if (buttomType == "fav-not_start" || buttomType == "fav-processing" || buttomType == "fav-finished") {   //我的收藏模块的按钮
             //添加删除按钮
             $aDel = $('<a class="btn btn-danger">删除</a>');
             $aDel.attr("id", "delete-button-" + activity["id"]);
             $aDel.on("click", function () {
-                $(this).parent().parent().remove();
-                deleteActivity(activity["id"]);
+                if(deleteActivity($(this).attr('id').split('delete-button-')[1])){
+                    $(this).parent().parent().remove();
+                };
             });
             $buttonTd.append($aDel);
         }
+        $itemCard.append($buttonTd);
+        $actTableBody .append($itemCard);
     }
+    //添加表体
+    $activityTable.append($actTableBody);
+    //添加到父对象
+    return $activityTable;
 }
 
 /**
- *@author choenpieceyb
- * @usage: 向服务器请求一页的内容，应该是通用api，目前是首页api
+ *@author chonepieceyb
  * @param api
- * @param btnID  按钮类型
+ * @param btnID 类型
  * @param pageID 第几页
- * @param perPage 每一页的页数
- * @param :是否生成新的导航栏，主要是区别在点击控制台的按钮，和下面的链接（第几页)的区别
+ * @param perPage
+ * @param $fatherObject  父对象（table 和导航栏的父对象）
+ * @param isGeneratePage 是否产生导航栏
  */
-function getActivityList(api,btnID,pageID,perPage,isGeneratePage=false){
-    //删除原有的元素
-    $('.activity-card').find('*').remove();
+function getActivityList(api,btnID,pageID,perPage,$fatherObject,isGeneratePage=false){
     $.ajax({
         url:api,
         data:{"btn-type":btnID, "page-id":pageID,'per-page':perPage},
         type:"GET",
         dataType:'json',
         success:function (data) {
-            setInfoList(data,btnID);
-            toastMessage("刷新成功！");
-            if(isGeneratePage){       //如果点击新按钮生成导航栏的话
-                generatePageItems($('#page-bar'),function (currentPage) {
-                    getActivityList(api,btnID,currentPage,perPage);
-                },data['pageNum']);
+            if(isGeneratePage){       //如果更换按钮种类
+                $fatherObject.find('*').remove();
+                $fatherObject.append(generateActivityTable(data,btnID));
+                $fatherObject.append(
+                    generatePageItems(function (currentPage) {
+                        getActivityList(api,btnID,currentPage,perPage,$fatherObject);
+                    },data['pageNum'])
+                );
+                //setNumInfo(btnID,data['sum']);
+            }else{
+                $fatherObject.children('table').remove();
+                $fatherObject.prepend( generateActivityTable(data,btnID) );
             }
+            toastMessage("刷新成功！");
         },
         error:function () {
             toastMessage("获取信息失败！");
@@ -111,32 +176,28 @@ function getActivityList(api,btnID,pageID,perPage,isGeneratePage=false){
 }
 
 /**
- * @author :chonepieceyb
- * usage:产生分页栏
- * @param pageNum (总页数)
- * @param pageShowNum (最多展示的页数）>=3
- * @param $fatherObject :父对象，将导航栏添加在父对象上
- * @callBackfun 切换页面时执行的回调函数
+ * @author chonepieceyb
+ * @param callBackfun   点击时的回调函数
+ * @param pageNum
+ * @param myID
+ * @returns {number | jQuery | HTMLElement}  返回生成的jquery对象
  */
-function generatePageItems($fatherObject,callBackfun=null,pageNum=5,myID='console',){
-    // if(pageShowNum<3){
-    //     pageShowNum=3;
-    // }
-    // if(pageShowNum>pageNum){
-    //     pageShowNum=pageNum;  //防止页面过少的情况
-    // }
-    //删除元素
-    $fatherObject.find('*').remove();
+function generatePageItems(callBackfun=null,pageNum=5,myID='console',){
+
+    $nav = $('<nav></nav>');
+    $pageUl=$('<ul class="pagination pagination-sm justify-content-center" id="page-bar"></ul>');
+    $nav.append($pageUl);
+
+    $pageUl.find('*').remove();
     //缓存当前页数（1）
-    $fatherObject.data('currentPage',1);
+    $pageUl.data('currentPage',1);
     //缓存总页数
-    $fatherObject.data('pageNum',pageNum);
+    $pageUl.data('pageNum',pageNum);
     //上一页按钮
     var $liP = $('<li class="page-item disabled">\n' +
         '                            <a class="page-link" href="#" id="'+myID+'-page-previous">Previous</a>\n' +
         '                        </li>');
-    $fatherObject.append($liP);
-
+    $pageUl.append($liP);
     //动态添加
     for(var i=1;i<=pageNum;i++){
         var $li = $('<li class="page-item">\n' +
@@ -144,7 +205,7 @@ function generatePageItems($fatherObject,callBackfun=null,pageNum=5,myID='consol
             '                        </li>');
         $li.children('a').attr('id',myID+'-page-'+i);
         $li.children('a').text(i);
-        $fatherObject.append($li);
+        $pageUl.append($li);
     }
     //添加next按钮
     var $liN = $('<li class="page-item">\n' +
@@ -153,66 +214,83 @@ function generatePageItems($fatherObject,callBackfun=null,pageNum=5,myID='consol
     if(pageNum==1){
         $liN.addClass('disabled');
     }
-    $fatherObject.append($liN);
+    $pageUl.append($liN);
 
     //添加激活效果
-    $('#'+myID+'-page-1').parent().addClass('active');
-    $('#page-bar *a').on('click',function () {
-        //取消激活状态
-        var pageNum = $fatherObject.data('pageNum');
-        var currentPage=$fatherObject.data('currentPage');
-        $('#'+myID+'-page-'+currentPage).parent().removeClass('active');
-        if($(this).attr('id')=="page-previous"){                                 //获取当前的active
-            currentPage-=1;                                                         //当前页-1
-            $('#'+myID+'-page-'+currentPage).parent().addClass('active');                     //激活效果
-            $fatherObject.data('currentPage',currentPage);                           //储存
-        }
-        else if($(this).attr('id')==myID+"-page-next" ){
-            currentPage+=1;  //当前页+1
-            $('#'+myID+'-page-'+currentPage).parent().addClass('active');
-            $fatherObject.data('currentPage',currentPage);
-        }else{
-            $(this).parent().addClass('active');
-            currentPage =  $(this).attr('id').split('-').pop();
-            $fatherObject.data('currentPage',currentPage);
-        }
-        if(pageNum==1){
-            $('#'+myID+'-page-previous').parent().addClass('disabled');
-            $("#page-next").parent().addClass('disabled');
-        }
-        else if(currentPage==1){
-            $('#'+myID+'-page-previous').parent().addClass('disabled');
-            $('#'+myID+'-page-next').parent().removeClass('disabled');
-        }else if(currentPage==pageNum){
-            $('#'+myID+'-page-previous').parent().removeClass('disabled');
-            $('#'+myID+'-page-next').parent().addClass('disabled');
-        }else{
-            $('#'+myID+'-page-previous').parent().removeClass('disabled');
-            $('#'+myID+'-page-next').parent().removeClass('disabled');
-        }
-        //执行回调函数
-        callBackfun(currentPage,pageNum);
+    $liN.addClass('disabled');
+    $pageUl.find('li').eq(1).addClass('active');
+    $pageUl.find('a').each(function(index,element){
+        $(this).on('click',function(){
+            var pageNum = $pageUl.data('pageNum');
+            var currentPage=$pageUl.data('currentPage');
+            //取消激活状态
+            $pageUl.find('li').eq(currentPage).removeClass('active');
+            if($(this).attr('id')=="page-previous"){                                 //获取当前的active
+                currentPage-=1;                                                         //当前页-1
+            }
+            else if($(this).attr('id')==myID+"-page-next" ){
+                currentPage+=1;  //当前页+1
+            }else{
+                currentPage =  $(this).attr('id').split('-').pop();
+            }
+            //添加激活状态
+            $pageUl.find('li').eq(currentPage).addClass('active');
+            //设置 pre 和next的状态
+            if(pageNum<=1){
+                $liP.addClass('disabled');
+                $liN.addClass('disabled');
+            }
+            else if(currentPage==1){
+                $liP.addClass('disabled');
+                $liN.removeClass('disabled');
+            }else if(currentPage==pageNum){
+                $liP.removeClass('disabled');
+                $liN.addClass('disabled');
+            }else{
+                $liP.removeClass('disabled');
+                $liN.removeClass('disabled');
+            }
+            //执行回调函数
+            callBackfun(currentPage,pageNum);
+        })
     });
+    return $nav;
 }
 
+function setNumInfo(id,num,maxNum=99){
+    $('#'+id).children('span.num-info').remove();
+    if(num<=maxNum){
+        $('#'+id).append('<span class="num-info">'+num+'</span>');
+    }else{
+        $('#'+id).append('<span class="num-info">99+</span>');
+    }
+}
 
-
+function showQRCode(act_uuid){
+    $.ajax({
+        type:'GET',
+        data:{uuid_act:act_uuid},
+        dataType: 'json',
+        success:function (data) {
+            url='QRCode.html?src='+data['qrcode'];
+            window.open(url, '入场二维码','height:500px,width=500px,location=no,menubar=no,toolbar=no');
+        }
+    })
+}
 //浏览器加载时运行
 $(function () {
     //分页按钮点击
     //面包屑导航栏要用的字典
     var breadDict={
-        "management-unpublished":['活动管理','未发布'],
-        "management-published":['活动管理','已发布'],
-        "management-processing":['活动管理','进行中'],
-        "management-finished":['活动管理','已结束'],
-        "management-to_be_audited":['活动管理','待审核'],
-        "my-not_start":['我的活动','未开始'],
-        "my-processing":['我的活动','进行中'],
-        "my-finished":['我的活动','已结束'],
-        "fav-not_start":['我的收藏','未开始'],
-        "fav-processing":['我的收藏','进行中'],
-        "fav-finished":['我的收藏','已结束']
+        management:'活动管理',
+        my:'我的活动',
+        fav:'我的收藏',
+        unpublished:'未发布',
+        published:'未开始',
+        processing:'进行中',
+        not_start:'未开始',
+        to_be_audited:'待审核',
+        finished:'已结束'
     }
 
     //新建会议的跳转
@@ -227,21 +305,30 @@ $(function () {
             window.location.href="index.html"
         })
     })
-
-    //未开始等按钮的跳转
-    $("div.function-list *div.collapse *a").on('click',function () {
+    //大模块点击效果
+    $("div.function-list *a[data-toggle='collapse']").on('click',function(){
         $('.breadcrumb *li').remove();
-        //实现按钮点击效果
-        $(this).parent().parent().find('a').removeClass('active');
-        $(this).addClass('active');
-        $(this).parent('div').prev('a').addClass('active');
-        //更改面包导航栏
+        $(this).parent().find('a').removeClass('active');
         items=breadDict[$(this).attr('id')];
         $('.breadcrumb').append(' <li class="breadcrumb-item"><a herf="#">控制台</a></li>');
-        $('.breadcrumb').append(' <li class="breadcrumb-item"><a herf="#">'+items[0]+'</a></li>');
-        $('.breadcrumb').append(' <li class="breadcrumb-item active"><a herf="#">'+items[1]+'</a></li>');
+        $('.breadcrumb').append(' <li class="breadcrumb-item active"><a herf="#">'+items+'</a></li>');
+        $(this).addClass('active');
+    })
+    //未开始等按钮的跳转
+    $("div.function-list *div.collapse *a").on('click',function () {
+
+        //实现按钮点击效果
+        $(this).parent('div').find('*').removeClass('active');
+        $(this).addClass('active');
+        //更改面包导航栏
+        item=breadDict[$(this).attr('id').split('-')[1]];
+        if($('.breadcrumb').find('li').length>=3){
+            $('.breadcrumb').find('li:last-child').remove();
+        }
+        $('.breadcrumb').find('li').removeClass('active');
+        $('.breadcrumb').append(' <li class="breadcrumb-item active"><a herf="#">'+item+'</a></li>');
         //向前端请求数据 并更新首页列表,产生分页栏
-        getActivityList("api/activity/pageDisplay/",$(this).attr('id'),1,5,true);
+        getActivityList("api/activity/pageDisplay/",$(this).attr('id'),1,5,$('#activity-content-div'),true);
     });
 
 });
