@@ -153,6 +153,52 @@ $(function () {
         }
     })
 })
+function agree()
+{
+    var x;
+    var r=confirm("确定同意吗!");
+    if (r==true)
+    {
+        var act_uuid = getParameter()['id']
+        $.ajax({
+            url: "api/activity/adminAgreeDelete/",
+            dataType: "json",
+            data:{act_uuid:act_uuid},
+            type: "post",
+            success: function (data)
+            {
+                window.location.reload()
+            },
+            error: function ()
+            {
+                alert("出问题了");
+            }
+        });
+    }
+}
+function disagree()
+{
+    var x;
+    var r=confirm("确定拒绝吗!");
+    if (r==true)
+    {
+        var act_uuid = getParameter()['id']
+        $.ajax({
+            url: "api/activity/adminRefuseDelete/",
+            dataType: "json",
+            data:{act_uuid:act_uuid},
+            type: "post",
+            success: function (data)
+            {
+                window.location.reload()
+            },
+            error: function ()
+            {
+                alert("出问题了");
+            }
+        });
+    }
+}
 
 
 

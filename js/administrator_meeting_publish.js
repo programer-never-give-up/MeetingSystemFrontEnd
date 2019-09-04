@@ -132,9 +132,7 @@ $(function () {
         type:"GET",
         dataType:'json',
         success:function (data) {
-            //设置按钮
             console.log(data);
-            setPageButton(data['roleType'],data['status_publish'],data['status_process'],act_uuid);
             setActivityInfo(data);
             toastMessage("获取会议信息成功！");
         },
@@ -143,3 +141,49 @@ $(function () {
         }
     })
 })
+function agree()
+{
+    var x;
+    var r=confirm("确定同意吗!");
+    if (r==true)
+    {
+        var act_uuid = getParameter()['id']
+        $.ajax({
+            url: "api/activity/adminAgreePublish/",
+            dataType: "json",
+            data:{act_uuid:act_uuid},
+            type: "post",
+            success: function (data)
+            {
+                window.location.reload()
+            },
+            error: function ()
+            {
+                alert("出问题了");
+            }
+        });
+    }
+}
+function disagree()
+{
+    var x;
+    var r=confirm("确定拒绝吗!");
+    if (r==true)
+    {
+        var act_uuid = getParameter()['id']
+        $.ajax({
+            url: "api/activity/adminRefusePublish/",
+            dataType: "json",
+            data:{act_uuid:act_uuid},
+            type: "post",
+            success: function (data)
+            {
+                window.location.reload()
+            },
+            error: function ()
+            {
+                alert("出问题了");
+            }
+        });
+    }
+}
