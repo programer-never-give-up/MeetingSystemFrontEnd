@@ -46,7 +46,18 @@ function setPageButton(roleType,status_publish,status_process,act_uuid){
             $btnPublish = $('<button type="button" class="btn btn-primary" id="btn-publish" >发布</button>');
             $('#user-button-group').append($btnPublish);
             $('#btn-publish').on('click',function () {
-;
+                $.ajax({
+                    url: "/api/activity/publishActivity/",
+                    type: "POST",
+                    data: {act_uuid: act_uuid},
+                    dataType: 'json',
+                    success: function (data) {
+                        toastMessage(data['message']);
+                    },
+                    error: function () {
+                        toastMessage("发布请求提交失败");
+                    }
+                });
             })
         }
     }else if(roleType==1){            //非主办方
@@ -62,7 +73,7 @@ function setPageButton(roleType,status_publish,status_process,act_uuid){
                         data: {uuid_act: act_uuid},
                         dataType: 'json',
                         success: function (data) {
-                            toastMessage('报名请求提交成功！' + data['message']);
+                            toastMessage(data['message']);
                         },
                         error: function () {
                             toastMessage("报名失败");
