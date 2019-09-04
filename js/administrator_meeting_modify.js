@@ -213,7 +213,7 @@ function agree()
             type: "post",
             success: function (data)
             {
-                window.location.reload()
+               window.location.href = 'Administrators.html';
             },
             error: function ()
             {
@@ -236,7 +236,7 @@ function disagree()
             type: "post",
             success: function (data)
             {
-                window.location.reload()
+               window.location.href = 'Administrators.html';
             },
             error: function ()
             {

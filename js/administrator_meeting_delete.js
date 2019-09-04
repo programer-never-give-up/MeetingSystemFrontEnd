@@ -144,7 +144,6 @@ $(function () {
         success:function (data) {
             //设置按钮
             console.log(data);
-            setPageButton(data['roleType'],data['status_publish'],data['status_process'],act_uuid);
             setActivityInfo(data);
             toastMessage("获取会议信息成功！");
         },
@@ -167,7 +166,7 @@ function agree()
             type: "post",
             success: function (data)
             {
-                window.location.reload()
+                window.location.href = 'Administrators.html';
             },
             error: function ()
             {
@@ -190,7 +189,7 @@ function disagree()
             type: "post",
             success: function (data)
             {
-                window.location.reload()
+                window.location.href = 'Administrators.html';
             },
             error: function ()
             {
