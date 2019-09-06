@@ -53,7 +53,7 @@ function setPageButton(roleType,status_publish,status_process,act_uuid){
                     dataType: 'json',
                     success: function (data) {
                         toastMessage(data['message']);
-                        window.location='Personal_Center.html'
+                        window.location='console.html'
                     },
                     error: function () {
                         toastMessage("发布请求提交失败");
