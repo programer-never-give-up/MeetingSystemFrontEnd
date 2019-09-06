@@ -28,6 +28,69 @@
 //     }
 // });
 
+/**
+ * @author:chonepieceyb
+ * @usage:实现列表的向上滚动效果
+ * @param ulID   ul的jQ对象（对ul以下的li元素实现滚动效果
+ * @param showNum :列表展示的数目
+ * @param timeStep :间隔时间
+ */
+function wheelList(ulObject,showNum=3,timeStep=3000){
+    var $ul=ulObject
+    var liNum = $ul.children('li').length;
+    if(liNum<=showNum){
+        showNum=liNum;
+    }
+    function scorll(){
+        if(showNum<liNum) {
+            var $firstLi = $ul.children('li:first');
+            var $nextLi = $ul.children('li').eq(showNum);  //第showNum+1个
+            var height = $firstLi.height;
+            //让高度为0
+            if(!$firstLi.is(":animated")) {
+                $firstLi.animate({
+                    height: 'hide',
+                    opacity: 'hide'
+                }, 1000, function () {
+                    //将第一个移除，区别于remove
+                    $firstLi.addClass('whell-item-invisible');
+                    $firstLi.remove();
+                    $ul.append($firstLi);
+                    $firstLi.addClass('whell-item-invisible');
+                });
+            }
+            $nextLi.removeClass('whell-item-invisible');
+            if(!$nextLi.is(":animated")) {
+                $nextLi.animate({
+                    height: 'show',
+                    opacity: 'show'
+                }, 1000);
+            }
+        }else{
+            console.log('第二种情况');
+            //否则将最后一个添加到末尾
+            var $firstLi = $ul.children('li:first');
+            var height = $firstLi.height;
+            $firstLi.animate({
+                height:height,
+                opacity: 1
+            }, 500, function () {
+                //将第一个移除，区别于remove
+                $firstLi.detach();
+                //将第一个li添加到末端
+                $firstLi.css('height',height);
+                $firstLi.css('opacity',1);
+                $firstLi.css('height','');
+                $firstLi.css('opacity','');
+                $ul.append($firstLi);
+
+            });
+        }
+    }
+    setInterval(function(){scorll()}, timeStep);
+}
+
+
 var data=
     {
         "act": [
@@ -81,46 +144,116 @@ var data=
 //         ]
 // };
 
+
+/**
+ * @ussage:渲染主页
+ * @param data
+ */
+function renderIndex(data) {
+    for (var i = 0; i < data.act.length; i++) {
+        //用JQuery重写
+
+        var $itemCard = $('<li class="item-card" style="clear:both"></li>');     //添加card主体
+        if (i>=2){
+            $itemCard.addClass('whell-item-invisible');
+        }
+        var $imgDiv = $('<h1><img src="' + data.act[i].logoSrc + '"></h1>');    //添加头像区域
+
+        var $infoDiv = $('<div class="item-info"></div>');
+
+        var $titleLink = $('<a><h2></h2></a>');      //标题和头像链接
+        $titleLink.attr('href', 'show_meeting_info.html?id=' + data.act[i].uuid);
+        $titleLink.children('h2').text(data.act[i].activityName);
+        $infoDiv.append($titleLink);
+
+        var $timeh = $('<h3></h3>');                     //时间
+        $timeh.html('时间:' + data.act[i].time.startTime + '——' + data.act[i].time.endTime);
+        $infoDiv.append($timeh);
+
+        var $locationh = $('<h3></h3>');            //地点
+        $locationh.html('地点：' + data.act[i].location);
+        $infoDiv.append($locationh);
+
+        var $organizerh = $('<h3></h3>');          //主办方
+        $organizerh.html("主办方:" + data.act[i].organizer);
+        $infoDiv.append($organizerh);
+
+        var $btnLink = $('<a><button class="btn btn-primary">查看详情</button></a>');  //查看详情按钮
+        $btnLink.attr('href', 'show_meeting_info.html?id=' + data.act[i].uuid);
+        $infoDiv.append($btnLink);
+
+        //添加元素
+        $itemCard.append($imgDiv);
+        $itemCard.append($infoDiv);
+        console.log($itemCard.html());
+        $('#recommend').append($itemCard);
+    }
+}
+
+function renderRecent(data){
+    for (var i = 0; i <data["list_activity"].length; i++)
+    {
+        $itemCard = $('<li class="recent_activity_item"></li>');   //卡片主体
+
+        $img = $('<img class="align-middle">');             //logo
+        $img.attr('src',data['list_activity'][i]["logo"]);
+        $itemCard.append($img);
+
+        $itemInfo=$('<div class="d-inline-block align-middle ml-2"></div>');
+
+        $titleLink =$('<a><h3></h3></a>');
+        $titleLink.children('h3').text(data["list_activity"][i]["name_act"]);
+        $titleLink.attr('href','show_meeting_info.html?id='+data["list_activity"][i]["uuid_act"]);
+        $itemInfo.append($titleLink);
+
+        $itemInfo.append('<div class="recent_activity_info"></div>');
+        $itemInfo.children('div.recent_activity_info').append('<span>时间:'+data["list_activity"][i]["start_time"]+" ");   //添加时间
+        $itemInfo.children('div.recent_activity_info').append('<span>地点:'+data["list_activity"][i]["location"]);   //添加时间
+
+        $itemCard.append($itemInfo);
+        $('#latestAct').append($itemCard);
+    }
+}
 function Render ()
 {
-    for (var i = 0; i < data.act.length; i++)
-    {
-        var gF = document.createElement("li");
-        gF.className = "item-card";
-        var F1 = document.createElement("h1");
-        var S1 = document.createElement("img");
-        S1.src = data.act[i].logoSrc;
-        F1.appendChild(S1);
-        var F2 = document.createElement("div");
-        F2.className = "item-info";
-        var S2 = document.createElement("a");
-        var S4 = document.createElement("a");
-        S2.setAttribute('href', data.act[i].detail);
-        S4.setAttribute('href', data.act[i].detail);
-        var gS1 = document.createElement("h2");
-        var gS2 = document.createElement("button");
-        gS2.innerText = "查看详情";
-        gS2.className = "btn btn-info";
-        gS2.onclick = "location='data.act[i].detail'";
-        var S3 = document.createElement("h3");
-        var S6 = document.createElement("h3");
-        var S5 = document.createElement("h3");
-        S3.innerText = "地点：" + data.act[i].location + " 时间：" + data.act[i].time.startTime + "——" + data.act[i].time.endTime;
-        S5.innerText = data.act[i].organizer;
-        S6.innerText = data.act[i].introduction;
-        gS1.innerText = data.act[i].activityName;
-        S2.appendChild(gS1);
-        S4.appendChild(gS2);
-        F2.appendChild(S2);
-        F2.appendChild(S3);
-        F2.appendChild(S5);
-        F2.appendChild(S6);
-        F2.appendChild(S4);
-        gF.appendChild(F1);
-        gF.appendChild(F2);
-        var x = document.getElementById("recommend");
-        x.appendChild(gF);
-    }
+
+    renderIndex(data);
+  //  wheelList($('#recommend'),2);
+    // var gF = document.createElement("li");
+        // gF.className = "item-card";
+        // var F1 = document.createElement("h1");
+        // var S1 = document.createElement("img");
+        // S1.src = data.act[i].logoSrc;
+        // F1.appendChild(S1);
+        // var F2 = document.createElement("div");
+        // F2.className = "item-info";
+        // var S2 = document.createElement("a");
+        // var S4 = document.createElement("a");
+        // S2.setAttribute('href', data.act[i].detail);
+        // S4.setAttribute('href', data.act[i].detail);
+        // var gS1 = document.createElement("h2");
+        // var gS2 = document.createElement("button");
+        // gS2.innerText = "查看详情";
+        // gS2.className = "btn btn-info";
+        // gS2.onclick = "location='data.act[i].detail'";
+        // var S3 = document.createElement("h3");
+        // var S6 = document.createElement("h3");
+        // var S5 = document.createElement("h3");
+        // S3.innerText = "地点：" + data.act[i].location + " 时间：" + data.act[i].time.startTime + "——" + data.act[i].time.endTime;
+        // S5.innerText = data.act[i].organizer;
+        // S6.innerText = data.act[i].introduction;
+        // gS1.innerText = data.act[i].activityName;
+        // S2.appendChild(gS1);
+        // S4.appendChild(gS2);
+        // F2.appendChild(S2);
+        // F2.appendChild(S3);
+        // F2.appendChild(S5);
+        // F2.appendChild(S6);
+        // F2.appendChild(S4);
+        // gF.appendChild(F1);
+        // gF.appendChild(F2);
+        // var x = document.getElementById("recommend");
+        // x.appendChild(gF);
 
     $.ajax({
 
@@ -129,37 +262,39 @@ function Render ()
         type: "GET",
         success: function (data)
         {
-            for (var i = 0; i <data["list_activity"].length; i++)
-            {
-                var gF = document.createElement("li");
-                gF.className = "recent_activity_item";
-                var F1 = document.createElement("img");
-                var F2 = document.createElement("div");
-                F2.className = "d-inline-block align-middle ml-2";
-                F1.className = "align-middle";
-                var S1 = document.createElement("a");
-                var S2 = document.createElement("div");
-                S2.className = "recent_activity_info";
-                var gS2 = document.createElement("span");
-                var gS3 = document.createElement("span");
-				var baseUrl = "show_meeting_info.html";
-                var Url = baseUrl + "?id=" +data["list_activity"][i]["uuid_act"];
-                S1.setAttribute('href', Url);
-                var gS1 = document.createElement("h3");
-                gS3.innerText = data["list_activity"][i]["location"];
-                gS2.innerText =data["list_activity"][i]["start_time"]+ "-" + data["list_activity"][i]["end_time"]+ " ";
-                gS1.innerText =  data["list_activity"][i]["name_act"];
-                F1.src =  data["list_activity"][i]["logo"];
-                F2.appendChild(S1);
-                F2.appendChild(S2);
-                S1.appendChild(gS1);
-                S2.appendChild(gS2);
-                S2.appendChild(gS3);
-                gF.appendChild(F1);
-                gF.appendChild(F2);
-                var x = document.getElementById("latestAct");
-                x.appendChild(gF);
-            }
+            renderRecent(data);
+            wheelList($('#latestAct'),2);
+            // for (var i = 0; i <data["list_activity"].length; i++)
+            // {
+            //     var gF = document.createElement("li");
+            //     gF.className = "recent_activity_item";
+            //     var F1 = document.createElement("img");
+            //     var F2 = document.createElement("div");
+            //     F2.className = "d-inline-block align-middle ml-2";
+            //     F1.className = "align-middle";
+            //     var S1 = document.createElement("a");
+            //     var S2 = document.createElement("div");
+            //     S2.className = "recent_activity_info";
+            //     var gS2 = document.createElement("span");
+            //     var gS3 = document.createElement("span");
+			// 	var baseUrl = "show_meeting_info.html";
+            //     var Url = baseUrl + "?id=" +data["list_activity"][i]["uuid_act"];
+            //     S1.setAttribute('href', Url);
+            //     var gS1 = document.createElement("h3");
+            //     gS3.innerText = data["list_activity"][i]["location"];
+            //     gS2.innerText =data["list_activity"][i]["start_time"]+ "-" + data["list_activity"][i]["end_time"]+ " ";
+            //     gS1.innerText =  data["list_activity"][i]["name_act"];
+            //     F1.src =  data["list_activity"][i]["logo"];
+            //     F2.appendChild(S1);
+            //     F2.appendChild(S2);
+            //     S1.appendChild(gS1);
+            //     S2.appendChild(gS2);
+            //     S2.appendChild(gS3);
+            //     gF.appendChild(F1);
+            //     gF.appendChild(F2);
+            //     var x = document.getElementById("latestAct");
+            //     x.appendChild(gF);
+            // }
         },
         error: function ()
         {
@@ -167,6 +302,7 @@ function Render ()
         }
     });
 }
+
 
 
 

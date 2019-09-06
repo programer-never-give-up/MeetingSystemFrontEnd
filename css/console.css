@@ -1,0 +1,20 @@
+.shadow-box{
+    /*perspective: 500px;*/
+    /*-webkit-perspective: 500px; !* Safari and Chrome *!*/
+    box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.2);
+
+}
+.btn-primary-shadow{
+    text-shadow: 0 -1px 0 rgba(0,0,0,.3);
+    box-shadow: 0 4px 4px 0 #fa3434, 5px 5px 10px 1px rgba(0,0,0,0.2);
+}
+.item-row-shadow{
+    box-shadow: 0 0 10px 1px rgba(0,0,0,0.2);
+}
+/*.stage-float-item{*/
+/*    -webkit-transform: translateZ(-10px);*/
+/*    background: white;*/
+/*    position:relative;*/
+/*    z-index: auto;*/
+
+/*}*/
