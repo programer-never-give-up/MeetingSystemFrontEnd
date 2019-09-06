@@ -19,6 +19,9 @@ function checkLogin(isRedirect, loginStatusToRedirect=false) {
                }
            }
            var navList = $('.nav-list');
+           navList.before(generateSearchBar(function (resultDiv,keyword) {
+               searchCallBack(resultDiv,keyword);
+           }));
            navList.append('<a href="console.html" class="nav-list-item">控制台</a>');
            navList.append('<a href="Personal_Center.html" class="nav-list-item">个人中心</a>');
            navList.append('<span style="color: #ff5722;" class="nav-list-item">' +
@@ -33,6 +36,9 @@ function checkLogin(isRedirect, loginStatusToRedirect=false) {
                }
            }
            var navList = $('.nav-list');
+           navList.before(generateSearchBar(function (resultDiv,keyword) {
+               searchCallBack(resultDiv,keyword);
+           }));
            navList.append('<a href="login.html" class="nav-list-item">登录</a>');
            navList.append('<a href="register.html" class="nav-list-item">注册</a>');
        }
@@ -120,4 +126,107 @@ function checkRequired(className){
         }
     });
     return flag;
+}
+
+/**
+ * $author chonepieceyb
+ * @param fatherObject  搜索框的父对象
+ * @param callBackFunction  回调函数
+ */
+function generateSearchBar(callbackFun=null) {
+    $searchDic = $('<div class="input-group search-box"></div>');
+    //添加label和图标
+    $searchIcon= $('<img class="search-icon" "></img>');
+    //搜索图标
+    $searchIcon.attr('src',"images/icons/search.png");
+    $searchDic.append($searchIcon);
+    $searchInput=$('<input type="text" list="search-result-list" placeholder="搜索" class="search-input" id="search-input">')
+    $searchDic  .append($searchInput);
+
+    //设置搜索结果框框
+    $resultDiv = $('<div class="card result-card" >\n' +
+        '                <div class="card-body">\n' +
+        '                    <table class="table table-hover table-borderless">\n' +
+        '                       <tbody id="search-result-body">\n' +
+        '            \n' +
+        '                       </tbody>\n' +
+        '                   </table>\n' +
+        '               </div>\n' +
+        '          </div>');
+    $resultDiv.hide();
+    $searchDic.append($resultDiv);
+    $searchInput.on('focus',function () {
+        $searchInput.parent().animate({
+            width:800,
+            },300,function () {
+                $searchInput.css('width','700px')
+            }
+        );
+        searchCallBack($resultDiv,$searchInput.val());
+
+    });
+    $('body').bind('click',function (event) {
+        if(event.target.id!='search-input' && event.target.id!="search-result-body"){
+            $searchInput.parent().animate({
+                    width:300,
+                },300
+            );
+            $searchInput.animate({
+                    width:250,
+                },300
+            );
+            $resultDiv.hide();
+        }
+
+    });
+    $searchInput.bind('input propertychange',function () {
+        callbackFun($resultDiv,$searchInput.val());
+    });
+    return  $searchDic;
+}
+
+
+/**
+ * @author choenpeiceyb
+ * @usage: 获得搜索结果
+ * @param $resultDiv
+ * @param keyword
+ */
+function searchCallBack($resultDiv,keyword){
+    //向服务器请求数据
+    $.ajax({
+        type:'GET',
+        data:{keyword:keyword},
+        url:"api/yw/search/",
+        dataType:'json',
+        success:function(data){
+            var $rusultBody=$resultDiv.find('tbody');
+            $rusultBody.find('*').remove(); //删除所有数
+            console.log(data);
+            toastMessage(data['message']);
+            activitys= data['list_activity'];
+            if(activitys.length>0){
+                for(let i=0;i<activitys.length;i++){
+                    activity=activitys[i];
+                    var $activityRow=$('<tr style="display: flex;align-items:center; ">\n' +
+                        '    <td></td>\n' +                      //logo
+                        '    <td></td>\n' +                      //名称
+                        '    <td></td>\n' +                      //地点
+                        '    <td></td>\n' +                     //时间
+                        '</tr>')
+                    //插入logo
+                    $activityRow.find('td').eq(0).append('<img style="width: 40px;height: 40px"  src="'+activity['logo']+'">');
+                    $activityRow.find('td').eq(1).append('<a href="show_meeting_info.html?id='+activity['uuid_act']+'">' +activity['name_act']+'</a>' ); //名称
+                    $activityRow.find('td').eq(2).text(activity['location']);         //插入地点
+                    $activityRow.find('td').eq(3).text(activity['start_time']+' —— '+activity['end_time']);   //插入时间
+                    $rusultBody.append( $activityRow);
+
+                }
+                $resultDiv.show();
+            }
+        },
+        error:function () {
+            toastMessage('搜索失败');
+        }
+    })
 }

@@ -13,7 +13,7 @@ function deleteActivity(uuid){
         data:{uuid:uuid},
         success:function (data) {
             toastMessage(data['message']);
-            $('#delete-button-'+uuid).parent().remove();
+            $('#delete-button-'+uuid).parent().parent().remove();
         },
         error:function () {
             toastMessage('请求提交失败');
