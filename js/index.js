@@ -35,59 +35,54 @@
  * @param showNum :列表展示的数目
  * @param timeStep :间隔时间
  */
-function wheelList(ulObject,showNum=3,timeStep=3000){
-    var $ul=ulObject
+function wheelList(ulObject,interval,showNum=3,timeStep=3000){
+    var $ul=ulObject;
+
+    $ul.find('li').css('position','absolute');    //设置位置属性
     var liNum = $ul.children('li').length;
+    var outerheight = $ul.children('li:first').outerHeight()+interval;
+    $ul.innerHeight(outerheight*showNum);
     if(liNum<=showNum){
-        showNum=liNum;
+        showNum=liNum-1;
+    }
+    function moveUp(dis) {
+        $ul.find('li').each(function (index) {
+            let top= $(this).position().top;
+            top-=dis;
+            $(this).animate({top:top},400,'linear',function () {
+                //处理越界
+                if(top<=-dis){
+                  $(this).css('top',outerheight*(liNum-1)+'px');
+                }
+            })
+        });
     }
     function scorll(){
-        if(showNum<liNum) {
-            var $firstLi = $ul.children('li:first');
-            var $nextLi = $ul.children('li').eq(showNum);  //第showNum+1个
-            var height = $firstLi.height;
-            //让高度为0
-            if(!$firstLi.is(":animated")) {
-                $firstLi.animate({
-                    height: 'hide',
-                    opacity: 'hide'
-                }, 1000, function () {
-                    //将第一个移除，区别于remove
-                    $firstLi.addClass('whell-item-invisible');
-                    $firstLi.remove();
-                    $ul.append($firstLi);
-                    $firstLi.addClass('whell-item-invisible');
-                });
-            }
-            $nextLi.removeClass('whell-item-invisible');
-            if(!$nextLi.is(":animated")) {
-                $nextLi.animate({
-                    height: 'show',
-                    opacity: 'show'
-                }, 1000);
-            }
-        }else{
-            console.log('第二种情况');
-            //否则将最后一个添加到末尾
-            var $firstLi = $ul.children('li:first');
-            var height = $firstLi.height;
-            $firstLi.animate({
-                height:height,
-                opacity: 1
-            }, 500, function () {
-                //将第一个移除，区别于remove
-                $firstLi.detach();
-                //将第一个li添加到末端
-                $firstLi.css('height',height);
-                $firstLi.css('opacity',1);
-                $firstLi.css('height','');
-                $firstLi.css('opacity','');
-                $ul.append($firstLi);
-
-            });
-        }
+        // var $firstLi = $ul.children('li:first');
+        // var $nextLi = $ul.children('li').eq(showNum);  //第showNum+1个
+        // var height = $firstLi.height;
+        // //让高度为0
+        // if(!$firstLi.is(":animated")) {
+        //     $firstLi.animate({
+        //         height: 'hide',
+        //         opacity: 'hide'
+        //     }, 1000, function () {
+        //         //将第一个移除，区别于remove
+        //         $firstLi.addClass('whell-item-invisible');
+        //         $firstLi.remove();
+        //         $ul.append($firstLi);
+        //         $firstLi.addClass('whell-item-invisible');
+        //     });
+        // }
+        // $nextLi.removeClass('whell-item-invisible');
+        // if(!$nextLi.is(":animated")) {
+        //     $nextLi.animate({
+        //         height: 'show',
+        //         opacity: 'show'
+        //     }, 1000);
+        // }
     }
-    setInterval(function(){scorll()}, timeStep);
+    setInterval(function(){moveUp(outerheight)}, timeStep);
 }
 
 
@@ -146,17 +141,17 @@ var data=
 
 
 /**
- * @ussage:渲染主页
- * @param data
+ *
+ * @param data 数据
+ * @param h    一行的高度
+ * @param showNum  展示的数目
  */
-function renderIndex(data) {
+function renderIndex(data,interval=0) {
     for (var i = 0; i < data.act.length; i++) {
         //用JQuery重写
 
         var $itemCard = $('<li class="item-card" style="clear:both"></li>');     //添加card主体
-        if (i>=2){
-            $itemCard.addClass('whell-item-invisible');
-        }
+
         var $imgDiv = $('<h1><img src="' + data.act[i].logoSrc + '"></h1>');    //添加头像区域
 
         var $infoDiv = $('<div class="item-info"></div>');
@@ -185,12 +180,14 @@ function renderIndex(data) {
         //添加元素
         $itemCard.append($imgDiv);
         $itemCard.append($infoDiv);
-        console.log($itemCard.html());
         $('#recommend').append($itemCard);
+        var outerHeight=$itemCard.outerHeight()+interval;
+        $itemCard.css('top',outerHeight*i+'px');
+
     }
 }
 
-function renderRecent(data){
+function renderRecent(data,interval=0){
     for (var i = 0; i <data["list_activity"].length; i++)
     {
         $itemCard = $('<li class="recent_activity_item"></li>');   //卡片主体
@@ -212,13 +209,15 @@ function renderRecent(data){
 
         $itemCard.append($itemInfo);
         $('#latestAct').append($itemCard);
+        var outerHeight= $itemCard.outerHeight()+interval;
+        $itemCard.css('top',outerHeight*i+'px');
     }
 }
 function Render ()
 {
 
     renderIndex(data);
-  //  wheelList($('#recommend'),2);
+     wheelList($('#recommend'),0,2);
     // var gF = document.createElement("li");
         // gF.className = "item-card";
         // var F1 = document.createElement("h1");
@@ -263,7 +262,7 @@ function Render ()
         success: function (data)
         {
             renderRecent(data);
-            wheelList($('#latestAct'),2);
+            wheelList($('#latestAct'),0,3);
             // for (var i = 0; i <data["list_activity"].length; i++)
             // {
             //     var gF = document.createElement("li");

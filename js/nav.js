@@ -194,6 +194,9 @@ function generateSearchBar(callbackFun=null) {
  */
 function searchCallBack($resultDiv,keyword){
     //向服务器请求数据
+    if(keyword=='' || keyword==null || keyword==undefined){
+        return;
+    }
     $.ajax({
         type:'GET',
         data:{keyword:keyword},

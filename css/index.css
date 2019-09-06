@@ -2,3 +2,10 @@
     display: none;
 
 }
+.whell-ul{
+    position:relative;
+    overflow:hidden;
+}
+.whell-li{
+    position:absolute;
+}
