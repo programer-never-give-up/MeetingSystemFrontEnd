@@ -41,10 +41,6 @@ function wheelList(ulObject,interval,showNum=3,timeStep=3000){
     $ul.find('li').css('position','absolute');    //设置位置属性
     var liNum = $ul.children('li').length;
     var outerheight = $ul.children('li:first').outerHeight()+interval;
-    $ul.innerHeight(outerheight*showNum);
-    if(liNum<=showNum){
-        showNum=liNum-1;
-    }
     function moveUp(dis) {
         $ul.find('li').each(function (index) {
             let top= $(this).position().top;
@@ -52,11 +48,16 @@ function wheelList(ulObject,interval,showNum=3,timeStep=3000){
             $(this).animate({top:top},400,'linear',function () {
                 //处理越界
                 if(top<=-dis){
-                  $(this).css('top',outerheight*(liNum-1)+'px');
+                    $(this).css('top',outerheight*(liNum-1)+'px');
                 }
             })
         });
     }
+    if(liNum<=showNum){
+        showNum=liNum;
+    }
+    $ul.innerHeight(outerheight*showNum);
+
     function scorll(){
         // var $firstLi = $ul.children('li:first');
         // var $nextLi = $ul.children('li').eq(showNum);  //第showNum+1个
@@ -82,7 +83,9 @@ function wheelList(ulObject,interval,showNum=3,timeStep=3000){
         //     }, 1000);
         // }
     }
-    setInterval(function(){moveUp(outerheight)}, timeStep);
+    if(showNum<liNum){
+        setInterval(function(){moveUp(outerheight)}, timeStep);
+    }
 }
 
 
@@ -147,34 +150,34 @@ var data=
  * @param showNum  展示的数目
  */
 function renderIndex(data,interval=0) {
-    for (var i = 0; i < data.act.length; i++) {
+    for (var i = 0; i < data.list_activity.length; i++) {
         //用JQuery重写
 
         var $itemCard = $('<li class="item-card" style="clear:both"></li>');     //添加card主体
 
-        var $imgDiv = $('<h1><img src="' + data.act[i].logoSrc + '"></h1>');    //添加头像区域
+        var $imgDiv = $('<h1><img src="' + data.list_activity[i].logo + '"></h1>');    //添加头像区域
 
         var $infoDiv = $('<div class="item-info"></div>');
 
         var $titleLink = $('<a><h2></h2></a>');      //标题和头像链接
-        $titleLink.attr('href', 'show_meeting_info.html?id=' + data.act[i].uuid);
-        $titleLink.children('h2').text(data.act[i].activityName);
+        $titleLink.attr('href', 'show_meeting_info.html?id=' + data.list_activity[i].uuid_act);
+        $titleLink.children('h2').text(data.list_activity[i].name_act);
         $infoDiv.append($titleLink);
 
         var $timeh = $('<h3></h3>');                     //时间
-        $timeh.html('时间:' + data.act[i].time.startTime + '——' + data.act[i].time.endTime);
+        $timeh.html('时间:' + data.list_activity[i].start_time + '——' + data.list_activity[i].end_time);
         $infoDiv.append($timeh);
 
         var $locationh = $('<h3></h3>');            //地点
-        $locationh.html('地点：' + data.act[i].location);
+        $locationh.html('地点：' + data.list_activity[i].location);
         $infoDiv.append($locationh);
 
         var $organizerh = $('<h3></h3>');          //主办方
-        $organizerh.html("主办方:" + data.act[i].organizer);
+        $organizerh.html("主办方:" + data.list_activity[i].organizer);
         $infoDiv.append($organizerh);
 
         var $btnLink = $('<a><button class="btn btn-primary">查看详情</button></a>');  //查看详情按钮
-        $btnLink.attr('href', 'show_meeting_info.html?id=' + data.act[i].uuid);
+        $btnLink.attr('href', 'show_meeting_info.html?id=' + data.list_activity[i].uuid);
         $infoDiv.append($btnLink);
 
         //添加元素
@@ -216,44 +219,23 @@ function renderRecent(data,interval=0){
 function Render ()
 {
 
-    renderIndex(data);
-     wheelList($('#recommend'),0,2);
-    // var gF = document.createElement("li");
-        // gF.className = "item-card";
-        // var F1 = document.createElement("h1");
-        // var S1 = document.createElement("img");
-        // S1.src = data.act[i].logoSrc;
-        // F1.appendChild(S1);
-        // var F2 = document.createElement("div");
-        // F2.className = "item-info";
-        // var S2 = document.createElement("a");
-        // var S4 = document.createElement("a");
-        // S2.setAttribute('href', data.act[i].detail);
-        // S4.setAttribute('href', data.act[i].detail);
-        // var gS1 = document.createElement("h2");
-        // var gS2 = document.createElement("button");
-        // gS2.innerText = "查看详情";
-        // gS2.className = "btn btn-info";
-        // gS2.onclick = "location='data.act[i].detail'";
-        // var S3 = document.createElement("h3");
-        // var S6 = document.createElement("h3");
-        // var S5 = document.createElement("h3");
-        // S3.innerText = "地点：" + data.act[i].location + " 时间：" + data.act[i].time.startTime + "——" + data.act[i].time.endTime;
-        // S5.innerText = data.act[i].organizer;
-        // S6.innerText = data.act[i].introduction;
-        // gS1.innerText = data.act[i].activityName;
-        // S2.appendChild(gS1);
-        // S4.appendChild(gS2);
-        // F2.appendChild(S2);
-        // F2.appendChild(S3);
-        // F2.appendChild(S5);
-        // F2.appendChild(S6);
-        // F2.appendChild(S4);
-        // gF.appendChild(F1);
-        // gF.appendChild(F2);
-        // var x = document.getElementById("recommend");
-        // x.appendChild(gF);
+    $.ajax({
 
+        url: "api/yw/showRecommendation/",
+        dataType: "json",
+        type: "GET",
+        success: function (data)
+        {
+            toastMessage(data['message']);
+            renderIndex(data);
+            wheelList($('#recommend'),0,3);
+
+        },
+        error: function ()
+        {
+            alert("出问题了");
+        }
+    });
     $.ajax({
 
         url: "api/yw/showRecent/",
@@ -261,39 +243,10 @@ function Render ()
         type: "GET",
         success: function (data)
         {
+            toastMessage(data['message']);
             renderRecent(data);
-            wheelList($('#latestAct'),0,3);
-            // for (var i = 0; i <data["list_activity"].length; i++)
-            // {
-            //     var gF = document.createElement("li");
-            //     gF.className = "recent_activity_item";
-            //     var F1 = document.createElement("img");
-            //     var F2 = document.createElement("div");
-            //     F2.className = "d-inline-block align-middle ml-2";
-            //     F1.className = "align-middle";
-            //     var S1 = document.createElement("a");
-            //     var S2 = document.createElement("div");
-            //     S2.className = "recent_activity_info";
-            //     var gS2 = document.createElement("span");
-            //     var gS3 = document.createElement("span");
-			// 	var baseUrl = "show_meeting_info.html";
-            //     var Url = baseUrl + "?id=" +data["list_activity"][i]["uuid_act"];
-            //     S1.setAttribute('href', Url);
-            //     var gS1 = document.createElement("h3");
-            //     gS3.innerText = data["list_activity"][i]["location"];
-            //     gS2.innerText =data["list_activity"][i]["start_time"]+ "-" + data["list_activity"][i]["end_time"]+ " ";
-            //     gS1.innerText =  data["list_activity"][i]["name_act"];
-            //     F1.src =  data["list_activity"][i]["logo"];
-            //     F2.appendChild(S1);
-            //     F2.appendChild(S2);
-            //     S1.appendChild(gS1);
-            //     S2.appendChild(gS2);
-            //     S2.appendChild(gS3);
-            //     gF.appendChild(F1);
-            //     gF.appendChild(F2);
-            //     var x = document.getElementById("latestAct");
-            //     x.appendChild(gF);
-            // }
+            wheelList($('#latestAct'),0,8);
+
         },
         error: function ()
         {
@@ -304,4 +257,71 @@ function Render ()
 
 
 
+// for (var i = 0; i <data["list_activity"].length; i++)
+// {
+//     var gF = document.createElement("li");
+//     gF.className = "recent_activity_item";
+//     var F1 = document.createElement("img");
+//     var F2 = document.createElement("div");
+//     F2.className = "d-inline-block align-middle ml-2";
+//     F1.className = "align-middle";
+//     var S1 = document.createElement("a");
+//     var S2 = document.createElement("div");
+//     S2.className = "recent_activity_info";
+//     var gS2 = document.createElement("span");
+//     var gS3 = document.createElement("span");
+// 	var baseUrl = "show_meeting_info.html";
+//     var Url = baseUrl + "?id=" +data["list_activity"][i]["uuid_act"];
+//     S1.setAttribute('href', Url);
+//     var gS1 = document.createElement("h3");
+//     gS3.innerText = data["list_activity"][i]["location"];
+//     gS2.innerText =data["list_activity"][i]["start_time"]+ "-" + data["list_activity"][i]["end_time"]+ " ";
+//     gS1.innerText =  data["list_activity"][i]["name_act"];
+//     F1.src =  data["list_activity"][i]["logo"];
+//     F2.appendChild(S1);
+//     F2.appendChild(S2);
+//     S1.appendChild(gS1);
+//     S2.appendChild(gS2);
+//     S2.appendChild(gS3);
+//     gF.appendChild(F1);
+//     gF.appendChild(F2);
+//     var x = document.getElementById("latestAct");
+//     x.appendChild(gF);
+// }
+
+// var gF = document.createElement("li");
+// gF.className = "item-card";
+// var F1 = document.createElement("h1");
+// var S1 = document.createElement("img");
+// S1.src = data.list_activity[i].logoSrc;
+// F1.appendChild(S1);
+// var F2 = document.createElement("div");
+// F2.className = "item-info";
+// var S2 = document.createElement("a");
+// var S4 = document.createElement("a");
+// S2.setAttribute('href', data.list_activity[i].detail);
+// S4.setAttribute('href', data.list_activity[i].detail);
+// var gS1 = document.createElement("h2");
+// var gS2 = document.createElement("button");
+// gS2.innerText = "查看详情";
+// gS2.className = "btn btn-info";
+// gS2.onclick = "location='data.list_activity[i].detail'";
+// var S3 = document.createElement("h3");
+// var S6 = document.createElement("h3");
+// var S5 = document.createElement("h3");
+// S3.innerText = "地点：" + data.list_activity[i].location + " 时间：" + data.list_activity[i].time.startTime + "——" + data.list_activity[i].time.endTime;
+// S5.innerText = data.list_activity[i].organizer;
+// S6.innerText = data.list_activity[i].introduction;
+// gS1.innerText = data.list_activity[i].activityName;
+// S2.appendChild(gS1);
+// S4.appendChild(gS2);
+// F2.appendChild(S2);
+// F2.appendChild(S3);
+// F2.appendChild(S5);
+// F2.appendChild(S6);
+// F2.appendChild(S4);
+// gF.appendChild(F1);
+// gF.appendChild(F2);
+// var x = document.getElementById("recommend");
+// x.appendChild(gF);
 
