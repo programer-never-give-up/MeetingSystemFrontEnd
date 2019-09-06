@@ -26,7 +26,7 @@ html, body {
     color: black;
 }
 .nav-list {
-    float: right;
+        float: right;
 }
 
 .nav-list a {
@@ -59,4 +59,32 @@ html, body {
 	z-index: 999;
 	right: 1rem;
 	top: 3rem;
+}
+.search-box{
+    background:#F7F9FA;
+    border:solid 1px rgba(128,128,128,0.5);
+    border-radius: 10px;
+    heihgt:30px;
+    width:310px;
+    display: inline-block;
+    padding: 0;
+    margin:0 0 0 auto;
+}
+.search-icon{
+    margin: 5px;
+    width:20px;
+    height: 20px;
+}
+.search-input{
+    height: 30px;
+    background-color:transparent;
+    border: none;
+    outline: none;
+}
+.result-card{
+    width: 100%;
+    position: absolute;
+    top:50px;
+    overflow: auto;
+    z-index: 9999999;
 }

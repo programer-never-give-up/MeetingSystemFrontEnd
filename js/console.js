@@ -13,7 +13,7 @@ function deleteActivity(uuid){
         data:{uuid:uuid},
         success:function (data) {
             toastMessage(data['message']);
-            $('#delete-button-'+uuid).parent().remove();
+            $('#delete-button-'+uuid).parent().parent().remove();
         },
         error:function () {
             toastMessage('请求提交失败');
@@ -130,6 +130,12 @@ function generateActivityTable(data,buttomType){
             $buttonTd.append($aDel);
         }
         $itemCard.append($buttonTd);
+        //给itemCard添加悬浮效果
+        $itemCard.hover(function () {
+            $(this).addClass('item-row-shadow');
+        },function () {
+            $(this).removeClass('item-row-shadow');
+        })
         $actTableBody .append($itemCard);
     }
     //添加表体
