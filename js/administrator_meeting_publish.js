@@ -131,12 +131,14 @@ $(function () {
         data:{uuid: act_uuid,},
         type:"GET",
         dataType:'json',
-        success:function (data) {
+        success:function (data)
+        {
             console.log(data);
             setActivityInfo(data);
             toastMessage("获取会议信息成功！");
         },
-        error:function () {
+        error:function ()
+        {
             toastMessage("获取会议信息失败！");
         }
     })
