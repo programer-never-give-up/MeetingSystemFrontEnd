@@ -15,15 +15,10 @@ function checkLogin(isRedirect, loginStatusToRedirect=false)
         // status === True 已登录
        if (data.status)
        {
-           if (isRedirect)
-           {
-               if (loginStatusToRedirect)
-               {
-                   Render();
-                   return;
-               }
-           }
-       } else
+           Render();
+
+       }
+       else
            {
            if (isRedirect)
            {
@@ -37,17 +32,8 @@ function checkLogin(isRedirect, loginStatusToRedirect=false)
     });
 }
 
-function logout() {
-	// reponse {status: True}
-	$.get('api/logout/', function(data){
-		if(data.status) {
-			console.log('登出成功');
-			window.location.href='index.html';
-		} else {
-			console.log('登出失败')
-		}
-	});
-}
+
+
 
 /**
  * @author y4ngyy
