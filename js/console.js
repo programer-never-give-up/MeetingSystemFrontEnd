@@ -82,10 +82,10 @@ function cancelApplication(act_uuid) {
  * usage 申请登上首页的fun
  * @param uuid_act
  */
-function applayToIndex(uuid_act) {
+function applayToIndex(act_uuid) {
     $.ajax({
         url:'api/activity/applyRecommend/',
-        data:{uuid_act:uuid_act},
+        data:{act_uuid:act_uuid},
         type:'POST',
         dataType:'json',
         success:function (data) {
