@@ -33,7 +33,7 @@ function Render ()
         },
         error: function ()
         {
-            alert("出问题了喔");
+            toastMessage("加载出现问题，请刷新页面重试");
         }
     });
 }
@@ -195,7 +195,7 @@ function disagree(dataSent)
             },
             error: function ()
             {
-                alert("出问题了");
+                toastMessage("加载出现问题，请刷新页面重试");
             }
         });
     }
@@ -231,7 +231,7 @@ function disagree(dataSent)
             },
             error: function()
             {
-                alert("出问题了");
+                toastMessage("加载出现问题，请刷新页面重试");
             }
         });
     }

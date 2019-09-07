@@ -6,7 +6,8 @@ function Render()
         type: "get",
         success: function (data)
         {
-            
+            console.log("success");
+			console.log(data["list_activity"][0]["name_act"]);
             for (var i = 0; i <data["list_activity"].length; i++)
             {
 				
@@ -31,7 +32,7 @@ function Render()
         },
         error: function ()
         {
-            alert("出问题了喔");
+            toastMessage("加载出现问题，请刷新页面重试");
         }
     });
 }

@@ -1,8 +1,3 @@
-//bootstrap fileinput
-
-
-
-
 /**
  * @author chonepieceyb
  * @usage :初始化 fileinput 插件
@@ -436,23 +431,3 @@ $(function () {
     })
 
 });
-
-
-
-
-
-//测试
-// var data = {
-//     logo:"https://y4ngyy.xyz/assets/avatar.jpg",
-//     name:"东南大学实训宣讲会",
-//     start_time:"2019-06-08 17:00",
-//     end_time:'2019-06-09 08:00',
-//     location:"计算机楼",
-//     organizer:'东南大学计算机科学与工程学院',
-//     introduction:'',
-//     files:[{"fileName":"1.pdf","fileSrc":"#"},{"fileName":"1.pdf","fileSrc":"#"}],
-//     status_publish:"to_be_audited",
-//     status_process:'processing',
-//     type:'讲座'
-//
-// }
