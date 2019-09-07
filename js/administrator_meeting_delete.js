@@ -164,7 +164,6 @@ function agree()
     var r=confirm("确定同意吗!");
     if (r==true)
     {
-		
         var act_uuid = getParameter()['id']
         $.ajax({
             url: "api/activity/adminAgreeDelete/",
@@ -183,7 +182,6 @@ function agree()
     }
        }
     });
-    
 }
 function disagree()
 {
@@ -213,7 +211,6 @@ function disagree()
     }
        }
     });
-    
 }
 
 

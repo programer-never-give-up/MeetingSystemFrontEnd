@@ -146,47 +146,59 @@ function Render()
 }
 function agree()
 {
-    var x;
-    var r=confirm("确定同意吗!");
-    if (r==true)
+    $.get('api/check/', function (data)
     {
-        var act_uuid = getParameter()['id']
-        $.ajax({
-            url: "api/activity/adminAgreePublish/",
-            dataType: "json",
-            data:{act_uuid:act_uuid},
-            type: "post",
-            success: function (data)
+        if (data.status)
+        {
+            var x;
+            var r=confirm("确定同意吗!");
+            if (r==true)
             {
-                window.location.reload()
-            },
-            error: function ()
-            {
-                alert("出问题了");
+                var act_uuid = getParameter()['id']
+                $.ajax({
+                    url: "api/activity/adminAgreePublish/",
+                    dataType: "json",
+                    data:{act_uuid:act_uuid},
+                    type: "post",
+                    success: function (data)
+                    {
+                        window.location.href = 'Administrators.html';
+                    },
+                    error: function ()
+                    {
+                        alert("出问题了");
+                    }
+                });
             }
-        });
-    }
+        }
+    });
 }
 function disagree()
 {
-    var x;
-    var r=confirm("确定拒绝吗!");
-    if (r==true)
+    $.get('api/check/', function (data)
     {
-        var act_uuid = getParameter()['id']
-        $.ajax({
-            url: "api/activity/adminRefusePublish/",
-            dataType: "json",
-            data:{act_uuid:act_uuid},
-            type: "post",
-            success: function (data)
+        if (data.status)
+        {
+            var x;
+            var r=confirm("确定拒绝吗!");
+            if (r==true)
             {
-                window.location.reload()
-            },
-            error: function ()
-            {
-                alert("出问题了");
+                var act_uuid = getParameter()['id']
+                $.ajax({
+                    url: "api/activity/adminRefusePublish/",
+                    dataType: "json",
+                    data:{act_uuid:act_uuid},
+                    type: "post",
+                    success: function (data)
+                    {
+                        window.location.href = 'Administrators.html';
+                    },
+                    error: function ()
+                    {
+                        alert("出问题了");
+                    }
+                });
             }
-        });
-    }
+        }
+    });
 }
