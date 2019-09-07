@@ -1,6 +1,3 @@
-
-
-
 /**
  * @author chonepieceyb
  * @param uuid 会议的id

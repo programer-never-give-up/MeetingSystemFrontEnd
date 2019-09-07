@@ -1,26 +1,3 @@
-
-
-// var data=
-//     {
-//         "act":
-//             [
-//             {
-//                 "uuid":123,
-//                 "activityName":"东南大学实训宣讲会1",
-//                 "time":{"startTime":"2019-6-8","endTime":"2019-6-9"},
-//             },
-//             {
-//                 "uuid":123,
-//                 "activityName":"东南大学实训宣讲会2",
-//                 "time":{"startTime":"2019-6-8","endTime":"2019-6-9"},
-//             },
-//             {
-//                 "uuid":123,
-//                 "activityName":"东南大学实训宣讲会3",
-//                 "time":{"startTime":"2019-6-8","endTime":"2019-6-9"},
-//             }
-//             ]
-//     };
 function Render()
 {
     $.ajax({
@@ -55,7 +32,7 @@ function Render()
         },
         error: function ()
         {
-            alert("出问题了喔");
+            toastMessage("加载出现问题，请刷新页面重试");
         }
     });
 }
