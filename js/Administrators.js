@@ -24,8 +24,12 @@ function Render ()
                     var baseUrl = "administrator_meeting_delete.html";
                     setInfo(data["list_activity"][i], "deleteRequest", baseUrl)
                 }
+                if (data["list_activity"][i]["action"] == "recommend")
+                {
+                    var baseUrl = "administrator_meeting_recommend.html";
+                    setInfo(data["list_activity"][i], "recommendRequest", baseUrl)
+                }
             }
-
         },
         error: function ()
         {
@@ -141,6 +145,23 @@ function agree(dataSent)
             }
         });
     }
+    if(dataSent["action"]=="recommend")
+    {
+        $.ajax({
+            url: "api/activity/adminAgreeRecommend/",
+            dataType: "json",
+            data:{act_uuid:dataSent["uuid_act"]},
+            type: "post",
+            success: function (data)
+            {
+                window.location.reload()
+            },
+            error: function ()
+            {
+                alert("出问题了");
+            }
+        });
+    }
 }
 function disagree(dataSent)
 {
@@ -180,7 +201,8 @@ function disagree(dataSent)
     }
     if(dataSent["action"]=="delete")
     {
-        $.ajax({
+        $.ajax
+        ({
             url: "api/activity/adminRefuseDelete/",
             dataType: "json",
             data:{act_uuid:dataSent["uuid_act"]},
@@ -189,7 +211,25 @@ function disagree(dataSent)
             {
                 window.location.reload()
             },
-            error: function ()
+            error: function()
+            {
+                alert("出问题了");
+            }
+        });
+    }
+    if(dataSent["action"]=="delete")
+    {
+        $.ajax
+        ({
+            url: "api/activity/adminRefuseRecommend/",
+            dataType: "json",
+            data:{act_uuid:dataSent["uuid_act"]},
+            type: "post",
+            success: function (data)
+            {
+                window.location.reload()
+            },
+            error: function()
             {
                 alert("出问题了");
             }

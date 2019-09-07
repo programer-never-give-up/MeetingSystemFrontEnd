@@ -18,7 +18,7 @@
     </div>
 </nav>
 <div class="container main-content">
-        <h2>控制台</h2>
+    <h2>控制台</h2>
     <div id="accordion">
         <div class="card">
             <div class="card-header">
@@ -42,9 +42,7 @@
             <div id="collapseTwo" class="collapse" data-parent="#accordion">
                 <div class="card-body" >
                     <ul class="p-0" id="modifyRequest">
-                       
                     </ul>
-                </div>
                 </div>
             </div>
         </div>
@@ -61,22 +59,36 @@
                 </div>
             </div>
         </div>
+        <div class="card">
+            <div class="card-header">
+                <a class="collapsed card-link" data-toggle="collapse" href="#collapseFour">
+                    推荐请求
+                </a>
+            </div>
+            <div id="collapseFour" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    <ul class="p-0"  id="recommendRequest">
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-    <footer class="footer" id="footer">
-        这是页脚
-    </footer>
+</div>
+<footer class="footer" id="footer">
+    这是页脚
+</footer>
 
-    <script src="plugins/fontawesome/font-awesome.js"></script>
-    <script src="plugins/jquery/jquery-3.4.1.min.js"></script>
-    <script src="plugins/popper/popper.min.js"></script>
-    <script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
-    <script src="js/navAdmini.js"></script>
-    <script src="js/Administrators.js"></script>
-    <script>
-        $(function () {
-            checkLogin(false);
-        })
-    </script>
+<script src="plugins/fontawesome/font-awesome.js"></script>
+<script src="plugins/jquery/jquery-3.4.1.min.js"></script>
+<script src="plugins/popper/popper.min.js"></script>
+<script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+<script src="js/navAdmini.js"></script>
+<script src="js/Administrators.js"></script>
+<script>
+    $(function () {
+        checkLogin(false);
+    })
+</script>
 </body>
 </html>

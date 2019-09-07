@@ -9,14 +9,11 @@
  */
 function checkLogin(isRedirect, loginStatusToRedirect=false)
 {
-	      // response格式{"status":True, "type":"企业用户 or 普通用户"}
     $.get('api/check/', function (data)
     {
-        // status === True 已登录
        if (data.status)
        {
            Render();
-
        }
        else
            {

@@ -1,30 +1,20 @@
-/**
- * @author:chonepieceyb
- * @type {string}
- */
-/*
-字典格式 {logoSrc:"#",activityName:"#",time:{startTime:"#",endTime:"#"},location:"#",organizer:"#",introduction:"#",files:[{fileName:"#",fileSrc:"#"},..],type:"#","status":int}
-status: 0未开始 1进行中 2已结束
- */
-
-//可识别的扩展名列表
 extIcons=
     {
-    "docx":"icon_doc.gif",
-    "doc":"icon_doc.gif",
-    "xls":"icon_xls.gif",
-    "xlsx":"icon_xls.gif",
-    "txt" :"icon_txt.gif",
-    "png":"icon_img.gif",
-    "jpg":"icon_img.gif",
-    "jpeg":"icon_img.gif",
-    "gif":"icon_img.gif",
-    "zip":"icon_rar.gif",
-    "rar":"icon_rar.gif",
-    "7z":"icon_rar.gif",
-    "pdf":"icon_pdf.gif",
-    "unknown":"icon_txt.gif"
-}
+        "docx":"icon_doc.gif",
+        "doc":"icon_doc.gif",
+        "xls":"icon_xls.gif",
+        "xlsx":"icon_xls.gif",
+        "txt" :"icon_txt.gif",
+        "png":"icon_img.gif",
+        "jpg":"icon_img.gif",
+        "jpeg":"icon_img.gif",
+        "gif":"icon_img.gif",
+        "zip":"icon_rar.gif",
+        "rar":"icon_rar.gif",
+        "7z":"icon_rar.gif",
+        "pdf":"icon_pdf.gif",
+        "unknown":"icon_txt.gif"
+    }
 
 /**
  *
@@ -133,9 +123,7 @@ function setActivityInfo(data){
 }
 
 //浏览器刷新时执行
-function Render() {
-    
-} {
+$(function () {
     //ajax请求
     var act_uuid = getParameter()['id']
     $.ajax({
@@ -143,17 +131,18 @@ function Render() {
         data:{uuid: act_uuid,},
         type:"GET",
         dataType:'json',
-        success:function (data) {
-            //设置按钮
+        success:function (data)
+        {
             console.log(data);
             setActivityInfo(data);
             toastMessage("获取会议信息成功！");
         },
-        error:function () {
+        error:function ()
+        {
             toastMessage("获取会议信息失败！");
         }
     })
-}
+})
 function agree()
 {
     var x;
@@ -162,13 +151,13 @@ function agree()
     {
         var act_uuid = getParameter()['id']
         $.ajax({
-            url: "api/activity/adminAgreeDelete/",
+            url: "api/activity/adminAgreeRecommend/",
             dataType: "json",
             data:{act_uuid:act_uuid},
             type: "post",
             success: function (data)
             {
-                window.location.href = 'Administrators.html';
+                window.location.reload()
             },
             error: function ()
             {
@@ -185,13 +174,13 @@ function disagree()
     {
         var act_uuid = getParameter()['id']
         $.ajax({
-            url: "api/activity/adminRefuseDelete/",
+            url: "api/activity/adminRefuseRecommend/",
             dataType: "json",
             data:{act_uuid:act_uuid},
             type: "post",
             success: function (data)
             {
-                window.location.href = 'Administrators.html';
+                window.location.reload()
             },
             error: function ()
             {
@@ -200,23 +189,3 @@ function disagree()
         });
     }
 }
-
-
-
-//  //测试代码
-// var data = {
-//     logo:"https://y4ngyy.xyz/assets/avatar.jpg",
-//     activityName:"东南大学实训宣讲会",
-//     start_time:"2019-6-8",
-//     end_time:'2019-6-9',
-//     location:"计算机楼",
-//     organizer:'东南大学计算机科学与工程学院',
-//     files:[{"fileName":"1.pdf","fileSrc":"#"},{"fileName":"1.pdf","fileSrc":"#"}],
-//     status_publish:"to_be_audited",
-//     status_process:'processing',
-//     type:'讲座'
-//
-// }
-//  $(function () {
-//      setActivityInfo(data);
-// });
