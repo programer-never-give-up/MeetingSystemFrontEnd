@@ -28,6 +28,11 @@ function checkLogin(isRedirect, loginStatusToRedirect=false) {
                '<i class="fas fa-power-off"></i>' +
                '<a href="#" onclick="logout()">退出</a>' +
                '</span>');
+           if(data['type']==0){    //如果是个人用户
+                $('.business-user').hide();
+           }else if(data['type']==1){    //如果是企业用户
+               $('.business-user').show();
+           }
        } else {
            if (isRedirect) {
                if (!loginStatusToRedirect) {
