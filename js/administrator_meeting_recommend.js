@@ -123,26 +123,27 @@ function setActivityInfo(data){
 }
 
 //浏览器刷新时执行
-$(function () {
-    //ajax请求
-    var act_uuid = getParameter()['id']
-    $.ajax({
-        url:"api/activity/showActivity/",
-        data:{uuid: act_uuid,},
-        type:"GET",
-        dataType:'json',
-        success:function (data)
-        {
-            console.log(data);
-            setActivityInfo(data);
-            toastMessage("获取会议信息成功！");
-        },
-        error:function ()
-        {
-            toastMessage("获取会议信息失败！");
-        }
-    })
-})
+function Render()
+{
+    {
+        //ajax请求
+        var act_uuid = getParameter()['id']
+        $.ajax({
+            url: "api/activity/showActivity/",
+            data: {uuid: act_uuid,},
+            type: "GET",
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                setActivityInfo(data);
+                toastMessage("获取会议信息成功！");
+            },
+            error: function () {
+                toastMessage("获取会议信息失败！");
+            }
+        })
+    }
+}
 function agree()
 {
     var x;

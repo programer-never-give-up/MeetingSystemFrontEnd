@@ -123,7 +123,8 @@ function setActivityInfo(data){
 }
 
 //浏览器刷新时执行
-$(function () {
+function Render()
+{
     //ajax请求
     var act_uuid = getParameter()['id']
     $.ajax({
@@ -142,7 +143,7 @@ $(function () {
             toastMessage("获取会议信息失败！");
         }
     })
-})
+}
 function agree()
 {
     var x;
