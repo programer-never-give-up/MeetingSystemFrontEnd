@@ -139,9 +139,9 @@ function checkRequired(className){
  * @param callBackFunction  回调函数
  */
 function generateSearchBar(callbackFun=null) {
-    $searchDic = $('<div class="input-group search-box"></div>');
+    $searchDic = $('<div class="input-group search-box" id="search-background"></div>');
     //添加label和图标
-    $searchIcon= $('<img class="search-icon" "></img>');
+    $searchIcon= $('<img class="search-icon"></img>');
     //搜索图标
     $searchIcon.attr('src',"images/icons/search.png");
     $searchDic.append($searchIcon);
@@ -171,7 +171,7 @@ function generateSearchBar(callbackFun=null) {
 
     });
     $('body').bind('click',function (event) {
-        if(event.target.id!='search-input' && event.target.id!="search-result-body"){
+        if(event.target.id!='search-input' && event.target.id!="search-result-body" && event.target.id!='search-background'){
             $searchInput.parent().animate({
                     width:300,
                 },300
