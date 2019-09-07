@@ -6,21 +6,61 @@
  * @param uuid 会议的id
  */
 function deleteActivity(uuid){
-    console.log(uuid);
     $.ajax({
         url:'api/activity/deleteActivity/',
         type : 'POST',
         data:{uuid:uuid},
         success:function (data) {
             toastMessage(data['message']);
-            $('#delete-button-'+uuid).parent().parent().remove();
+            if(act_status){
+                $('#delete-button-'+uuid).parent().parent().remove();
+            }
+
         },
         error:function () {
             toastMessage('请求提交失败');
         }
-    })
+    });
 }
 
+/**
+ * @usage :用户取消报名
+ * @param uuid_act
+ */
+function  canselAplay(uuid_act) {
+    console.log(uuid_act);
+    $.ajax({
+        url:'api/yw/cancelApply/',
+        type : 'POST',
+        data:{uuid_act:uuid_act},
+        success:function (data) {
+            toastMessage(data['message']);
+            $('#delete-button-'+uuid_act).parent().parent().remove();
+        },
+        error:function () {
+            toastMessage('请求提交失败');
+        }
+    });
+}
+
+/**
+ * usage:用户取消收藏
+ * @param uuid_act
+ */
+function  cancelCollection(uuid_act) {
+    $.ajax({
+        url:'api/yw/cancelCollection/',
+        type : 'POST',
+        data:{uuid_act:uuid_act},
+        success:function (data) {
+            toastMessage(data['message']);
+            $('#delete-button-'+uuid_act).parent().parent().remove();
+        },
+        error:function () {
+            toastMessage('请求提交失败');
+        }
+    });
+}
 
 /**
  * @author chonepieceyb
@@ -69,6 +109,8 @@ function generateActivityTable(data,buttomType){
         }
 
         var $buttonTd = $("<td class='buttonTd'></td>");    //添加查看详情按钮
+        $buttonTd.data('act_uuid',activity['id']);            //将id缓存在按钮td里
+        console.log($buttonTd);
         var $a = $('<a class="btn btn-primary">查看</a>');
         $a.attr("href", "show_meeting_info.html?id=" + activity["id"]);
         $buttonTd.append($a);
@@ -81,12 +123,11 @@ function generateActivityTable(data,buttomType){
 
             $aDel = $('<a class="btn btn-danger">删除</a>');
             $aDel.attr("id", "delete-button-" + activity["id"]);
-            $aDel.on("click", function () {
-                if(deleteActivity($(this).attr('id').split('delete-button-')[1])){
-                    $(this).parent().parent().remove();
-                };
-            })
             $buttonTd.append($aDel);
+            $aDel.on("click", function () {
+                deleteActivity($(this).parent().data('act_uuid'));
+            });
+
 
         } else if (buttomType == 'management-processing' || buttomType == "management-finished") {   //活动管理的：进行中和已结束
             //上传按钮，进入界面后只能上传活动资料
@@ -96,38 +137,34 @@ function generateActivityTable(data,buttomType){
         } else if (buttomType == "my-not_start") {    //我的活动的 未开始
             //查看二维码按钮
             $acheck=$('<a class="btn btn-primary">查看门票</a>');
-            $acheck.data('act_uuid',activity['id']);
+            $buttonTd.append($acheck);
             $acheck.on('click',function () {
-                showQRCode($(this).data('act_uuid'));
-            })
+                showQRCode($(this).parent().data('act_uuid'));
+            });
             //取消报名的按钮
             $aDel = $('<a class="btn btn-danger">取消报名</a>');
             $aDel.attr("id", "delete-button-" + activity["id"]);
-            $aDel.on("click", function () {
-                if(deleteActivity($(this).attr('id').split('delete-button-')[1])){
-                    $(this).parent().parent().remove();
-                };
-            });
             $buttonTd.append($aDel);
-            $buttonTd.append($acheck);
+            $aDel.on("click", function () {
+                canselAplay($(this).parent().data('act_uuid'));
+            });
+
         } else if(buttomType=='my-processing'){
             //查看二维码按钮
             $acheck=$('<a class="btn btn-primary">查看门票</a>');
-            $acheck.data('act_uuid',activity['id']);
             $acheck.on('click',function () {
-                showQRCode($(this).data('act_uuid'));
+                showQRCode($(this).parent().data('act_uuid'));
             });
             $buttonTd.append($acheck);
         } else if (buttomType == "fav-not_start" || buttomType == "fav-processing" || buttomType == "fav-finished") {   //我的收藏模块的按钮
             //添加删除按钮
             $aDel = $('<a class="btn btn-danger">删除</a>');
             $aDel.attr("id", "delete-button-" + activity["id"]);
-            $aDel.on("click", function () {
-                if(deleteActivity($(this).attr('id').split('delete-button-')[1])){
-                    $(this).parent().parent().remove();
-                };
-            });
             $buttonTd.append($aDel);
+            $aDel.on("click", function () {
+                cancelCollection($(this).parent().data('act_uuid'));
+            });
+
         }
         $itemCard.append($buttonTd);
         //给itemCard添加悬浮效果
@@ -274,12 +311,17 @@ function setNumInfo(id,num,maxNum=99){
 
 function showQRCode(act_uuid){
     $.ajax({
+        url:'api/yw/getQRcode/',
         type:'GET',
         data:{uuid_act:act_uuid},
         dataType: 'json',
         success:function (data) {
-            url='QRCode.html?src='+data['qrcode'];
-            window.open(url, '入场二维码','height:500px,width=500px,location=no,menubar=no,toolbar=no');
+            toastMessage(data['message']);
+            $('#QRImg').attr('src',data['qrcode']);
+            $('.QR-window *button').on('click',function () {
+                $(this).parent().hide();
+            })
+            $('.QR-window').show();
         }
     })
 }
