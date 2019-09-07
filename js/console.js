@@ -84,7 +84,7 @@ function cancelApplication(act_uuid) {
  */
 function applayToIndex(uuid_act) {
     $.ajax({
-        url:'api/yw/add_in_recommendation/',
+        url:'api/activity/applyRecommend/',
         data:{uuid_act:uuid_act},
         type:'POST',
         dataType:'json',
@@ -133,7 +133,7 @@ function generateActivityTable(data,buttomType){
         //如果是未开始
         if(buttomType =='management-published'){
             var $starTd= $('<td><a><img style="width: 20px;height: 20px"></a>')   //添加星星标记
-            if(false){   //如果登上首页了
+            if(data['ifRecommended']){   //如果登上首页了
                 $starTd.find('img').attr('src','images/icons/star_active.png');
                 $starTd.children('a').attr('title','已经登上首页');
             }else{
