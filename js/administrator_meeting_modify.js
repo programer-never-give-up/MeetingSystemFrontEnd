@@ -179,7 +179,8 @@ function setActivityInfo(data)
 }
 
 //浏览器刷新时执行
-$(function () {
+function Render()
+{
     //ajax请求
     var act_uuid = getParameter()['id']
     $.ajax({
@@ -197,51 +198,63 @@ $(function () {
             toastMessage("获取会议信息失败！");
         }
     })
-})
+}
 
 function agree()
 {
-    var x;
-    var r=confirm("确定同意吗!");
-    if (r==true)
+    $.get('api/check/', function (data)
     {
-        var act_uuid = getParameter()['id']
-        $.ajax({
-            url: "api/activity/adminAgreeModify/",
-            dataType: "json",
-            data:{act_uuid:act_uuid},
-            type: "post",
-            success: function (data)
+        if (data.status)
+        {
+            var x;
+            var r=confirm("确定同意吗!");
+            if (r==true)
             {
-               window.location.href = 'Administrators.html';
-            },
-            error: function ()
-            {
-                alert("出问题了");
+                var act_uuid = getParameter()['id']
+                $.ajax({
+                    url: "api/activity/adminAgreeModify/",
+                    dataType: "json",
+                    data:{act_uuid:act_uuid},
+                    type: "post",
+                    success: function (data)
+                    {
+                        window.location.href = 'Administrators.html';
+                    },
+                    error: function ()
+                    {
+                        alert("出问题了");
+                    }
+                });
             }
-        });
-    }
+        }
+    });
 }
 function disagree()
 {
-    var x;
-    var r=confirm("确定拒绝吗!");
-    if (r==true)
+    $.get('api/check/', function (data)
     {
-        var act_uuid = getParameter()['id']
-        $.ajax({
-            url: "api/activity/adminRefuseModify/",
-            dataType: "json",
-            data:{act_uuid:act_uuid},
-            type: "post",
-            success: function (data)
+        if (data.status)
+        {
+            var x;
+            var r=confirm("确定拒绝吗!");
+            if (r==true)
             {
-               window.location.href = 'Administrators.html';
-            },
-            error: function ()
-            {
-                alert("出问题了");
+                var act_uuid = getParameter()['id']
+                $.ajax({
+                    url: "api/activity/adminRefuseModify/",
+                    dataType: "json",
+                    data:{act_uuid:act_uuid},
+                    type: "post",
+                    success: function (data)
+                    {
+                        window.location.href = 'Administrators.html';
+                    },
+                    error: function ()
+                    {
+                        alert("出问题了");
+                    }
+                });
             }
-        });
-    }
+        }
+    });
 }
