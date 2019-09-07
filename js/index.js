@@ -35,12 +35,11 @@
  * @param showNum :列表展示的数目
  * @param timeStep :间隔时间
  */
-function wheelList(ulObject,interval,showNum=3,timeStep=3000){
+function wheelList(ulObject,showNum=3,timeStep=10000){
     var $ul=ulObject;
-
-    $ul.find('li').css('position','absolute');    //设置位置属性
+    $ul.children('li').css('position','absolute');    //设置位置属性
     var liNum = $ul.children('li').length;
-    var outerheight = $ul.children('li:first').outerHeight()+interval;
+    var outerheight = $ul.children('li:first').outerHeight();
     function moveUp(dis) {
         $ul.find('li').each(function (index) {
             let top= $(this).position().top;
@@ -149,11 +148,11 @@ var data=
  * @param h    一行的高度
  * @param showNum  展示的数目
  */
-function renderIndex(data,interval=0) {
+function renderIndex(data) {
     for (var i = 0; i < data.list_activity.length; i++) {
         //用JQuery重写
 
-        var $itemCard = $('<li class="item-card" style="clear:both"></li>');     //添加card主体
+        var $itemCard = $('<li class="item-card" style="width:100%;"></li>');     //添加card主体
 
         var $imgDiv = $('<h1><img src="' + data.list_activity[i].logo + '"></h1>');    //添加头像区域
 
@@ -165,7 +164,7 @@ function renderIndex(data,interval=0) {
         $infoDiv.append($titleLink);
 
         var $timeh = $('<h3></h3>');                     //时间
-        $timeh.html('时间:' + data.list_activity[i].start_time + '——' + data.list_activity[i].end_time);
+        $timeh.html('时间:' + data.list_activity[i].start_time + '—' + data.list_activity[i].end_time);
         $infoDiv.append($timeh);
 
         var $locationh = $('<h3></h3>');            //地点
@@ -184,24 +183,24 @@ function renderIndex(data,interval=0) {
         $itemCard.append($imgDiv);
         $itemCard.append($infoDiv);
         $('#recommend').append($itemCard);
-        var outerHeight=$itemCard.outerHeight()+interval;
+        var outerHeight=$itemCard.outerHeight();
         $itemCard.css('top',outerHeight*i+'px');
 
     }
 }
 
-function renderRecent(data,interval=0){
+function renderRecent(data){
     for (var i = 0; i <data["list_activity"].length; i++)
     {
-        $itemCard = $('<li class="recent_activity_item"></li>');   //卡片主体
+        var $itemCard = $('<li class="recent_activity_item"></li>');   //卡片主体
 
-        $img = $('<img class="align-middle">');             //logo
+        var $img = $('<img class="align-middle">');             //logo
         $img.attr('src',data['list_activity'][i]["logo"]);
         $itemCard.append($img);
 
-        $itemInfo=$('<div class="d-inline-block align-middle ml-2"></div>');
+        var $itemInfo=$('<div class="d-inline-block align-middle ml-2"></div>');
 
-        $titleLink =$('<a><h3></h3></a>');
+        var $titleLink =$('<a><h3></h3></a>');
         $titleLink.children('h3').text(data["list_activity"][i]["name_act"]);
         $titleLink.attr('href','show_meeting_info.html?id='+data["list_activity"][i]["uuid_act"]);
         $itemInfo.append($titleLink);
@@ -212,7 +211,7 @@ function renderRecent(data,interval=0){
 
         $itemCard.append($itemInfo);
         $('#latestAct').append($itemCard);
-        var outerHeight= $itemCard.outerHeight()+interval;
+        var outerHeight= $itemCard.outerHeight();
         $itemCard.css('top',outerHeight*i+'px');
     }
 }
@@ -228,7 +227,7 @@ function Render ()
         {
             toastMessage(data['message']);
             renderIndex(data);
-            wheelList($('#recommend'),0,3);
+            wheelList($('#recommend'),3,5000);
 
         },
         error: function ()
@@ -245,7 +244,7 @@ function Render ()
         {
             toastMessage(data['message']);
             renderRecent(data);
-            wheelList($('#latestAct'),0,8);
+            wheelList($('#latestAct'),4,5000);
 
         },
         error: function ()

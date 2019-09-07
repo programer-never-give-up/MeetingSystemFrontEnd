@@ -18,3 +18,29 @@
 /*    z-index: auto;*/
 
 /*}*/
+.QR-window{
+    display: none;
+    position:fixed;
+    width: 400px;
+    height: 400px;
+    left:50%;
+    top:50%;
+    margin-left: -200px;
+    margin-top:-200px;
+    z-index: 9999999;
+}
+.QR-window img.icon{
+    position: absolute;
+    top:15px;
+    right: 15px;
+    height: 5%;
+    width: 5%;
+    z-index: 99999999;
+}
+.QR-window img#QRImg{
+    position: absolute;
+    width:95%;
+    height: 95%;
+    top:5%;
+    right: 0px;
+}
