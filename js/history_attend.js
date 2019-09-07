@@ -29,7 +29,8 @@ function Render()
         type: "get",
         success: function (data)
         {
-            
+            console.log("success");
+			console.log(data["list_activity"][0]["name_act"]);
             for (var i = 0; i <data["list_activity"].length; i++)
             {
 				
