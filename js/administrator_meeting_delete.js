@@ -132,10 +132,10 @@ function setActivityInfo(data){
     }
 }
 
-//浏览器刷新时执行
+
 function Render() {
     
-} {
+ {
     //ajax请求
     var act_uuid = getParameter()['id']
     $.ajax({
@@ -144,7 +144,6 @@ function Render() {
         type:"GET",
         dataType:'json',
         success:function (data) {
-            //设置按钮
             console.log(data);
             setActivityInfo(data);
             toastMessage("获取会议信息成功！");
@@ -154,12 +153,18 @@ function Render() {
         }
     })
 }
+}
 function agree()
 {
-    var x;
+	    $.get('api/check/', function (data)
+    {
+       if (data.status)
+       {
+		  var x;
     var r=confirm("确定同意吗!");
     if (r==true)
     {
+		
         var act_uuid = getParameter()['id']
         $.ajax({
             url: "api/activity/adminAgreeDelete/",
@@ -176,10 +181,17 @@ function agree()
             }
         });
     }
+       }
+    });
+    
 }
 function disagree()
 {
-    var x;
+	$.get('api/check/', function (data)
+    {
+       if (data.status)
+       {
+		var x;
     var r=confirm("确定拒绝吗!");
     if (r==true)
     {
@@ -199,6 +211,9 @@ function disagree()
             }
         });
     }
+       }
+    });
+    
 }
 
 
