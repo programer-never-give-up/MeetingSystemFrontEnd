@@ -167,7 +167,7 @@ function generateSearchBar($fatherObject,callbackFun=null,minWidth=310) {
     $resultDiv.hide();
     $searchDic.append($resultDiv);
     $searchInput.on('focus',function () {
-        var maxWidth = $fatherObject.width()-$fatherObject.children('*').eq(0).outerWidth()-$fatherObject.children('*').eq(2).outerWidth()-30;
+        var maxWidth = $fatherObject.width()-$fatherObject.children('*').eq(0).outerWidth()-$fatherObject.children('*').eq(2).outerWidth()-40;
         $searchInput.parent().animate({
             width:maxWidth,
             },300,function () {
