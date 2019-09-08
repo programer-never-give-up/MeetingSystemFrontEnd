@@ -24,12 +24,14 @@ function checkLogin(isRedirect, loginStatusToRedirect=false) {
            navList.before(generateSearchBar(navList.parent(),function (resultDiv,keyword) {
                searchCallBack(resultDiv,keyword);
            }));
+
            navList.append('<a href="console.html" class="nav-list-item">控制台</a>');
            navList.append('<a href="Personal_Center.html" class="nav-list-item">个人中心</a>');
            navList.append('<span style="color: #ff5722;" class="nav-list-item">' +
                '<i class="fas fa-power-off"></i>' +
                '<a href="#" onclick="logout()">退出</a>' +
                '</span>');
+           navList.prev().css('right',navList.outerWidth()+30);
            if(data['type']==0){    //如果是个人用户
                 $('.business-user').hide();
            }else if(data['type']==1){    //如果是企业用户
@@ -49,6 +51,7 @@ function checkLogin(isRedirect, loginStatusToRedirect=false) {
            }));
            navList.append('<a href="login.html" class="nav-list-item">登录</a>');
            navList.append('<a href="register.html" class="nav-list-item">注册</a>');
+           navList.prev().css('right',navList.outerWidth()+30);
        }
     });
 }
@@ -164,7 +167,7 @@ function generateSearchBar($fatherObject,callbackFun=null,minWidth=310) {
     $resultDiv.hide();
     $searchDic.append($resultDiv);
     $searchInput.on('focus',function () {
-        var maxWidth = $fatherObject.width()-$fatherObject.children('*').eq(0).outerWidth()-$fatherObject.children('*').eq(2).outerWidth()-10;
+        var maxWidth = $fatherObject.width()-$fatherObject.children('*').eq(0).outerWidth()-$fatherObject.children('*').eq(2).outerWidth()-30;
         $searchInput.parent().animate({
             width:maxWidth,
             },300,function () {
