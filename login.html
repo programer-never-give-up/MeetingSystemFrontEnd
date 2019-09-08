@@ -92,10 +92,36 @@
 <script>
     // 这是调试登录的ajax
 
-    $(function () {
-        // 弹出提示框
-        // response格式{"status":True, "message":"失败信息"}
-        $('#login').click(function (e) {
+    $(function ()
+    {
+        $("#querySearcher").live("keyup", function (e) {
+            if (e.keyCode == 13) {
+                var username = $('#username').val();
+                var password = $('#password').val();
+                $.post('api/login/', {username:username, password: password}, function (data) {
+                    console.log(data);
+                    if (data.status)
+                    {
+                        if(data.isAdmin)
+                        {
+                            toastMessage('登录成功,正在跳转...');
+                            window.location.href = 'Administrators.html';
+                        }
+                        else
+                        {
+                            toastMessage('登录成功,正在跳转...');
+                            window.location.href = 'index.html';
+                        }
+                    }
+                    else
+                    {
+                        toastMessage(data.message);
+                    }
+                });
+            }
+        });
+        $('#login').click(function (e)
+        {
             var username = $('#username').val();
             var password = $('#password').val();
             $.post('api/login/', {username:username, password: password}, function (data) {
@@ -116,7 +142,6 @@
                 else
                 {
                    toastMessage(data.message);
-
                 }
             });
         })
