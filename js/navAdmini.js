@@ -3,29 +3,22 @@
  */
 
 /**
- * usage: 确认登录状态，更新导航栏状态
- * @param isRedirect true:启用跳转状态 false:关闭跳转状态
- * @param loginStatusToRedirect true:若在登录状态则跳转 false:若在非登录状态则跳转
+管理员确认登陆
  */
-function checkLogin(isRedirect, loginStatusToRedirect=false)
+function checkLogin()
 {
     $.get('api/check/', function (data)
     {
        if (data.status)
        {
-           Render();
-       }
-       else
+           if(data['type']==2)
            {
-           if (isRedirect)
-           {
-               if (!loginStatusToRedirect)
-               {
-                   window.location.href = "login.html";
-                   return;
-               }
+               Render();
+               return;
            }
        }
+           window.location.href = "login.html";
+           return;
     });
 }
 

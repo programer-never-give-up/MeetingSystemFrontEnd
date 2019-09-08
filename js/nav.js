@@ -13,7 +13,8 @@ function checkLogin(isRedirect, loginStatusToRedirect=false) {
         // status === True 已登录
        if (data.status) {
            if (isRedirect) {
-               if (loginStatusToRedirect) {
+               if (loginStatusToRedirect)
+               {
                    window.location.href = "index.html";
                    return;
                }
