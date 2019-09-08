@@ -104,7 +104,8 @@ function renderIndex(data) {
         $infoDiv.append($organizerh);
 
         var $btnLink = $('<a><button class="btn btn-primary">查看详情</button></a>');  //查看详情按钮
-        $btnLink.attr('href', 'show_meeting_info.html?id=' + data.list_activity[i].uuid);
+        $btnLink.attr('href', 'show_meeting_info.html?id=' + data.list_activity[i].uuid_act);
+        console.log(data);
         $infoDiv.append($btnLink);
 
         //添加元素
