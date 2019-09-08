@@ -33,9 +33,13 @@ function checkLogin(isRedirect, loginStatusToRedirect=false) {
                '</span>');
            navList.prev().css('right',navList.outerWidth()+30);
            if(data['type']==0){    //如果是个人用户
-                $('.business-user').hide();
+               $('div.business-user').hide();
+               $('button.business-user').addClass('disabled');
+               $('button.business-user').attr('disabled',true);
            }else if(data['type']==1){    //如果是企业用户
-               $('.business-user').show();
+               $('div.business-user').show();
+               $('button.business-user').removeClass('disabled');
+               $('button.business-user').attr('disabled',false);
            }
        } else {
            if (isRedirect) {
