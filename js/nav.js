@@ -20,7 +20,8 @@ function checkLogin(isRedirect, loginStatusToRedirect=false) {
                }
            }
            var navList = $('.nav-list');
-           navList.before(generateSearchBar(function (resultDiv,keyword) {
+           navList.parent().css('position','relative');
+           navList.before(generateSearchBar(navList.parent(),function (resultDiv,keyword) {
                searchCallBack(resultDiv,keyword);
            }));
            navList.append('<a href="console.html" class="nav-list-item">控制台</a>');
@@ -42,7 +43,8 @@ function checkLogin(isRedirect, loginStatusToRedirect=false) {
                }
            }
            var navList = $('.nav-list');
-           navList.before(generateSearchBar(function (resultDiv,keyword) {
+           navList.parent().css('position','relative');
+           navList.before(generateSearchBar(navList.parent(),function (resultDiv,keyword) {
                searchCallBack(resultDiv,keyword);
            }));
            navList.append('<a href="login.html" class="nav-list-item">登录</a>');
@@ -139,7 +141,7 @@ function checkRequired(className){
  * @param fatherObject  搜索框的父对象
  * @param callBackFunction  回调函数
  */
-function generateSearchBar(callbackFun=null) {
+function generateSearchBar($fatherObject,callbackFun=null,minWidth=310) {
     $searchDic = $('<div class="input-group search-box" id="search-background"></div>');
     //添加label和图标
     $searchIcon= $('<img class="search-icon"></img>');
@@ -162,11 +164,16 @@ function generateSearchBar(callbackFun=null) {
     $resultDiv.hide();
     $searchDic.append($resultDiv);
     $searchInput.on('focus',function () {
+        var maxWidth = $fatherObject.width()-$fatherObject.children('*').eq(0).outerWidth()-$fatherObject.children('*').eq(2).outerWidth()-10;
         $searchInput.parent().animate({
-            width:800,
+            width:maxWidth,
             },300,function () {
                 $searchInput.css('width','700px')
             }
+        );
+        $searchInput.animate({
+                width:maxWidth-50,
+            },300
         );
         searchCallBack($resultDiv,$searchInput.val());
 
@@ -174,11 +181,11 @@ function generateSearchBar(callbackFun=null) {
     $('body').bind('click',function (event) {
         if(event.target.id!='search-input' && event.target.id!="search-result-body" && event.target.id!='search-background'){
             $searchInput.parent().animate({
-                    width:300,
+                    width:minWidth,
                 },300
             );
             $searchInput.animate({
-                    width:250,
+                    width:minWidth-50,
                 },300
             );
             $resultDiv.hide();

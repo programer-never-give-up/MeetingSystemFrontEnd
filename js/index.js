@@ -23,7 +23,6 @@ function wheelList(ulObject,showNum=3,timeStep=10000){
     $ul.children('li').css('position','absolute');    //设置位置属性
     var liNum = $ul.children('li').length;
     var outerheight = $ul.children('li:first').outerHeight();
-    console.log(outerheight);
     function moveUp(dis) {
         $ul.find('li').each(function (index) {
             let top= $(this).position().top;
@@ -114,7 +113,6 @@ function renderIndex(data) {
         $('#recommend').append($itemCard);
         // var outerHeight=$itemCard.outerHeight();
         var outerHeight = 200;
-        console.log(outerHeight);
         $itemCard.css('top',outerHeight*i+'px');
 
     }
@@ -175,7 +173,7 @@ function Render ()
         {
             toastMessage(data['message']);
             renderRecent(data);
-            wheelList($('#latestAct'),4,5000);
+            wheelList($('#latestAct'),5,5000);
 
         },
         error: function ()
