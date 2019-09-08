@@ -16,74 +16,7 @@ extIcons=
         "unknown":"icon_txt.gif"
     }
 
-/**
- *
- * @param isHold  是否是该用户举办的
- * @param status_publish   发布状态
- * @param status_process     进行状态
- */
-// function setPageButton(roleType,status_publish,status_process,act_uuid){
-//     if(roleType==0){      //游客
-//         console.log(roleType);
-//         $btnSignup = $('<button type="button" class="btn btn-primary" id="btn-signup">报名</button>');
-//         $('#user-button-group').append($btnSignup);
-//         $btnSignup.on('click',function () {
-//             window.location.href='login.html';
-//         })
-//     }
-//     else if(roleType==2){     //主办方
-//         if(status_publish=='unpublished'){
-//             //生成发布按钮
-//             $btnPublish = $('<button type="button" class="btn btn-primary" id="btn-publish" >发布</button>');
-//             $('#user-button-group').append($btnPublish);
-//             $('#btn-publish').on('click',function () {
-//                 ;
-//             })
-//         }
-//     }else if(roleType==1){            //非主办方
-//         if(status_publish=='published'  ){
-//             //添加报名按钮
-//             if(status_process=='not_start') {
-//                 $btnSignup = $('<button type="button" class="btn btn-primary" id="btn-signup">报名</button>');
-//                 $('#user-button-group').append($btnSignup);
-//                 $('#btn-signup').on('click', function () {
-//                     $.ajax({
-//                         url: "api/yw/apply/",
-//                         type: "POST",
-//                         data: {uuid_act: act_uuid},
-//                         dataType: 'json',
-//                         success: function (data) {
-//                             toastMessage('报名请求提交成功！' + data['message']);
-//                         },
-//                         error: function () {
-//                             toastMessage("报名失败");
-//                         }
-//                     });
-//                 })
-//             }else{
-//                 $btnSignup = $('<button type="button" class="btn btn-primary disabled" id="btn-signup" disabled="disabled">报名</button>');
-//                 $('#user-button-group').append($btnSignup);
-//             }
-//         }
-//         //添加收藏按钮
-//         $btnCollection =  $('<button type="button" class="btn btn-warning" id="btn-collection">收藏</button>');
-//         $('#user-button-group').append($btnCollection );
-//         $('#btn-collection').on('click',function () {
-//             $.ajax({
-//                 url: "api/yw/collect/",
-//                 type: "POST",
-//                 data: {uuid_act: act_uuid},
-//                 dataType: 'json',
-//                 success: function (data) {
-//                     toastMessage(data['message']);
-//                 },
-//                 error: function () {
-//                     toastMessage("收藏失败");
-//                 }
-//             });
-//         })
-//     }
-// }
+
 /**
  * usuage:渲染页面信息的函数
  * @param data:json文件，格式为： 字典格式 {logo:"#",name:"#",start_time:"#",end_time:"#",location:"#",organizer:"#",introduction:"#",files:[{fileName:"#",fileSrc:"#"},..]}
