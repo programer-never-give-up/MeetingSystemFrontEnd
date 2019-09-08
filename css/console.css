@@ -44,3 +44,19 @@
     top:5%;
     right: 0px;
 }
+.td-icon{
+    height: 20px;
+    margin-left: -20px;
+    position: absolute;
+    bottom: 10%;
+    left:50%;
+    display: flex;
+    align-items:center;
+}
+.td-icon img{
+    height: 20px;
+    width: 20px;
+}
+.td-icon span{
+    color:#f55d54;
+}
