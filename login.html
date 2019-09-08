@@ -94,32 +94,34 @@
 
     $(function ()
     {
-        $("#querySearcher").live("keyup", function (e) {
-            if (e.keyCode == 13) {
-                var username = $('#username').val();
-                var password = $('#password').val();
-                $.post('api/login/', {username:username, password: password}, function (data) {
-                    console.log(data);
-                    if (data.status)
+            document.onkeydown = function(e){
+        var ev = document.all ? window.event : e;
+        if(ev.keyCode==13) 
+		{
+		var username = $('#username').val();
+            var password = $('#password').val();
+            $.post('api/login/', {username:username, password: password}, function (data) {
+                console.log(data);
+                if (data.status)
+                {
+                    if(data.isAdmin)
                     {
-                        if(data.isAdmin)
-                        {
-                            toastMessage('登录成功,正在跳转...');
-                            window.location.href = 'Administrators.html';
-                        }
-                        else
-                        {
-                            toastMessage('登录成功,正在跳转...');
-                            window.location.href = 'index.html';
-                        }
+                        toastMessage('登录成功,正在跳转...');
+                        window.location.href = 'Administrators.html';
                     }
                     else
                     {
-                        toastMessage(data.message);
+                        toastMessage('登录成功,正在跳转...');
+                        window.location.href = 'index.html';
                     }
-                });
-            }
-        });
+                }
+                else
+                {
+                   toastMessage(data.message);
+                }
+            });
+        }
+    }
         $('#login').click(function (e)
         {
             var username = $('#username').val();
