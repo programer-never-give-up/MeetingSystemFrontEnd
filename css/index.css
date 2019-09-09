@@ -9,3 +9,81 @@
 .whell-li{
     position:absolute;
 }
+.item-list {
+    background: #ffffff;
+    padding: 20px;
+}
+.item-card {
+    padding: 20px;
+}
+.item-card img{
+    height: 100%;
+    width: 100%;
+}
+.item-card h1 {
+    float: left;
+    width: 28%;
+    height: 152px;
+}
+.item-card h2 {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 18px;
+    line-height: 22px;
+    margin-bottom: 12px;
+
+}
+.item-card h3 {
+    line-height: 24px;
+    font-size: 14px;
+    margin: 0;
+    color: #888;
+
+}
+.item-card a, #recent_activity a{
+    color: #000;
+}
+.item-card button {
+    line-height: 32px;
+    font-size: 13px;
+    padding: 0 18px;
+    margin: 14px 0 0;
+    background-color: #f55d54;
+    border-color: #f55d54;
+}
+.item-card .item-info {
+    margin-left: 30%;
+}
+.item-list li{
+    list-style-type: none;
+    text-align: left;
+}
+.recent_activity_item {
+    list-style-type: none;
+    padding-bottom: 10px;
+}
+#recent_activity {
+    border-left: solid 10px #eeeeee;
+    background-color: #ffffff;
+    padding: 20px;
+}
+.recent_activity_item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 100px;
+}
+.recent_activity_item h3 {
+    font-size: 14px;
+    line-height: 1.5;
+}
+.recent_activity_header {
+    font-size: 18px;
+    margin-bottom: 16px;
+    font-weight: 700;
+}
+.recent_activity_info {
+    font-size: 12px;
+    margin-top: 5px;
+    color: #808080;
+}
