@@ -109,35 +109,24 @@
 </nav>
 <div class="container main-content">
     <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8">
             <div class="row">
                 <div class=" col-12">
                     <div class="tab" role="tabpanel">
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" ><a href="#Section1" aria-controls="home" role="tab" data-toggle="tab" class="active" aria-selected="true">系统消息</a></li>
-                            <li role="presentation"><a href="#Section2" aria-controls="profile" role="tab" data-toggle="tab">会议消息</a></li>
+                            <li role="presentation" ><a href="#Section1" aria-controls="home" role="tab" data-toggle="tab" class="active" aria-selected="true">列表</a></li>
+                            <li role="presentation"><a href="#Section2" aria-controls="profile" role="tab" data-toggle="tab">日程表</a></li>
                         </ul>
                         <div class="tab-content tabs">
                             <div role="tabpanel" class="tab-pane fade in active show" id="Section1">
-                                <h3>系统消息：</h3>
+
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="Section2">
-                                <h3>会议消息：</h3>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-2"></div>
-        <div class="row">
-            <button onclick="run2()">会议</button>
-        </div>
-        <div class="row">
-            <button onclick="run1()">系统</button>
-        </div>
-    </div>
 </div>
 <footer class="footer" id="footer">
     这是页脚
@@ -148,49 +137,5 @@
 <script src="plugins/popper/popper.min.js"></script>
 <script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
 <script src="js/nav.js"></script>
-<script>
-    function run2()
-    {
-
-        var x=document.getElementById("Section2");
-        var y1=document.createElement("div");
-        var y2=document.createElement("div");
-        var y3=document.createElement("div");
-        var y4=document.createElement("div");
-        var y5=document.createElement("button");
-        y2.className="card-body";
-        y3.className="h3";
-        y1.className="card jianju";
-        y4.innerText="label";
-        y3.innerText="xx会议:";
-        y4.innerText="修改了XX";
-        y5.className="btn btn-info"
-        y5.innerText="详情";
-        y2.appendChild(y3);
-        y2.appendChild(y4);
-        y2.appendChild(y5);
-        y1.appendChild(y2);
-        x.appendChild(y1);
-    }
-    function run1()
-    {
-
-        var x=document.getElementById("Section1")
-        var y1=document.createElement("div");
-        var y2=document.createElement("div");
-        var y4=document.createElement("div")
-        var y5=document.createElement("button");
-        y2.className="card-body";
-        y1.className="card jianju";
-        y4.innerText="label";
-        y4.innerText="XXXXXXXXXXXX";
-        y5.className="btn btn-info"
-        y5.innerText="详情";
-        y2.appendChild(y4);
-        y2.appendChild(y5);
-        y1.appendChild(y2);
-        x.appendChild(y1);
-    }
-</script>
 </body>
 </html>
