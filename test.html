@@ -1,63 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset='utf-8' />
     <link rel="stylesheet" href="plugins/bootstrap-4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>模板</title>
+    <link href='packages/core/main.css' rel='stylesheet' />
+    <link href='packages/daygrid/main.css' rel='stylesheet' />
+    <link href='packages/timegrid/main.css' rel='stylesheet' />
+    <link href='packages/list/main.css' rel='stylesheet' />
+    <script src='packages/core/main.js'></script>
+    <script src='packages/interaction/main.js'></script>
+    <script src='packages/daygrid/main.js'></script>
+    <script src='packages/timegrid/main.js'></script>
+    <script src='packages/list/main.js'></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var x;
+            var calendarEl = document.getElementById('calendar');
+            $.ajax({
+
+                url: "api/personal_center/history_organize/",
+                dataType: "json",
+                type: "get",
+                success: function (data)
+                {
+                    for (var i = 0; i <data["list_activity"].length; i++)
+                    {
+                        console.log(data["list_activity"][i]["uuid_act"]);
+                        console.log(data["list_activity"][i]["num_actual"]);
+                        var baseUrl = "show_meeting_info.html";
+                        var Url = baseUrl + "?id=" +data["list_activity"][i]["uuid_act"];
+                        //F4.innerText = data["list_activity"][i]["num_actual"]+"/"+data["list_activity"][i]["num_should"];
+                        var y=
+                            {
+                                title: data["list_activity"][i]["num_actual"],
+                                url: Url,
+                                start: data["list_activity"][i]["start_time"],
+                                end: data["list_activity"][i]["end_time"],
+                            }
+                            x.push(y);
+                    }
+                },
+                error: function ()
+                {
+                    toastMessage("加载出现问题，请刷新页面重试");
+                }
+            });
+            // var x=[
+            //     {
+            //         title: 'All Day Event',
+            //         start: '2019-08-01'
+            //     },
+            //     {
+            //         title: 'Long Event',
+            //         start: '2019-08-07',
+            //         end: '2019-08-10'
+            //     },
+            //     {
+            //         groupId: 999,
+            //         title: 'Repeating Event',
+            //         start: '2019-08-09T16:00:00'
+            //     },
+            //     {
+            //         groupId: 999,
+            //         title: 'Repeating Event',
+            //         start: '2019-08-16T16:00:00'
+            //     },
+            //     {
+            //         title: 'Conference',
+            //         start: '2019-08-11',
+            //         end: '2019-08-13'
+            //     },
+            //     {
+            //         title: 'Meeting',
+            //         start: '2019-08-12T10:30:00',
+            //         end: '2019-08-12T12:30:00'
+            //     },
+            //     {
+            //         title: 'Lunch',
+            //         start: '2019-08-12T12:00:00'
+            //     },
+            //     {
+            //         title: 'Meeting',
+            //         start: '2019-08-12T14:30:00'
+            //     },
+            //     {
+            //         title: 'Happy Hour',
+            //         start: '2019-08-12T17:30:00'
+            //     },
+            //     {
+            //         title: 'Dinner',
+            //         start: '2019-08-12T20:00:00'
+            //     },
+            //     {
+            //         title: 'Birthday Party',
+            //         start: '2019-08-13T07:00:00'
+            //     },
+            //     {
+            //         title: 'Click for Google',
+            //         url: 'http://baidu.com/',
+            //         start: '2019-08-28'
+            //     }
+            // ]
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                },
+                defaultDate: '2019-08-12',
+                navLinks: true, // can click day/week names to navigate views
+
+                weekNumbers: true,
+                weekNumbersWithinDays: true,
+                weekNumberCalculation: 'ISO',
+
+                editable: false,
+                eventLimit: true, // allow "more" link when too many events
+                events:x,
+
+            });
+
+            calendar.render();
+        });
+
+    </script>
+    <style>
+        #calendar {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+    </style>
 </head>
 <body>
-
 <nav class="navbar navbar-light bg-light">
     <a class="navbar-brand" href="#">
         <img src="https://y4ngyy.xyz/assets/avatar.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
-        <span class="home-name">云会议系统</span>
+        <span class="home-name">云活动系统</span>
     </a>
     <div class="nav-list">
-        <a href="#" class="nav-list-item">公开会议列表</a>
-        <a href="#" class="nav-list-item">控制台</a>
-        <a href="" class="nav-list-item">消息</a>
-        <a href="#" class="nav-list-item">个人中心</a>
-
-        <span style="color: #ff5722;" class="nav-list-item">
-                <i class="fas fa-power-off"></i>
-                <a href="#">退出</a>
-            </span>
-
+        <a href="index.html" class="nav-list-item">首页</a>
     </div>
 </nav>
 <div class="container main-content">
-    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingTwo">
-                <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        系统消息
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                <div class="panel-body">
-                    <label>这里有消息</label>
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingThree">
-                <h4 class="panel-title">
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        风暴英雄
-                    </a>
-                </h4>
-            </div>
-            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                <div class="panel-body">
-                    《风暴英雄》 是由暴雪娱乐公司开发的一款运行在Windows和Mac OS上的在线多人竞技PC游戏。
-                </div>
-            </div>
-        </div>
-    </div>
-    <button id="test">abcd</button>
+    <div id='calendar'></div>
 </div>
 <footer class="footer" id="footer">
     这是页脚
@@ -69,20 +158,11 @@
 <script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
 <script src="js/nav.js"></script>
 <script>
-
-    $(function(){
-        function test() {
-            console.log("test");
-            toastMessage("test");
-
-        }
-        toastMessage("abcd");
-        $("#test").click(test);
-    });
-
+    $(function () {
+        checkLogin(false);
+    })
 </script>
+
+
 </body>
 </html>
-
-
-
