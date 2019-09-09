@@ -33,7 +33,7 @@
                         var Url = baseUrl + "?id=" +data["list_activity"][i]["uuid_act"];
                         var y=
                             {
-                                title: data["list_activity"][i]["num_actual"],
+                                title: data["list_activity"][i]["name_act"],
                                 url: Url,
                                 start: data["list_activity"][i]["start_time"],
                                 end: data["list_activity"][i]["end_time"],
@@ -67,7 +67,6 @@
                     toastMessage("加载出现问题，请刷新页面重试");
                 }
             });
-
             // var x=[
             //     {
             //         title: '你好',
@@ -125,7 +124,7 @@
             //     }
             // ]
         });
-
+	
     </script>
     <style>
         #calendar {
@@ -148,6 +147,8 @@
 <div class="container main-content">
     <div id='calendar'></div>
 </div>
+<div style='display:none'></div>
+<button style="position:absolute">
 <footer class="footer" id="footer">
     这是页脚
 </footer>
