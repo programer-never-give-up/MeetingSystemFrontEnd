@@ -53,7 +53,7 @@ function setPageButton(roleType,status_publish,status_process,act_uuid){
                     dataType: 'json',
                     success: function (data) {
                         toastMessage(data['message']);
-                        window.location='console.html'
+                        jump(3,'回到控制台','console.html');
                     },
                     error: function () {
                         toastMessage("发布请求提交失败");
@@ -75,6 +75,7 @@ function setPageButton(roleType,status_publish,status_process,act_uuid){
                         dataType: 'json',
                         success: function (data) {
                             toastMessage(data['message']);
+                            jump(3,'回到主页','index.html');
                         },
                         error: function () {
                             toastMessage("报名失败");
@@ -97,6 +98,7 @@ function setPageButton(roleType,status_publish,status_process,act_uuid){
                 dataType: 'json',
                 success: function (data) {
                     toastMessage(data['message']);
+                    jump(3,'回到主页','index.html');
                 },
                 error: function () {
                     toastMessage("收藏失败");
