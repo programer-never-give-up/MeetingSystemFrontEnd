@@ -60,3 +60,9 @@
 .td-icon span{
     color:#f55d54;
 }
+.td-limited-width{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 150px;
+}

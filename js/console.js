@@ -147,7 +147,7 @@ function generateActivityTable(data,buttomType){
         }
         $itemCard.append('<td><img src="' + activity["logoSrc"] + '" alt="活动logo"></td>');   //添加缩略图
 
-        var $nameTd = $('<td style="position:relative">' + activity["activityName"] + '</td>') ;  //活动名称
+        var $nameTd = $('<td style="position:relative" class="td-limited-width">' + activity["activityName"] + '</td>') ;  //活动名称
         //添加报名的人数 ，未发布活动没有报名人数
         if(buttomType!='management-unpublished'){
             $nameTd.append('<div class="td-icon" ><img src="images/icons/actNum.png" title="报名人数" style="width: 20px;height: 20px"><span >: '+activity['num']+'</span></div>');
@@ -156,7 +156,7 @@ function generateActivityTable(data,buttomType){
             $itemCard.append($nameTd);    //添加活动名称
         }
 
-        $itemCard.append('<td>' + activity["location"] + '</td>');        //添加活动地点
+        $itemCard.append('<td class="td-limited-width">' + activity["location"] + '</td>');        //添加活动地点
 
         var $timeTd = $('<td></td>');                                              //添加活动的开始时间和结束时间
         $timeTd.append(activity["startTime"] + "</br>" + activity["endTime"]);

@@ -83,7 +83,7 @@ function uploadActivityLogo(){
         return false;
     }
     //判单图片的大小  100KB
-    if(file.size>300*1024){
+    if(file.size>700*1024){
         alert("请选择小于300KB的图片");
         return false;
     }
@@ -131,14 +131,16 @@ function uploadActivityInfo(){
         contentType: false,
         processData: false,
         success:function (data) {
+            if(data['status']) {
+                toastMessage(data['message']);
+                $('#upload-file-input').on('filepreupload', function (event, outData, previewId, i) {
 
-            toastMessage("创建会议成功，开始上传活动文件！");
-            $('#upload-file-input').on('filepreupload', function(event,outData, previewId, i) {
-
-                outData.formdata.append('act_uuid',data["uuid"]);
-            });
-            $('#upload-file-input').fileinput("upload");
-            return true;
+                    outData.formdata.append('act_uuid', data["uuid"]);
+                });
+                $('#upload-file-input').fileinput("upload");
+            }else{
+                toastMessage(data['message']);
+            }
         },
         error:function () {
             toastMessage("创建会议失败！");
