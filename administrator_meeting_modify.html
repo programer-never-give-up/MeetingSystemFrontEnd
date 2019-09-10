@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="plugins/bootstrap-4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <title>会议详情</title>
     <style>
@@ -44,7 +45,7 @@
         <span class="home-name">云活动系统</span>
     </a>
     <div class="nav-list">
-        <a href="index.html" class="nav-list-item">首页</a>
+        <a href="#" class="nav-list-item" onclick="logout()">退出登录</a>
     </div>
 </nav>
 <div class="container main-content">
@@ -118,14 +119,13 @@
     这是页脚
 </footer>
 
-<script src="plugins/fontawesome/font-awesome.js"></script>
 <script src="plugins/jquery/jquery-3.4.1.min.js"></script>
 <script src="plugins/popper/popper.min.js"></script>
 <script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
 <script src="js/navAdmini.js"></script>
 <script>
     $(function () {
-        checkLogin(false);
+        checkLogin();
     })
 </script>
 <script src="js/administrator_meeting_modify.js"></script>

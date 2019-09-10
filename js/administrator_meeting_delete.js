@@ -1,13 +1,6 @@
 /**
- * @author:chonepieceyb
- * @type {string}
+ * @author: shixuezhiyi
  */
-/*
-字典格式 {logoSrc:"#",activityName:"#",time:{startTime:"#",endTime:"#"},location:"#",organizer:"#",introduction:"#",files:[{fileName:"#",fileSrc:"#"},..],type:"#","status":int}
-status: 0未开始 1进行中 2已结束
- */
-
-//可识别的扩展名列表
 extIcons=
     {
     "docx":"icon_doc.gif",
