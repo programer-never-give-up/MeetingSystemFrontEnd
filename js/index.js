@@ -136,8 +136,8 @@ function renderRecent(data){
         $itemInfo.append($titleLink);
 
         $itemInfo.append('<div class="recent_activity_info"></div>');
-        $itemInfo.children('div.recent_activity_info').append('<span>'+data["list_activity"][i]["start_time"].split(' ')[0]+" ");   //添加时间
-        $itemInfo.children('div.recent_activity_info').append('<span>'+data["list_activity"][i]["location"]);   //添加时间
+        $itemInfo.children('div.recent_activity_info').append('<span>时间:'+data["list_activity"][i]["start_time"]+" ");   //添加时间
+        $itemInfo.children('div.recent_activity_info').append('<span>地点:'+data["list_activity"][i]["location"]);   //添加时间
 
         $itemCard.append($itemInfo);
         $('#latestAct').append($itemCard);
