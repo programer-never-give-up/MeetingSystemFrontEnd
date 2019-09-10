@@ -95,3 +95,14 @@ function checkRequired(className){
     });
     return flag;
 }
+function logout() {
+    // reponse {status: True}
+    $.get('api/logout/', function(data){
+        if(data.status) {
+            console.log('登出成功');
+            window.location.href='index.html';
+        } else {
+            console.log('登出失败')
+        }
+    });
+}
