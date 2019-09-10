@@ -293,8 +293,7 @@ function getActivityList(api,btnID,pageID,perPage,$fatherObject,isGeneratePage=f
  * @param myID
  * @returns {number | jQuery | HTMLElement}  返回生成的jquery对象
  */
-function generatePageItems(callBackfun=null,pageNum=5,myID='console',){
-
+function generatePageItems(callBackfun=null,pageNum,myID='console',){
     $nav = $('<nav></nav>');
     $pageUl=$('<ul class="pagination pagination-sm justify-content-center" id="page-bar"></ul>');
     $nav.append($pageUl);
@@ -324,11 +323,12 @@ function generatePageItems(callBackfun=null,pageNum=5,myID='console',){
         '                        </li>');
     if(pageNum==1){
         $liN.addClass('disabled');
+    }else{
+        $liN.removeClass('disabled');
     }
     $pageUl.append($liN);
 
     //添加激活效果
-    $liN.addClass('disabled');
     $pageUl.find('li').eq(1).addClass('active');
     $pageUl.find('a').each(function(index,element){
         $(this).on('click',function(){
@@ -336,8 +336,8 @@ function generatePageItems(callBackfun=null,pageNum=5,myID='console',){
             var currentPage=$pageUl.data('currentPage');
             //取消激活状态
             $pageUl.find('li').eq(currentPage).removeClass('active');
-            if($(this).attr('id')=="page-previous"){                                 //获取当前的active
-                currentPage-=1;                                                         //当前页-1
+            if($(this).attr('id')==myID+"-page-previous"){//获取当前的active
+                currentPage-=1;//当前页-1
             }
             else if($(this).attr('id')==myID+"-page-next" ){
                 currentPage+=1;  //当前页+1
@@ -361,6 +361,7 @@ function generatePageItems(callBackfun=null,pageNum=5,myID='console',){
                 $liP.removeClass('disabled');
                 $liN.removeClass('disabled');
             }
+             $pageUl.data('currentPage',currentPage);
             //执行回调函数
             callBackfun(currentPage,pageNum);
         })
