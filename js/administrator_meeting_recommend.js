@@ -1,3 +1,6 @@
+/**
+ * @author: shixuezhiyi
+ */
 extIcons=
     {
         "docx":"icon_doc.gif",
