@@ -5,8 +5,8 @@
     <link rel="stylesheet" href="plugins/bootstrap-4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" type="text/css" href="css/all.min.css">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <title>主页</title>
     <style>
         .item-list {
@@ -15,6 +15,7 @@
         }
         .item-card {
             padding: 20px;
+            /*border-bottom: solid 1px #b6b6b6;*/
         }
         .item-card img{
             height: 100%;
@@ -62,6 +63,7 @@
         .recent_activity_item {
             list-style-type: none;
             padding-bottom: 10px;
+
         }
         #recent_activity {
             border-left: solid 10px #eeeeee;
@@ -74,6 +76,10 @@
             border-radius: 100px;
         }
         .recent_activity_item h3 {
+            width:220px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
             font-size: 14px;
             line-height: 1.5;
         }
@@ -83,6 +89,10 @@
             font-weight: 700;
         }
         .recent_activity_info {
+            width:220px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
             font-size: 12px;
             margin-top: 5px;
             color: #808080;
@@ -140,12 +150,13 @@
         </div>
     </div>
 </footer>
+<script src="plugins/fontawesome/font-awesome.js"></script>
 <script src="plugins/jquery/jquery-3.4.1.min.js"></script>
 <script src="plugins/popper/popper.min.js"></script>
 <script src="plugins/bootstrap-4.3.1/js/bootstrap.min.js"></script>
 <script src="js/index.js"></script>
 <!-- 导航栏测试 -->
-<script src="js/nav.min.js"></script>
+<script src="js/nav.js"></script>
 <script>
     $(function () {
         checkLogin(false);
