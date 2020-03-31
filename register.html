@@ -300,11 +300,16 @@
           }
           let avatar = $('#UploadAvatar')[0].files[0];
           // 限制上传文件大小
-          console.log(avatar.size);
+          if (avatar){
+              console.log(avatar.size);
+          }else{
+              avatar="D:\FRONTEND\MeetingSystemFrontEnd\default.jpg";   
+          }
           if (avatar.size >= 102400) {
               toastMessage('上传的头像不能超过100k!');
               return;
           }
+          
           let form = new FormData();
           form.append('avatar', avatar); // 头像
           form.append('username', $('#username').val());
